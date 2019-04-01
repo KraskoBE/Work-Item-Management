@@ -47,8 +47,8 @@ public class StoryImpl extends WorkItemBase implements Story {
 
     @Override
     void setStatus(Status status) {
-        if(status != Status.NotDone && status != Status.InProgress && status != Status.Done) {
+        if(status != Status.NotDone && status != Status.InProgress && status != Status.Done)
             throw new IllegalArgumentException();
-        }
+        this.status = status;
     }
 }
