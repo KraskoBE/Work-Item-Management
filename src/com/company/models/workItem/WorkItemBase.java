@@ -16,7 +16,7 @@ public abstract class WorkItemBase implements WorkItem {
     private int id;
     private String title;
     private String description;
-    private Status status;
+    protected Status status;
     private List<Comment> comments;
     private List<String> history;
 
