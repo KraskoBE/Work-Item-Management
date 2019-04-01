@@ -10,4 +10,5 @@ public abstract class UnitBase implements Unit {
     private List<WorkItemBase> items;
     private List<String> activityHistory;
 
+
 }
