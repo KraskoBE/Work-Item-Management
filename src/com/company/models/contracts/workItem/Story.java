@@ -6,10 +6,10 @@ import com.company.models.contracts.unit.Member;
 
 public interface Story extends WorkItem{
 
-    public Priority getPriority();
+    Priority getPriority();
 
-    public Size getSize();
+    Size getSize();
 
-    public Member getAssignee();
+    Member getAssignee();
 
 }
