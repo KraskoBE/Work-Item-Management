@@ -6,22 +6,25 @@ import com.company.models.common.Status;
 import com.company.models.contracts.unit.Member;
 import com.company.models.contracts.workItem.Bug;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class BugImpl extends WorkItemBase implements Bug {
-    private String stepsToReproduce;
+    private List<String> stepsToReproduce;
     private Priority priority;
     private Severity severity;
-    private Member asignee;
+    private Member assignee;
 
-    public BugImpl(int id, String title, String description, Status status, String stepsToReproduce, Priority priority, Severity severity, Member asignee) {
+    public BugImpl(int id, String title, String description, Status status, Priority priority, Severity severity, Member asignee) {
         super(id, title, description, status);
         setPriority(priority);
         setSeverity(severity);
-        setStepsToReproduce(stepsToReproduce);
-        setAsignee(asignee);
+        setStepsToReproduce();
+        setAssignee(asignee);
     }
 
-    private void setStepsToReproduce(String stepsToReproduce) {
-        this.stepsToReproduce = stepsToReproduce;
+    private void setStepsToReproduce() {
+        this.stepsToReproduce = new ArrayList<>();
     }
 
     private void setPriority(Priority priority) {
@@ -32,8 +35,8 @@ public class BugImpl extends WorkItemBase implements Bug {
         this.severity = severity;
     }
 
-    private void setAsignee(Member asignee) {
-        this.asignee = asignee;
+    private void setAssignee(Member assignee) {
+        this.assignee = assignee;
     }
 
     @Override
@@ -43,9 +46,9 @@ public class BugImpl extends WorkItemBase implements Bug {
         this.status = status;
     }
 
-
-    public String getStepsToReproduce() {
-        return stepsToReproduce;
+    @Override
+    public List<String> getStepsToReproduce() {
+        return new ArrayList<>(stepsToReproduce);
     }
 
     public Priority getPriority() {
@@ -56,8 +59,8 @@ public class BugImpl extends WorkItemBase implements Bug {
         return severity;
     }
 
-    public Member getAsignee() {
-        return asignee;
+    public Member getAssignee() {
+        return assignee;
     }
 
 }

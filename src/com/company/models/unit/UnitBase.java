@@ -7,11 +7,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public abstract class UnitBase implements Unit {
-    protected String name;
+    String name;
     private List<WorkItemBase> items;
     private List<String> activityHistory;
 
-    public UnitBase(String name) {
+    UnitBase(String name) {
         setName(name);
         setItems();
         setActivityHistory();

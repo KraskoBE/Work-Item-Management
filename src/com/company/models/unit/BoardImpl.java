@@ -14,9 +14,9 @@ public class BoardImpl extends UnitBase implements Board {
 
     @Override
     void setName(String name) {
-        if(name.length() < NAME_MIN_LENGTH ||  name.length() > NAME_MAX_LENGTH) {
+        if (name.length() < NAME_MIN_LENGTH || name.length() > NAME_MAX_LENGTH)
             throw new IllegalArgumentException();
-        }
+
         this.name = name;
     }
 
