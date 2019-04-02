@@ -1,4 +1,4 @@
-package com.company.core.contracts;
+package com.company.engine.contracts;
 
 public interface Engine {
 

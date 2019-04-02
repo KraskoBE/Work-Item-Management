@@ -1,16 +1,13 @@
 package com.company;
 
-import com.company.core.EngineImpl;
-import com.company.core.contracts.Engine;
-import com.company.core.factories.Factory;
-import com.company.core.factories.FactoryImpl;
+
+import com.company.engine.EngineImpl;
+import com.company.engine.contracts.Engine;
 
 public class Main {
 
     public static void main(String[] args) {
-        Factory factory = new FactoryImpl();
-        Engine engine = new EngineImpl(factory);
-
+        Engine engine = new EngineImpl();
         engine.start();
     }
 }
