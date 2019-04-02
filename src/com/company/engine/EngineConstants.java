@@ -31,6 +31,7 @@ public class EngineConstants {
     static final String INVALID_SEVERITY_NAME = "Invalid severity name: %s";
 
     //Status
+    static final String ACTIVE = "active";
     static final String FIXED = "fixed";
     static final String NOTDONE = "notdone";
     static final String INPROGRESS = "inprogress";

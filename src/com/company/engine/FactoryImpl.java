@@ -4,6 +4,7 @@ import com.company.engine.contracts.Factory;
 import com.company.models.TeamImpl;
 import com.company.models.common.Priority;
 import com.company.models.common.Severity;
+import com.company.models.common.Status;
 import com.company.models.contracts.Team;
 import com.company.models.contracts.unit.Board;
 import com.company.models.contracts.unit.Member;
@@ -31,7 +32,7 @@ public class FactoryImpl implements Factory {
 
     @Override
     public Bug createBug(String name, String description, String priority, String severity, String Status, String assignee) {
-        return new BugImpl(name, description, getPriority(priority), getSeverity(severity),)
+        return new BugImpl(name, description, getPriority(priority), getSeverity(severity), )
     }
 
     private Priority getPriority(String priority) {
@@ -47,10 +48,8 @@ public class FactoryImpl implements Factory {
         }
     }
 
-    private Severity getSeverity(String severity)
-    {
-        switch (severity.toLowerCase())
-        {
+    private Severity getSeverity(String severity) {
+        switch (severity.toLowerCase()) {
             case EngineConstants.CRITICAL:
                 return Severity.Critical;
             case EngineConstants.MAJOR:
@@ -58,7 +57,32 @@ public class FactoryImpl implements Factory {
             case EngineConstants.MINOR:
                 return Severity.Minor;
             default:
-                throw new IllegalArgumentException(String.format(EngineConstants.INVALID_SEVERITY_NAME,severity));
+                throw new IllegalArgumentException(String.format(EngineConstants.INVALID_SEVERITY_NAME, severity));
         }
     }
+
+    private Status getStatus(String status) {
+        switch (status.toLowerCase()) {
+            case EngineConstants.ACTIVE:
+                return Status.Active;
+            case EngineConstants.FIXED:
+                return Status.Fixed;
+            case EngineConstants.NOTDONE:
+                return Status.NotDone;
+            case EngineConstants.INPROGRESS:
+                return Status.InProgress;
+            case EngineConstants.DONE:
+                return Status.Done:
+            case EngineConstants.NEW:
+                return Status.New;
+            case EngineConstants.UNSCHEDULED:
+                return Status.Unscheduled;
+            case EngineConstants.SCHEDULED:
+                return Status.Scheduled;
+            default:
+                throw new IllegalArgumentException(String.format(EngineConstants.INVALID_STATUS_NAME, status));
+
+        }
+    }
+
 }
