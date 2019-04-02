@@ -3,6 +3,7 @@ package com.company.engine;
 import com.company.engine.contracts.Factory;
 import com.company.models.TeamImpl;
 import com.company.models.common.Priority;
+import com.company.models.common.Severity;
 import com.company.models.contracts.Team;
 import com.company.models.contracts.unit.Board;
 import com.company.models.contracts.unit.Member;
@@ -12,12 +13,6 @@ import com.company.models.unit.MemberImpl;
 import com.company.models.workItem.BugImpl;
 
 public class FactoryImpl implements Factory {
-
-    private static final String HIGH = "high";
-    private static final String MEDIUM = "medium";
-    private static final String LOW = "low";
-    private static final String INVALID_PRIORITY_NAME = "Invalid priority name: %s";
-
 
     @Override
     public Team createTeam(String name) {
@@ -36,22 +31,34 @@ public class FactoryImpl implements Factory {
 
     @Override
     public Bug createBug(String name, String description, String priority, String severity, String Status, String assignee) {
-        //return new BugImpl(name,description, getPriority(priority),)
-        return null;
+        return new BugImpl(name, description, getPriority(priority), getSeverity(severity),)
     }
 
-    private Priority getPriority(String priority)
-    {
-        switch (priority.toLowerCase())
-        {
-            case HIGH:
+    private Priority getPriority(String priority) {
+        switch (priority.toLowerCase()) {
+            case EngineConstants.HIGH:
                 return Priority.High;
-            case MEDIUM:
+            case EngineConstants.MEDIUM:
                 return Priority.Medium;
-            case LOW:
+            case EngineConstants.LOW:
                 return Priority.Low;
             default:
-                throw new IllegalArgumentException(String.format(INVALID_PRIORITY_NAME, priority));
+                throw new IllegalArgumentException(String.format(EngineConstants.INVALID_PRIORITY_NAME, priority));
+        }
+    }
+
+    private Severity getSeverity(String severity)
+    {
+        switch (severity.toLowerCase())
+        {
+            case EngineConstants.CRITICAL:
+                return Severity.Critical;
+            case EngineConstants.MAJOR:
+                return Severity.Major;
+            case EngineConstants.MINOR:
+                return Severity.Minor;
+            default:
+                throw new IllegalArgumentException(String.format(EngineConstants.INVALID_SEVERITY_NAME,severity));
         }
     }
 }
