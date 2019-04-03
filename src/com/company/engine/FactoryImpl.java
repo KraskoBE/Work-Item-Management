@@ -4,14 +4,17 @@ import com.company.engine.contracts.Factory;
 import com.company.models.TeamImpl;
 import com.company.models.common.Priority;
 import com.company.models.common.Severity;
+import com.company.models.common.Size;
 import com.company.models.common.Status;
 import com.company.models.contracts.Team;
 import com.company.models.contracts.unit.Board;
 import com.company.models.contracts.unit.Member;
 import com.company.models.contracts.workItem.Bug;
+import com.company.models.contracts.workItem.Story;
 import com.company.models.unit.BoardImpl;
 import com.company.models.unit.MemberImpl;
 import com.company.models.workItem.BugImpl;
+import com.company.models.workItem.StoryImpl;
 
 import java.awt.*;
 
@@ -35,6 +38,11 @@ public class FactoryImpl implements Factory {
     @Override
     public Bug createBug(int id, String name, String description, String priority, String severity, String status) {
         return new BugImpl(id, name, description, getPriority(priority), getSeverity(severity), getStatus(status));
+    }
+
+    @Override
+    public Story createStory(int id, String name, String description, String status, String priority, String size) {
+        return new StoryImpl(id, name, description, getStatus(status), getPriority(priority),getSize(size));
     }
 
     private Priority getPriority(String priority) {
@@ -84,6 +92,19 @@ public class FactoryImpl implements Factory {
             default:
                 throw new IllegalArgumentException(String.format(EngineConstants.INVALID_STATUS_NAME, status));
 
+        }
+    }
+
+    private Size getSize(String size) {
+        switch (size.toLowerCase()) {
+            case EngineConstants.LARGE:
+                return Size.Large;
+            case EngineConstants.MEDIUM:
+                return Size.Medium;
+            case EngineConstants.SMALL:
+                return Size.Small;
+            default:
+                throw new IllegalArgumentException(String.format(EngineConstants.INVALID_SIZE_NAME, size));
         }
     }
 

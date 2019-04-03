@@ -7,6 +7,7 @@ public class EngineConstants {
     static final String CreateMemberCommand = "createmember";
     static final String CreateBoardCommand = "createboard";
     static final String CreateBugCommand = "createbug";
+    static final String CraeteStoryCommand = "createstory";
     static final String AddMemberToTeam = "addmembertoteam";
 
     // Error messages
@@ -25,6 +26,7 @@ public class EngineConstants {
     static final String MemberCreatedSuccessMessage = "Member %s created";
     static final String BoardCreatedSuccessMessage = "Board %s created";
     static final String BugCreatedSuccessMessage = "Bug %s created with ID:%d";
+    static final String StoryCreatedSuccessMessage = "Story %s created with ID:%d";
     static final String MemberAddedSuccessMessage = "Member %s added to team %s";
 
     //Priority
@@ -49,5 +51,10 @@ public class EngineConstants {
     static final String UNSCHEDULED = "unscheduled";
     static final String SCHEDULED = "scheduled";
     static final String INVALID_STATUS_NAME = "Invalid status name: %s";
+
+    //Size
+    static final String LARGE = "large";
+    static final String SMALL = "small";
+    static final String INVALID_SIZE_NAME = "Invalid size name: %s";
 
 }

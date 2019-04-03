@@ -4,6 +4,7 @@ import com.company.models.contracts.Team;
 import com.company.models.contracts.unit.Board;
 import com.company.models.contracts.unit.Member;
 import com.company.models.contracts.workItem.Bug;
+import com.company.models.contracts.workItem.Story;
 
 public interface Factory {
 
@@ -15,4 +16,5 @@ public interface Factory {
 
     Bug createBug(int id, String name, String description, String priority, String severity, String Status);
 
+    Story createStory(int id, String name, String description, String status, String priority, String size);
 }
