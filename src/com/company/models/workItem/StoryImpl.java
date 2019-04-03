@@ -8,6 +8,7 @@ import com.company.models.contracts.workItem.Story;
 
 public class StoryImpl extends WorkItemBase implements Story {
 
+    private static final String ERROR_INVALID_STATUS = "Error: invalid status";
     private Priority priority;
     private Size size;
     private Member assignee;
@@ -47,7 +48,7 @@ public class StoryImpl extends WorkItemBase implements Story {
     @Override
     void setStatus(Status status) {
         if (status != Status.NotDone && status != Status.InProgress && status != Status.Done)
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException(ERROR_INVALID_STATUS);
         this.status = status;
     }
 }

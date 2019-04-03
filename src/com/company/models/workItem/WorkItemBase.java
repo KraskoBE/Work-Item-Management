@@ -12,6 +12,8 @@ public abstract class WorkItemBase implements WorkItem {
     private static final int TITLE_MAX_LENGTH = 50;
     private static final int DESCRIPTION_MIN_LENGTH = 10;
     private static final int DESCRIPTION_MAX_LENGTH = 500;
+    private static final String ERROR_WORK_ITEM_NAME = "Error: Work item name is less than %d symbols or more than %d symbols";
+    private static final String ERROR_WORK_ITEM_DESCRIPTION = "Error: Work item description is less than %d symbols or more than %d symbols";
 
     private int id;
     private String title;
@@ -35,13 +37,13 @@ public abstract class WorkItemBase implements WorkItem {
 
     private void setTitle(String title) {
         if (title.length() < TITLE_MIN_LENGTH || title.length() > TITLE_MAX_LENGTH)
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException(String.format(ERROR_WORK_ITEM_NAME, TITLE_MIN_LENGTH, TITLE_MAX_LENGTH));
         this.title = title;
     }
 
     private void setDescription(String description) {
         if (description.length() < DESCRIPTION_MIN_LENGTH || description.length() > DESCRIPTION_MAX_LENGTH)
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException(String.format(ERROR_WORK_ITEM_DESCRIPTION, DESCRIPTION_MIN_LENGTH, DESCRIPTION_MAX_LENGTH));
         this.description = description;
     }
 

@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class BugImpl extends WorkItemBase implements Bug {
+    private static final String ERROR_INVALID_STATUS = "Error: invalid status";
     private List<String> stepsToReproduce;
     private Priority priority;
     private Severity severity;
@@ -41,7 +42,7 @@ public class BugImpl extends WorkItemBase implements Bug {
     @Override
     void setStatus(Status status) {
         if (status != Status.Active && status != Status.Fixed)
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException(ERROR_INVALID_STATUS);
         this.status = status;
     }
 
