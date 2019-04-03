@@ -8,6 +8,7 @@ public class EngineConstants {
     static final String CreateBoardCommand = "createboard";
     static final String CreateBugCommand = "createbug";
     static final String CraeteStoryCommand = "createstory";
+    static final String CreateFeedbackCommand = "createfeedback";
     static final String AddMemberToTeam = "addmembertoteam";
 
     // Error messages

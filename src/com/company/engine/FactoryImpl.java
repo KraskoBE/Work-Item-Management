@@ -91,7 +91,6 @@ public class FactoryImpl implements Factory {
                 return Status.Scheduled;
             default:
                 throw new IllegalArgumentException(String.format(EngineConstants.INVALID_STATUS_NAME, status));
-
         }
     }
 
