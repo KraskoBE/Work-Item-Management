@@ -10,10 +10,12 @@ import com.company.models.contracts.Team;
 import com.company.models.contracts.unit.Board;
 import com.company.models.contracts.unit.Member;
 import com.company.models.contracts.workItem.Bug;
+import com.company.models.contracts.workItem.Feedback;
 import com.company.models.contracts.workItem.Story;
 import com.company.models.unit.BoardImpl;
 import com.company.models.unit.MemberImpl;
 import com.company.models.workItem.BugImpl;
+import com.company.models.workItem.FeedbackImpl;
 import com.company.models.workItem.StoryImpl;
 
 import java.awt.*;
@@ -43,6 +45,11 @@ public class FactoryImpl implements Factory {
     @Override
     public Story createStory(int id, String name, String description, String status, String priority, String size) {
         return new StoryImpl(id, name, description, getStatus(status), getPriority(priority),getSize(size));
+    }
+
+    @Override
+    public Feedback createFeedback(int id, String name, String description, String status, int rating) {
+        return new FeedbackImpl(id,name, description,getStatus(status),rating);
     }
 
     private Priority getPriority(String priority) {

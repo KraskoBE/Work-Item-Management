@@ -28,6 +28,7 @@ public class EngineConstants {
     static final String BoardCreatedSuccessMessage = "Board %s created";
     static final String BugCreatedSuccessMessage = "Bug %s created with ID:%d";
     static final String StoryCreatedSuccessMessage = "Story %s created with ID:%d";
+    static final String FeedBackSuccessMessage = "Feedback %s created with ID:%d";
     static final String MemberAddedSuccessMessage = "Member %s added to team %s";
 
     //Priority

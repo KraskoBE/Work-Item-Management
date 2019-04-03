@@ -8,6 +8,7 @@ import com.company.models.contracts.Team;
 import com.company.models.contracts.unit.Board;
 import com.company.models.contracts.unit.Member;
 import com.company.models.contracts.workItem.Bug;
+import com.company.models.contracts.workItem.Feedback;
 import com.company.models.contracts.workItem.Story;
 import com.company.models.contracts.workItem.WorkItem;
 
@@ -114,6 +115,18 @@ public class EngineImpl implements Engine {
                     commandResult = createStory(storyName, storyDescription, storyStatus, storyPriority, storySize, storyBoard, storyTeam);
                     commandResults.add(commandResult);
                     break;
+                case EngineConstants.CreateFeedbackCommand:
+                    String feedbackName = command.getParameters().get(0);
+                    String feedbackDescription = command.getParameters().get(1);
+                    String feedbackStatus = command.getParameters().get(2);
+                    int feedbackRating = Integer.parseInt(command.getParameters().get(3));
+                    String feedbackBoard = command.getParameters().get(4);
+                    String feedbackTeam = command.getParameters().get(5);
+
+                    commandResult = createFeedback(feedbackName, feedbackDescription, feedbackStatus, feedbackRating, feedbackBoard, feedbackTeam );
+                    commandResults.add(commandResult);
+                    break;
+
                 case EngineConstants.AddMemberToTeam:
                     memberName = command.getParameters().get(0);
                     teamName = command.getParameters().get(1);
@@ -193,6 +206,21 @@ public class EngineImpl implements Engine {
 
         teams.get(team).getBoards().get(board).addWorkItem(story);
         return String.format(EngineConstants.StoryCreatedSuccessMessage, name, globalID++);
+    }
+
+    private String createFeedback(String name, String description, String status, int rating, String board, String team) {
+        if (!teams.containsKey(team))
+            return String.format(EngineConstants.TeamDoesNotExist, team);
+
+        if (!teams.get(team).getBoards().containsKey(board))
+            return String.format(EngineConstants.BoardIsNotOnheTeam, board, team);
+
+        Feedback feedback = factory.createFeedback(globalID, name, description, status, rating);
+        workItems.put(globalID,feedback);
+
+        teams.get(team).getBoards().get(board).addWorkItem(feedback);
+        return String.format(EngineConstants.FeedBackSuccessMessage, name, globalID++);
+
     }
 
     private String addMemberToTeam(String memberName, String teamName) {
