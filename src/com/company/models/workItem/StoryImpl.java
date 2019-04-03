@@ -12,12 +12,11 @@ public class StoryImpl extends WorkItemBase implements Story {
     private Size size;
     private Member assignee;
 
-    public StoryImpl(int id, String title, String description, Status status, Priority priority, Size size, Member assignee) {
+    public StoryImpl(int id, String title, String description, Status status, Priority priority, Size size) {
         super(id, title, description, status);
-       setAssignee(assignee);
-       setPriority(priority);
-       setSize(size);
-       setStatus(status);
+        setPriority(priority);
+        setSize(size);
+        setStatus(status);
     }
 
     public Priority getPriority() {
@@ -40,14 +39,14 @@ public class StoryImpl extends WorkItemBase implements Story {
         return assignee;
     }
 
-    private void setAssignee(Member assignee) {
+    public void setAssignee(Member assignee) {
         this.assignee = assignee;
     }
 
 
     @Override
     void setStatus(Status status) {
-        if(status != Status.NotDone && status != Status.InProgress && status != Status.Done)
+        if (status != Status.NotDone && status != Status.InProgress && status != Status.Done)
             throw new IllegalArgumentException();
         this.status = status;
     }

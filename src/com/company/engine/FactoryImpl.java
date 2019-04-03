@@ -34,8 +34,7 @@ public class FactoryImpl implements Factory {
 
     @Override
     public Bug createBug(int id, String name, String description, String priority, String severity, String status) {
-        Member member = new MemberImpl("krasen");
-        return new BugImpl(id, name, description, getPriority(priority), getSeverity(severity), getStatus(status), member);
+        return new BugImpl(id, name, description, getPriority(priority), getSeverity(severity), getStatus(status));
     }
 
     private Priority getPriority(String priority) {
