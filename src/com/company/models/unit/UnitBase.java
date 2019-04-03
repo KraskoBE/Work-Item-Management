@@ -1,14 +1,16 @@
 package com.company.models.unit;
 
 import com.company.models.contracts.unit.Unit;
-import com.company.models.workItem.WorkItemBase;
+import com.company.models.contracts.workItem.WorkItem;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public abstract class UnitBase implements Unit {
     String name;
-    private List<WorkItemBase> items;
+    private Map<String, WorkItem> items;
     private List<String> activityHistory;
 
     UnitBase(String name) {
@@ -18,7 +20,7 @@ public abstract class UnitBase implements Unit {
     }
 
     private void setItems() {
-        this.items = new ArrayList<>();
+        this.items = new HashMap<>();
     }
 
     private void setActivityHistory() {
@@ -31,11 +33,16 @@ public abstract class UnitBase implements Unit {
         return name;
     }
 
-    public List<WorkItemBase> getItems() {
-        return new ArrayList<>(items);
+    public Map<String, WorkItem> getItems() {
+        return new HashMap<>(items);
     }
 
     public List<String> getActivityHistory() {
         return new ArrayList<>(activityHistory);
+    }
+
+    @Override
+    public void addWorkItem(WorkItem workItem) {
+        this.items.put(workItem.getTitle(), workItem);
     }
 }

@@ -6,12 +6,14 @@ import com.company.models.contracts.unit.Board;
 import com.company.models.contracts.unit.Member;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class TeamImpl implements Team {
     private String name;
     private List<Member> members;
-    private List<Board> boards;
+    private Map<String,Board> boards;
 
     public TeamImpl(String name) {
         setName(name);
@@ -28,7 +30,7 @@ public class TeamImpl implements Team {
     }
 
     private void setBoards() {
-        this.boards = new ArrayList<>();
+        this.boards = new HashMap<>();
     }
 
     public String getName() {
@@ -39,7 +41,7 @@ public class TeamImpl implements Team {
         return members;
     }
 
-    public List<Board> getBoards() {
+    public Map<String,Board> getBoards() {
         return boards;
     }
 }

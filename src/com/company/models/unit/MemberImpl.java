@@ -2,6 +2,7 @@ package com.company.models.unit;
 
 
 import com.company.models.contracts.unit.Member;
+import com.company.models.contracts.workItem.WorkItem;
 
 public class MemberImpl extends UnitBase implements Member {
 

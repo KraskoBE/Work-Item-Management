@@ -139,21 +139,18 @@ public class EngineImpl implements Engine {
             return String.format(EngineConstants.TeamDoesNotExist, teamName);
         }
         Team tempTeam = teams.get(teamName);
-        List<Board> teamBoards = tempTeam.getBoards();
+        Map<String, Board> teamBoards = tempTeam.getBoards();
 
-        if (teamBoards.stream().anyMatch((x) -> x.getName().equals(name)))
+        if(teamBoards.containsKey(name))
             return String.format(EngineConstants.BoardExistsInTeamErrorMessage, name, teamName);
 
         Board board = factory.createBoard(name);
-        tempTeam.getBoards().add(board);
+        tempTeam.getBoards().put(name,board);
         boards.put(name, board);
         return String.format(EngineConstants.BoardCreatedSuccessMessage, name);
     }
 
     private String createBug(String name, String description, String priority, String severity, String status, String assignee, String board, String team) {
-        if (workItems.containsKey(name))
-            return String.format(EngineConstants.BugExistsErrorMessage, name);
-
         if (!teams.containsKey(team))
             return String.format(EngineConstants.TeamDoesNotExist, team);
 
@@ -163,7 +160,7 @@ public class EngineImpl implements Engine {
         if (teams.get(team).getMembers().stream().noneMatch((x) -> x.getName().equals(assignee)))
             return String.format(EngineConstants.MemberIsNotFromTheTeam, assignee, team);
 
-        if (teams.get(team).getBoards().stream().noneMatch((x) -> x.getName().equals(board)))
+        if(!teams.get(team).getBoards().containsKey(board))
             return String.format(EngineConstants.BoardIsNotOnheTeam, board, team);
 
         Member member = members.get(assignee);
@@ -171,6 +168,7 @@ public class EngineImpl implements Engine {
         Bug bug = factory.createBug(globalInt, name, description, priority, severity, status, member);
         workItems.put(globalInt++, bug);
 
+        teams.get(team).getBoards().get(board).addWorkItem(bug);
         return String.format(EngineConstants.BugCreatedSuccessMessage, name);
     }
 

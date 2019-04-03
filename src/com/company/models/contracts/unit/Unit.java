@@ -1,15 +1,18 @@
 package com.company.models.contracts.unit;
 
+import com.company.models.contracts.workItem.WorkItem;
 import com.company.models.workItem.WorkItemBase;
 
 
 import java.util.List;
+import java.util.Map;
 
 public interface Unit {
-    String getName() ;
+    String getName();
 
-    List<WorkItemBase> getItems() ;
+    Map<String, WorkItem> getItems();
 
-   List<String> getActivityHistory();
+    List<String> getActivityHistory();
 
+    void addWorkItem(WorkItem workItem);
 }

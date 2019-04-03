@@ -14,7 +14,6 @@ public class EngineConstants {
     static final String MemberExistsErrorMessage = "Member %s already exists";
     static final String BoardExistsInTeamErrorMessage = "Board %s already exists in %s";
     static final String TeamDoesNotExist = "Team %s does not exists";
-    static final String BugExistsErrorMessage = "Bug %s already exists";
     static final String MemberDoesNotExist = "Member %s does not exist";
     static final String MemberIsNotFromTheTeam = "Member %s is not from team: %s";
     static final String BoardIsNotOnheTeam = "Board %s is not on team: %s";
@@ -23,7 +22,7 @@ public class EngineConstants {
     static final String TeamCreatedSuccessMessage = "Team %s created";
     static final String MemberCreatedSuccessMessage = "Member %s created";
     static final String BoardCreatedSuccessMessage = "Board %s created";
-    static final String BugCreatedSuccessMessage = "Bug %s created";
+    static final String BugCreatedSuccessMessage = "Bug %s created with ID:%d";
 
     //Priority
     static final String HIGH = "high";
