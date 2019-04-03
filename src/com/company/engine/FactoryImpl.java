@@ -31,8 +31,8 @@ public class FactoryImpl implements Factory {
     }
 
     @Override
-    public Bug createBug(String name, String description, String priority, String severity, String Status, String assignee) {
-        return new BugImpl(name, description, getPriority(priority), getSeverity(severity), )
+    public Bug createBug(int id, String name, String description, String priority, String severity, String status, Member assignee) {
+        return new BugImpl(id,name, description, getPriority(priority), getSeverity(severity),getStatus(status),assignee );
     }
 
     private Priority getPriority(String priority) {
@@ -72,7 +72,7 @@ public class FactoryImpl implements Factory {
             case EngineConstants.INPROGRESS:
                 return Status.InProgress;
             case EngineConstants.DONE:
-                return Status.Done:
+                return Status.Done;
             case EngineConstants.NEW:
                 return Status.New;
             case EngineConstants.UNSCHEDULED:

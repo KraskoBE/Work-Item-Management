@@ -7,7 +7,9 @@ import com.company.engine.contracts.Renderer;
 import com.company.models.contracts.Team;
 import com.company.models.contracts.unit.Board;
 import com.company.models.contracts.unit.Member;
+import com.company.models.contracts.workItem.Bug;
 import com.company.models.contracts.workItem.WorkItem;
+import com.sun.javafx.binding.StringFormatter;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -15,7 +17,10 @@ import java.util.List;
 import java.util.Map;
 
 public class EngineImpl implements Engine {
+
     private Factory factory;
+
+    private int globalInt = 0;
 
     private Map<String, Team> teams;
     private Map<String, Member> members;
@@ -68,19 +73,37 @@ public class EngineImpl implements Engine {
             switch (command.getName()) {
                 case EngineConstants.CreateMemberCommand:
                     String memberName = command.getParameters().get(0);
+
                     commandResult = createMember(memberName);
                     commandResults.add(commandResult);
                     break;
                 case EngineConstants.CreateTeamCommand:
                     String teamName = command.getParameters().get(0);
+
                     commandResult = createTeam(teamName);
                     commandResults.add(commandResult);
                     break;
                 case EngineConstants.CreateBoardCommand:
                     String boardName = command.getParameters().get(0);
-                    commandResult = createBoard(boardName);
+                    teamName = command.getParameters().get(1);
+
+                    commandResult = createBoard(boardName, teamName);
                     commandResults.add(commandResult);
                     break;
+                case EngineConstants.CreateBugCommand:
+                    String bugName = command.getParameters().get(0);
+                    String bugDescription = command.getParameters().get(1);
+                    String bugPriority = command.getParameters().get(2);
+                    String bugSeverity = command.getParameters().get(3);
+                    String bugStatus = command.getParameters().get(4);
+                    String bugAssignee = command.getParameters().get(5);
+                    String bugBoard = command.getParameters().get(6);
+                    String bugTeam = command.getParameters().get(7);
+
+                    commandResult = createBug(bugName, bugDescription, bugPriority, bugSeverity, bugStatus, bugAssignee, bugBoard, bugTeam);
+                    commandResults.add(commandResult);
+                    break;
+
                 default:
                     commandResults.add(String.format(EngineConstants.InvalidCommandErrorMessage, command.getName()));
                     break;
@@ -111,16 +134,45 @@ public class EngineImpl implements Engine {
 
     }
 
-    private String createBoard(String name) {
-        if (boards.containsKey(name)) {
-            return String.format(EngineConstants.BoardExistsErrorMessage, name);
+    private String createBoard(String name, String teamName) {
+        if (!teams.containsKey(teamName)) {
+            return String.format(EngineConstants.TeamDoesNotExist, teamName);
         }
-        Board board = factory.createBoard(name);
-        boards.put(name, board);
+        Team tempTeam = teams.get(teamName);
+        List<Board> teamBoards = tempTeam.getBoards();
 
+        if (teamBoards.stream().anyMatch((x) -> x.getName().equals(name)))
+            return String.format(EngineConstants.BoardExistsInTeamErrorMessage, name, teamName);
+
+        Board board = factory.createBoard(name);
+        tempTeam.getBoards().add(board);
+        boards.put(name, board);
         return String.format(EngineConstants.BoardCreatedSuccessMessage, name);
     }
 
+    private String createBug(String name, String description, String priority, String severity, String status, String assignee, String board, String team) {
+        if (workItems.containsKey(name))
+            return String.format(EngineConstants.BugExistsErrorMessage, name);
+
+        if (!teams.containsKey(team))
+            return String.format(EngineConstants.TeamDoesNotExist, team);
+
+        if (!members.containsKey(assignee))
+            return String.format(EngineConstants.MemberDoesNotExist, assignee);
+
+        if (teams.get(team).getMembers().stream().noneMatch((x) -> x.getName().equals(assignee)))
+            return String.format(EngineConstants.MemberIsNotFromTheTeam, assignee, team);
+
+        if (teams.get(team).getBoards().stream().noneMatch((x) -> x.getName().equals(board)))
+            return String.format(EngineConstants.BoardIsNotOnheTeam, board, team);
+
+        Member member = members.get(assignee);
+
+        Bug bug = factory.createBug(globalInt, name, description, priority, severity, status, member);
+        workItems.put(globalInt++, bug);
+
+        return String.format(EngineConstants.BugCreatedSuccessMessage, name);
+    }
 
     private void renderCommandResults(List<String> output) {
         renderer.output(output);

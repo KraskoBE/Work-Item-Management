@@ -20,7 +20,7 @@ public abstract class WorkItemBase implements WorkItem {
     private List<Comment> comments;
     private List<String> history;
 
-    public WorkItemBase(int id, String title, String description, Status status) {
+    protected WorkItemBase(int id, String title, String description, Status status) {
         setId(id);
         setTitle(title);
         setDescription(description);

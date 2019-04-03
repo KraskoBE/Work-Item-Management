@@ -20,7 +20,7 @@ public class CommandImpl implements Command {
     }
 
     public String getName() {
-        return this.name;
+        return this.name.toLowerCase();
     }
 
     public List<String> getParameters() {
