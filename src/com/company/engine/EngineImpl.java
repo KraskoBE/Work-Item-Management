@@ -96,14 +96,19 @@ public class EngineImpl implements Engine {
                     String bugPriority = command.getParameters().get(2);
                     String bugSeverity = command.getParameters().get(3);
                     String bugStatus = command.getParameters().get(4);
-                    String bugAssignee = command.getParameters().get(5);
-                    String bugBoard = command.getParameters().get(6);
-                    String bugTeam = command.getParameters().get(7);
+                    String bugBoard = command.getParameters().get(5);
+                    String bugTeam = command.getParameters().get(6);
 
-                    commandResult = createBug(bugName, bugDescription, bugPriority, bugSeverity, bugStatus, bugAssignee, bugBoard, bugTeam);
+                    commandResult = createBug(bugName, bugDescription, bugPriority, bugSeverity, bugStatus, bugBoard, bugTeam);
                     commandResults.add(commandResult);
                     break;
+                case EngineConstants.AddMemberToTeam:
+                    memberName = command.getParameters().get(0);
+                    teamName = command.getParameters().get(1);
 
+                    commandResult = addMemberToTeam(memberName, teamName);
+                    commandResults.add(commandResult);
+                    break;
                 default:
                     commandResults.add(String.format(EngineConstants.InvalidCommandErrorMessage, command.getName()));
                     break;
@@ -141,36 +146,44 @@ public class EngineImpl implements Engine {
         Team tempTeam = teams.get(teamName);
         Map<String, Board> teamBoards = tempTeam.getBoards();
 
-        if(teamBoards.containsKey(name))
+        if (teamBoards.containsKey(name))
             return String.format(EngineConstants.BoardExistsInTeamErrorMessage, name, teamName);
 
         Board board = factory.createBoard(name);
-        tempTeam.getBoards().put(name,board);
+        tempTeam.getBoards().put(name, board);
         boards.put(name, board);
         return String.format(EngineConstants.BoardCreatedSuccessMessage, name);
     }
 
-    private String createBug(String name, String description, String priority, String severity, String status, String assignee, String board, String team) {
+    private String createBug(String name, String description, String priority, String severity, String status, String board, String team) {
         if (!teams.containsKey(team))
             return String.format(EngineConstants.TeamDoesNotExist, team);
 
-        if (!members.containsKey(assignee))
-            return String.format(EngineConstants.MemberDoesNotExist, assignee);
-
-        if (teams.get(team).getMembers().stream().noneMatch((x) -> x.getName().equals(assignee)))
-            return String.format(EngineConstants.MemberIsNotFromTheTeam, assignee, team);
-
-        if(!teams.get(team).getBoards().containsKey(board))
+        if (!teams.get(team).getBoards().containsKey(board))
             return String.format(EngineConstants.BoardIsNotOnheTeam, board, team);
 
-        Member member = members.get(assignee);
-
-        Bug bug = factory.createBug(globalInt, name, description, priority, severity, status, member);
-        workItems.put(globalInt++, bug);
+        Bug bug = factory.createBug(globalInt, name, description, priority, severity, status);
+        workItems.put(globalInt, bug);
 
         teams.get(team).getBoards().get(board).addWorkItem(bug);
-        return String.format(EngineConstants.BugCreatedSuccessMessage, name);
+        return String.format(EngineConstants.BugCreatedSuccessMessage, name, globalInt++);
     }
+
+    private String addMemberToTeam(String memberName, String teamName) {
+        if (!teams.containsKey(teamName))
+            return String.format(EngineConstants.TeamDoesNotExist, teamName);
+
+        if (!members.containsKey(memberName))
+            return String.format(EngineConstants.MemberDoesNotExist, memberName);
+
+        if (teams.get(teamName).getMembers().containsKey(memberName))
+            return String.format(EngineConstants.MemberAlreadyInTeam, memberName, teamName);
+
+        teams.get(teamName).getMembers().put(memberName, members.get(memberName));
+
+        return String.format(EngineConstants.MemberAddedSuccessMessage, memberName, teamName);
+    }
+
 
     private void renderCommandResults(List<String> output) {
         renderer.output(output);

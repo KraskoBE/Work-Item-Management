@@ -13,7 +13,6 @@ public interface Factory {
 
     Board createBoard(String name);
 
-    Bug createBug(int id, String name, String description, String priority, String severity, String Status, Member assignee);
-
+    Bug createBug(int id, String name, String description, String priority, String severity, String Status);
 
 }

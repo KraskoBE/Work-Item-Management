@@ -7,6 +7,7 @@ public class EngineConstants {
     static final String CreateMemberCommand = "createmember";
     static final String CreateBoardCommand = "createboard";
     static final String CreateBugCommand = "createbug";
+    static final String AddMemberToTeam = "addmembertoteam";
 
     // Error messages
     static final String InvalidCommandErrorMessage = "Invalid command name: %s";
@@ -16,13 +17,15 @@ public class EngineConstants {
     static final String TeamDoesNotExist = "Team %s does not exists";
     static final String MemberDoesNotExist = "Member %s does not exist";
     static final String MemberIsNotFromTheTeam = "Member %s is not from team: %s";
-    static final String BoardIsNotOnheTeam = "Board %s is not on team: %s";
+    static final String BoardIsNotOnheTeam = "Board %s is not on team %s";
+    static final String MemberAlreadyInTeam = "Member %s is already in team %s";
 
     // Success messages
     static final String TeamCreatedSuccessMessage = "Team %s created";
     static final String MemberCreatedSuccessMessage = "Member %s created";
     static final String BoardCreatedSuccessMessage = "Board %s created";
     static final String BugCreatedSuccessMessage = "Bug %s created with ID:%d";
+    static final String MemberAddedSuccessMessage = "Member %s added to team %s";
 
     //Priority
     static final String HIGH = "high";

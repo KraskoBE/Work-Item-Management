@@ -11,7 +11,7 @@ public interface Team {
 
     String getName();
 
-    List<Member> getMembers();
+    Map<String,Member> getMembers();
 
     Map<String,Board> getBoards();
 }

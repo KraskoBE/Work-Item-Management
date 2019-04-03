@@ -12,7 +12,7 @@ import java.util.Map;
 
 public class TeamImpl implements Team {
     private String name;
-    private List<Member> members;
+    private Map<String, Member> members;
     private Map<String,Board> boards;
 
     public TeamImpl(String name) {
@@ -26,7 +26,7 @@ public class TeamImpl implements Team {
     }
 
     private void setMembers() {
-        this.members = new ArrayList<>();
+        this.members = new HashMap<>();
     }
 
     private void setBoards() {
@@ -37,7 +37,7 @@ public class TeamImpl implements Team {
         return name;
     }
 
-    public List<Member> getMembers() {
+    public Map<String, Member> getMembers() {
         return members;
     }
 

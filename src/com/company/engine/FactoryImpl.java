@@ -13,6 +13,8 @@ import com.company.models.unit.BoardImpl;
 import com.company.models.unit.MemberImpl;
 import com.company.models.workItem.BugImpl;
 
+import java.awt.*;
+
 public class FactoryImpl implements Factory {
 
     @Override
@@ -31,8 +33,9 @@ public class FactoryImpl implements Factory {
     }
 
     @Override
-    public Bug createBug(int id, String name, String description, String priority, String severity, String status, Member assignee) {
-        return new BugImpl(id,name, description, getPriority(priority), getSeverity(severity),getStatus(status),assignee );
+    public Bug createBug(int id, String name, String description, String priority, String severity, String status) {
+        Member member = new MemberImpl("krasen");
+        return new BugImpl(id, name, description, getPriority(priority), getSeverity(severity), getStatus(status), member);
     }
 
     private Priority getPriority(String priority) {

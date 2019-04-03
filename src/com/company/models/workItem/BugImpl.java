@@ -15,12 +15,12 @@ public class BugImpl extends WorkItemBase implements Bug {
     private Severity severity;
     private Member assignee;
 
-    public BugImpl(int id, String title, String description, Priority priority, Severity severity, Status status, Member asignee) {
+    public BugImpl(int id, String title, String description, Priority priority, Severity severity, Status status, Member assignee) {
         super(id, title, description, status);
         setPriority(priority);
         setSeverity(severity);
         setStepsToReproduce();
-        setAssignee(asignee);
+        setAssignee(assignee);
     }
 
     private void setStepsToReproduce() {
