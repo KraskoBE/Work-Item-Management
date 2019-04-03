@@ -8,8 +8,8 @@ import com.company.models.contracts.Team;
 import com.company.models.contracts.unit.Board;
 import com.company.models.contracts.unit.Member;
 import com.company.models.contracts.workItem.Bug;
+import com.company.models.contracts.workItem.Story;
 import com.company.models.contracts.workItem.WorkItem;
-import com.sun.javafx.binding.StringFormatter;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -20,7 +20,7 @@ public class EngineImpl implements Engine {
 
     private Factory factory;
 
-    private int globalInt = 0;
+    private int globalID = 0;
 
     private Map<String, Team> teams;
     private Map<String, Member> members;
@@ -102,6 +102,18 @@ public class EngineImpl implements Engine {
                     commandResult = createBug(bugName, bugDescription, bugPriority, bugSeverity, bugStatus, bugBoard, bugTeam);
                     commandResults.add(commandResult);
                     break;
+                case EngineConstants.CraeteStoryCommand:
+                    String storyName = command.getParameters().get(0);
+                    String storyDescription = command.getParameters().get(1);
+                    String storyStatus = command.getParameters().get(2);
+                    String storyPriority = command.getParameters().get(3);
+                    String storySize = command.getParameters().get(4);
+                    String storyBoard = command.getParameters().get(5);
+                    String storyTeam = command.getParameters().get(6);
+
+                    commandResult = createStory(storyName, storyDescription, storyStatus, storyPriority, storySize, storyBoard, storyTeam);
+                    commandResults.add(commandResult);
+                    break;
                 case EngineConstants.AddMemberToTeam:
                     memberName = command.getParameters().get(0);
                     teamName = command.getParameters().get(1);
@@ -162,11 +174,25 @@ public class EngineImpl implements Engine {
         if (!teams.get(team).getBoards().containsKey(board))
             return String.format(EngineConstants.BoardIsNotOnheTeam, board, team);
 
-        Bug bug = factory.createBug(globalInt, name, description, priority, severity, status);
-        workItems.put(globalInt, bug);
+        Bug bug = factory.createBug(globalID, name, description, priority, severity, status);
+        workItems.put(globalID, bug);
 
         teams.get(team).getBoards().get(board).addWorkItem(bug);
-        return String.format(EngineConstants.BugCreatedSuccessMessage, name, globalInt++);
+        return String.format(EngineConstants.BugCreatedSuccessMessage, name, globalID++);
+    }
+
+    private String createStory(String name, String description, String status, String priority, String size, String board, String team) {
+        if (!teams.containsKey(team))
+            return String.format(EngineConstants.TeamDoesNotExist, team);
+
+        if (!teams.get(team).getBoards().containsKey(board))
+            return String.format(EngineConstants.BoardIsNotOnheTeam, board, team);
+
+        Story story = factory.createStory(globalID, name, description, status, priority, size);
+        workItems.put(globalID,story);
+
+        teams.get(team).getBoards().get(board).addWorkItem(story);
+        return String.format(EngineConstants.StoryCreatedSuccessMessage, name, globalID++);
     }
 
     private String addMemberToTeam(String memberName, String teamName) {
