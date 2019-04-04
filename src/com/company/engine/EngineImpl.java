@@ -3,8 +3,6 @@ package com.company.engine;
 import com.company.engine.contracts.Command;
 import com.company.engine.contracts.Engine;
 import com.company.engine.contracts.Factory;
-import com.company.engine.contracts.Renderer;
-import com.company.models.common.Priority;
 import com.company.models.contracts.Team;
 import com.company.models.contracts.unit.Board;
 import com.company.models.contracts.unit.Member;
@@ -14,10 +12,7 @@ import com.company.models.contracts.workItem.Story;
 import com.company.models.contracts.workItem.WorkItem;
 
 import javax.swing.*;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class EngineImpl implements Engine {
 
@@ -30,8 +25,6 @@ public class EngineImpl implements Engine {
     private Map<String, Board> boards;
     private Map<Integer, WorkItem> workItems;
 
-    private Renderer renderer;
-
     public EngineImpl() {
 
         factory = new FactoryImpl();
@@ -39,135 +32,108 @@ public class EngineImpl implements Engine {
         members = new HashMap<>();
         boards = new HashMap<>();
         workItems = new HashMap<>();
-        renderer = new ConsoleRendererImpl();
     }
-
 
     @Override
     public void start() {
-        List<String> commandResults = new ArrayList<>();
+        Scanner scanner = new Scanner(System.in);
+        String currentLine = scanner.nextLine();
         try {
-            List<Command> commands = readCommands();
-            commandResults = processCommands(commands);
-        } catch (Exception ex) {
-            commandResults.add(ex.getMessage());
-        }
-
-        renderCommandResults(commandResults);
-    }
-
-    private List<Command> readCommands() {
-
-        List<Command> commands = new ArrayList<>();
-
-        for (String currentLine : renderer.input()) {
-            Command currentCommand = CommandImpl.parse(currentLine);
-            commands.add(currentCommand);
-        }
-        return commands;
-    }
-
-    private List<String> processCommands(List<Command> commands) {
-        List<String> commandResults = new ArrayList<>();
-
-        for (Command command : commands) {
-            String commandResult;
-
-            switch (command.getName()) {
-                case EngineConstants.CreateMemberCommand:
-                    String memberName = command.getParameters().get(0);
-
-                    commandResult = createMember(memberName);
-                    commandResults.add(commandResult);
-                    break;
-                case EngineConstants.CreateTeamCommand:
-                    String teamName = command.getParameters().get(0);
-
-                    commandResult = createTeam(teamName);
-                    commandResults.add(commandResult);
-                    break;
-                case EngineConstants.CreateBoardCommand:
-                    String boardName = command.getParameters().get(0);
-                    teamName = command.getParameters().get(1);
-
-                    commandResult = createBoard(boardName, teamName);
-                    commandResults.add(commandResult);
-                    break;
-                case EngineConstants.CreateBugCommand:
-                    String bugName = command.getParameters().get(0);
-                    String bugDescription = command.getParameters().get(1);
-                    String bugPriority = command.getParameters().get(2);
-                    String bugSeverity = command.getParameters().get(3);
-                    String bugBoard = command.getParameters().get(4);
-                    String bugTeam = command.getParameters().get(5);
-
-                    commandResult = createBug(bugName, bugDescription, bugPriority, bugSeverity, bugBoard, bugTeam);
-                    commandResults.add(commandResult);
-                    break;
-                case EngineConstants.CreateStoryCommand:
-                    String storyName = command.getParameters().get(0);
-                    String storyDescription = command.getParameters().get(1);
-                    String storyStatus = command.getParameters().get(2);
-                    String storyPriority = command.getParameters().get(3);
-                    String storySize = command.getParameters().get(4);
-                    String storyBoard = command.getParameters().get(5);
-                    String storyTeam = command.getParameters().get(6);
-
-                    commandResult = createStory(storyName, storyDescription, storyStatus, storyPriority, storySize, storyBoard, storyTeam);
-                    commandResults.add(commandResult);
-                    break;
-                case EngineConstants.CreateFeedbackCommand:
-                    String feedbackName = command.getParameters().get(0);
-                    String feedbackDescription = command.getParameters().get(1);
-                    String feedbackStatus = command.getParameters().get(2);
-                    int feedbackRating = Integer.parseInt(command.getParameters().get(3));
-                    String feedbackBoard = command.getParameters().get(4);
-                    String feedbackTeam = command.getParameters().get(5);
-
-                    commandResult = createFeedback(feedbackName, feedbackDescription, feedbackStatus, feedbackRating, feedbackBoard, feedbackTeam);
-                    commandResults.add(commandResult);
-                    break;
-                case EngineConstants.ShowAllPeopleCommand:
-                    commandResult = showAllPeople();
-                    commandResults.add(commandResult);
-                    break;
-                case EngineConstants.ShowAllTeamsCommand:
-                    commandResult = showAllTeams();
-                    commandResults.add(commandResult);
-                    break;
-                case EngineConstants.ShowAllTeamMembersCommand:
-                    teamName = command.getParameters().get(0);
-
-                    commandResult = showAllTeamMembers(teamName);
-                    commandResults.add(commandResult);
-                    break;
-                case EngineConstants.ShowAllTeamBoardsCommand:
-                    teamName = command.getParameters().get(0);
-
-                    commandResult = showAllTeamBoards(teamName);
-                    commandResults.add(commandResult);
-                    break;
-                case EngineConstants.AddMemberToTeamCommand:
-                    memberName = command.getParameters().get(0);
-                    teamName = command.getParameters().get(1);
-
-                    commandResult = addMemberToTeam(memberName, teamName);
-                    commandResults.add(commandResult);
-                    break;
-                case EngineConstants.ChangeCommand:
-                    int workItemID = Integer.parseInt(command.getParameters().get(0));
-                    String changeType = command.getParameters().get(1);
-                    String changeValue = command.getParameters().get(2);
-
-                    commandResult = changeCommand(workItemID, changeType, changeValue);
-                    commandResults.add(commandResult);
-                    break;
-                default:
-                    commandResults.add(String.format(EngineConstants.InvalidCommandErrorMessage, command.getName());
-                    break;
+            while (currentLine != null && !currentLine.equals("")) {
+                Command command = CommandImpl.parse(currentLine);
+                System.out.println(processCommand(command));
+                currentLine = scanner.nextLine();
             }
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
         }
-        return commandResults;
+    }
+
+    private String processCommand(Command command) {
+        String commandResult;
+
+        switch (command.getName()) {
+            case EngineConstants.CreateMemberCommand:
+                String memberName = command.getParameters().get(0);
+
+                commandResult = createMember(memberName);
+                break;
+            case EngineConstants.CreateTeamCommand:
+                String teamName = command.getParameters().get(0);
+
+                commandResult = createTeam(teamName);
+                break;
+            case EngineConstants.CreateBoardCommand:
+                String boardName = command.getParameters().get(0);
+                teamName = command.getParameters().get(1);
+
+                commandResult = createBoard(boardName, teamName);
+                break;
+            case EngineConstants.CreateBugCommand:
+                String bugName = command.getParameters().get(0);
+                String bugDescription = command.getParameters().get(1);
+                String bugPriority = command.getParameters().get(2);
+                String bugSeverity = command.getParameters().get(3);
+                String bugBoard = command.getParameters().get(4);
+                String bugTeam = command.getParameters().get(5);
+
+                commandResult = createBug(bugName, bugDescription, bugPriority, bugSeverity, bugBoard, bugTeam);
+                break;
+            case EngineConstants.CreateStoryCommand:
+                String storyName = command.getParameters().get(0);
+                String storyDescription = command.getParameters().get(1);
+                String storyStatus = command.getParameters().get(2);
+                String storyPriority = command.getParameters().get(3);
+                String storySize = command.getParameters().get(4);
+                String storyBoard = command.getParameters().get(5);
+                String storyTeam = command.getParameters().get(6);
+
+                commandResult = createStory(storyName, storyDescription, storyStatus, storyPriority, storySize, storyBoard, storyTeam);
+                break;
+            case EngineConstants.CreateFeedbackCommand:
+                String feedbackName = command.getParameters().get(0);
+                String feedbackDescription = command.getParameters().get(1);
+                String feedbackStatus = command.getParameters().get(2);
+                int feedbackRating = Integer.parseInt(command.getParameters().get(3));
+                String feedbackBoard = command.getParameters().get(4);
+                String feedbackTeam = command.getParameters().get(5);
+
+                commandResult = createFeedback(feedbackName, feedbackDescription, feedbackStatus, feedbackRating, feedbackBoard, feedbackTeam);
+                break;
+            case EngineConstants.ShowAllPeopleCommand:
+                commandResult = showAllPeople();
+                break;
+            case EngineConstants.ShowAllTeamsCommand:
+                commandResult = showAllTeams();
+                break;
+            case EngineConstants.ShowAllTeamMembersCommand:
+                teamName = command.getParameters().get(0);
+
+                commandResult = showAllTeamMembers(teamName);
+                break;
+            case EngineConstants.ShowAllTeamBoardsCommand:
+                teamName = command.getParameters().get(0);
+
+                commandResult = showAllTeamBoards(teamName);
+                break;
+            case EngineConstants.AddMemberToTeamCommand:
+                memberName = command.getParameters().get(0);
+                teamName = command.getParameters().get(1);
+
+                commandResult = addMemberToTeam(memberName, teamName);
+                break;
+            case EngineConstants.ChangeCommand:
+                int workItemID = Integer.parseInt(command.getParameters().get(0));
+                String changeType = command.getParameters().get(1);
+                String changeValue = command.getParameters().get(2);
+
+                commandResult = changeCommand(workItemID, changeType, changeValue);
+                break;
+            default:
+                commandResult = String.format(EngineConstants.InvalidCommandErrorMessage, command.getName());
+                break;
+        }
+        return commandResult;
     }
 
     private String createMember(String name) {
