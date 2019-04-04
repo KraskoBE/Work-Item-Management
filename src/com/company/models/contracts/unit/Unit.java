@@ -10,7 +10,7 @@ import java.util.Map;
 public interface Unit {
     String getName();
 
-    Map<String, WorkItem> getItems();
+    Map<Integer, WorkItem> getItems();
 
     List<String> getActivityHistory();
 

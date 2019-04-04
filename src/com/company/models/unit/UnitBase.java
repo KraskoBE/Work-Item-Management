@@ -2,6 +2,7 @@ package com.company.models.unit;
 
 import com.company.models.contracts.unit.Unit;
 import com.company.models.contracts.workItem.WorkItem;
+import com.sun.corba.se.spi.orbutil.threadpool.Work;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -10,7 +11,7 @@ import java.util.Map;
 
 public abstract class UnitBase implements Unit {
     String name;
-    private Map<String, WorkItem> items;
+    private Map<Integer, WorkItem> items;
     List<String> activityHistory;
 
     UnitBase(String name) {
@@ -31,7 +32,7 @@ public abstract class UnitBase implements Unit {
         return name;
     }
 
-    public Map<String, WorkItem> getItems() {
+    public Map<Integer, WorkItem> getItems() {
         return new HashMap<>(items);
     }
 
@@ -41,7 +42,8 @@ public abstract class UnitBase implements Unit {
 
     @Override
     public void addWorkItem(WorkItem workItem) {
-        this.items.put(workItem.getTitle(), workItem);
+        this.items.put(workItem.getId(), workItem);
+        System.out.println("Dobavqme workItem s id" + workItem.getId() +"  i ime " + workItem.getTitle());
     }
 
     @Override

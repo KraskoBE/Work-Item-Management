@@ -17,7 +17,7 @@ public interface Factory {
 
     Bug createBug(int id, String name, String description, String priority, String severity);
 
-    Story createStory(int id, String name, String description, String status, String priority, String size);
+    Story createStory(int id, String name, String description , String priority, String size);
 
     Feedback createFeedback(int id, String name, String description, String status, int rating);
 }

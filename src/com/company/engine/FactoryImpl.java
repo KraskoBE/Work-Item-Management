@@ -43,16 +43,16 @@ public class FactoryImpl implements Factory {
     }
 
     @Override
-    public Story createStory(int id, String name, String description, String status, String priority, String size) {
-        return new StoryImpl(id, name, description, getStatus(status), getPriority(priority),getSize(size));
+    public Story createStory(int id, String name, String description, String priority, String size) {
+        return new StoryImpl(id, name, description, getPriority(priority), getSize(size));
     }
 
     @Override
     public Feedback createFeedback(int id, String name, String description, String status, int rating) {
-        return new FeedbackImpl(id,name, description,getStatus(status),rating);
+        return new FeedbackImpl(id, name, description, getStatus(status), rating);
     }
 
-     static Priority getPriority(String priority) {
+    static Priority getPriority(String priority) {
         switch (priority.toLowerCase()) {
             case EngineConstants.HIGH:
                 return Priority.High;
@@ -65,7 +65,7 @@ public class FactoryImpl implements Factory {
         }
     }
 
-     static Severity getSeverity(String severity) {
+    static Severity getSeverity(String severity) {
         switch (severity.toLowerCase()) {
             case EngineConstants.CRITICAL:
                 return Severity.Critical;
@@ -78,7 +78,7 @@ public class FactoryImpl implements Factory {
         }
     }
 
-     static Status getStatus(String status) {
+    static Status getStatus(String status) {
         switch (status.toLowerCase()) {
             case EngineConstants.ACTIVE:
                 return Status.Active;
@@ -101,7 +101,7 @@ public class FactoryImpl implements Factory {
         }
     }
 
-     static Size getSize(String size) {
+    static Size getSize(String size) {
         switch (size.toLowerCase()) {
             case EngineConstants.LARGE:
                 return Size.Large;

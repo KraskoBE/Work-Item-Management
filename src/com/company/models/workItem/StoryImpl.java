@@ -13,11 +13,10 @@ public class StoryImpl extends WorkItemBase implements Story {
     private Size size;
     private Member assignee;
 
-    public StoryImpl(int id, String title, String description, Status status, Priority priority, Size size) {
-        super(id, title, description, status);
+    public StoryImpl(int id, String title, String description, Priority priority, Size size) {
+        super(id, title, description, Status.InProgress);
         setPriority(priority);
         setSize(size);
-        setStatus(status);
     }
 
     public Priority getPriority() {

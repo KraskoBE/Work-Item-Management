@@ -15,6 +15,9 @@ public class EngineConstants {
     static final String ShowAllTeamMembersCommand = "showteammembers";
     static final String ShowAllTeamBoardsCommand = "showteamboards";
     static final String ChangeCommand = "change";
+    static final String AssignCommand = "assign";
+    static final String UnassignCommand = "unassign";
+    static final String ListWorkItems = "listworkitems";
 
     // Error messages
     static final String InvalidCommandErrorMessage = "Invalid command name: %s";
@@ -32,6 +35,7 @@ public class EngineConstants {
     static final String EmptyBoardsErrorMessage = "Team %s does not have boards";
     static final String WorkItemDoesNotExist = "Work item with ID:%d does not exist";
     static final String InvalidObjectType = "Invalid object type: %s";
+    static final String WorkItemListEmpty = "There are no work items";
 
     // Success messages
     static final String TeamCreatedSuccessMessage = "Team %s created";

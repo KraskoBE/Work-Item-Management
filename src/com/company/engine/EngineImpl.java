@@ -13,6 +13,7 @@ import com.company.models.contracts.workItem.WorkItem;
 
 import javax.swing.*;
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class EngineImpl implements Engine {
 
@@ -82,13 +83,12 @@ public class EngineImpl implements Engine {
             case EngineConstants.CreateStoryCommand:
                 String storyName = command.getParameters().get(0);
                 String storyDescription = command.getParameters().get(1);
-                String storyStatus = command.getParameters().get(2);
-                String storyPriority = command.getParameters().get(3);
-                String storySize = command.getParameters().get(4);
-                String storyBoard = command.getParameters().get(5);
-                String storyTeam = command.getParameters().get(6);
+                String storyPriority = command.getParameters().get(2);
+                String storySize = command.getParameters().get(3);
+                String storyBoard = command.getParameters().get(4);
+                String storyTeam = command.getParameters().get(5);
 
-                commandResult = createStory(storyName, storyDescription, storyStatus, storyPriority, storySize, storyBoard, storyTeam);
+                commandResult = createStory(storyName, storyDescription, storyPriority, storySize, storyBoard, storyTeam);
                 break;
             case EngineConstants.CreateFeedbackCommand:
                 String feedbackName = command.getParameters().get(0);
@@ -128,6 +128,20 @@ public class EngineImpl implements Engine {
                 String changeValue = command.getParameters().get(2);
 
                 commandResult = changeCommand(workItemID, changeType, changeValue);
+                break;
+            case EngineConstants.AssignCommand:
+                workItemID = Integer.parseInt(command.getParameters().get(0));
+                String assignee = command.getParameters().get(1);
+
+                commandResult = assignCommand(workItemID, assignee);
+                break;
+            case EngineConstants.ListWorkItems:
+                String firstParam = command.getParameters().get(0);
+                if(firstParam.equals("all")){
+                    commandResult = listWorkItemsAll();
+                    break;
+                }
+                commandResult="error";
                 break;
             default:
                 commandResult = String.format(EngineConstants.InvalidCommandErrorMessage, command.getName());
@@ -188,14 +202,14 @@ public class EngineImpl implements Engine {
         return String.format(EngineConstants.BugCreatedSuccessMessage, name, globalID++);
     }
 
-    private String createStory(String name, String description, String status, String priority, String size, String board, String team) {
+    private String createStory(String name, String description, String priority, String size, String board, String team) {
         if (!teams.containsKey(team))
             return String.format(EngineConstants.TeamDoesNotExist, team);
 
         if (!teams.get(team).getBoards().containsKey(board))
             return String.format(EngineConstants.BoardIsNotOnTheTeam, board, team);
 
-        Story story = factory.createStory(globalID, name, description, status, priority, size);
+        Story story = factory.createStory(globalID, name, description, priority, size);
         workItems.put(globalID, story);
 
         teams.get(team).getBoards().get(board).addWorkItem(story);
@@ -339,8 +353,44 @@ public class EngineImpl implements Engine {
         return String.format(EngineConstants.MemberAddedSuccessMessage, memberName, teamName);
     }
 
-    private void renderCommandResults(List<String> output) {
-        //renderer.output(output);
-    }
+    private String assignCommand(int id, String assignee) {
+        if (!workItems.containsKey(id))
+            return String.format(EngineConstants.WorkItemDoesNotExist, id);
+        if (!members.containsKey(assignee))
+            return String.format(EngineConstants.MemberDoesNotExist, assignee);
+        Team workItemTeam = null;
 
+        for (Team t : teams.values()) {
+            for (Board b : t.getBoards().values()) {
+                for (WorkItem w : b.getItems().values()) {
+                    if (w.getId() == id)
+                        workItemTeam = t;
+                }
+            }
+        }
+
+        assert workItemTeam != null;
+        for(Member m :teams.get(workItemTeam.getName()).getMembers().values())
+        {
+            if(m.getName().equals(members.get(id).getName()))
+            {
+                members.get(id).addWorkItem(workItems.get(id));
+            }
+        }
+
+
+        return workItemTeam.getName();
+        //System.out.println(workItemTeam.getName());
+    }
+    private String listWorkItemsAll()
+    {
+        if(workItems.values().isEmpty())
+            return String.format(EngineConstants.WorkItemListEmpty);
+
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("[WORK ITEMS]\n");
+
+        workItems.values().forEach(w->stringBuilder.append(w.getTitle()).append('\n'));
+        return stringBuilder.toString().trim();
+    }
 }
