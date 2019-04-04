@@ -41,6 +41,7 @@ public class BugImpl extends WorkItemBase implements Bug {
 
     @Override
     public void setStatus(Status status) {
+
         if (status != Status.Active && status != Status.Fixed)
             throw new IllegalArgumentException(ERROR_INVALID_STATUS);
         this.status = status;

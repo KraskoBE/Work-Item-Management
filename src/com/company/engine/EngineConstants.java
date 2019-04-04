@@ -41,6 +41,7 @@ public class EngineConstants {
     static final String StoryCreatedSuccessMessage = "Story %s created with ID:%d";
     static final String FeedBackSuccessMessage = "Feedback %s created with ID:%d";
     static final String MemberAddedSuccessMessage = "Member %s added to team %s";
+    static final String WorkItemObjectChangedSuccessMessage = "Changed %s's %s to %s";
 
 
     // Activity history messages

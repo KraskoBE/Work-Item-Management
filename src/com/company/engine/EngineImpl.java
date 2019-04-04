@@ -282,13 +282,46 @@ public class EngineImpl implements Engine {
                     break;
                 case "severity":
                     ((Bug) workItems.get(id)).setSeverity(FactoryImpl.getSeverity(value));
+                    break;
                 case "status":
                     workItems.get(id).setStatus(FactoryImpl.getStatus(value));
+                    break;
                 default:
                     return String.format(EngineConstants.InvalidObjectType, type);
             }
         }
-        return null;
+
+        if (workItems.get(id) instanceof Story) {
+            switch (type.toLowerCase()) {
+                case "priority":
+                    ((Story) workItems.get(id)).setPriority(FactoryImpl.getPriority(value));
+                    break;
+                case "size":
+                    ((Story) workItems.get(id)).setSize(FactoryImpl.getSize(value));
+                    break;
+                case "status":
+                    workItems.get(id).setStatus(FactoryImpl.getStatus(value));
+                    break;
+                default:
+                    return String.format(EngineConstants.InvalidObjectType, type);
+            }
+        }
+
+        if (workItems.get(id) instanceof Feedback) {
+            switch (type.toLowerCase()) {
+                case "rating":
+                    ((Feedback) workItems.get(id)).setRating(Integer.parseInt(value));
+                    break;
+                case "status":
+                    workItems.get(id).setStatus(FactoryImpl.getStatus(value));
+                    break;
+                default:
+                    return String.format(EngineConstants.InvalidObjectType, type);
+
+            }
+        }
+
+        return String.format(EngineConstants.WorkItemObjectChangedSuccessMessage, workItems.get(id).getTitle(), type, value);
     }
 
     private String addMemberToTeam(String memberName, String teamName) {
