@@ -2,7 +2,8 @@ package com.company.models.unit;
 
 
 import com.company.models.contracts.unit.Member;
-import com.company.models.contracts.workItem.WorkItem;
+
+import java.util.ArrayList;
 
 public class MemberImpl extends UnitBase implements Member {
 
@@ -12,6 +13,12 @@ public class MemberImpl extends UnitBase implements Member {
 
     public MemberImpl(String name) {
         super(name);
+    }
+
+    @Override
+    void setActivityHistory() {
+        this.activityHistory = new ArrayList<>();
+        activityHistory.add("Person created");
     }
 
     @Override

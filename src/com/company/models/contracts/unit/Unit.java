@@ -15,4 +15,6 @@ public interface Unit {
     List<String> getActivityHistory();
 
     void addWorkItem(WorkItem workItem);
+
+    void addActivity(String activity);
 }

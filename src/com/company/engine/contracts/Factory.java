@@ -15,7 +15,7 @@ public interface Factory {
 
     Board createBoard(String name);
 
-    Bug createBug(int id, String name, String description, String priority, String severity, String Status);
+    Bug createBug(int id, String name, String description, String priority, String severity);
 
     Story createStory(int id, String name, String description, String status, String priority, String size);
 

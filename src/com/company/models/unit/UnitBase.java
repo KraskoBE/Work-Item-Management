@@ -11,7 +11,7 @@ import java.util.Map;
 public abstract class UnitBase implements Unit {
     String name;
     private Map<String, WorkItem> items;
-    private List<String> activityHistory;
+    List<String> activityHistory;
 
     UnitBase(String name) {
         setName(name);
@@ -23,9 +23,7 @@ public abstract class UnitBase implements Unit {
         this.items = new HashMap<>();
     }
 
-    private void setActivityHistory() {
-        this.activityHistory = new ArrayList<>();
-    }
+    abstract void setActivityHistory();
 
     abstract void setName(String name);
 
@@ -44,5 +42,10 @@ public abstract class UnitBase implements Unit {
     @Override
     public void addWorkItem(WorkItem workItem) {
         this.items.put(workItem.getTitle(), workItem);
+    }
+
+    @Override
+    public void addActivity(String activity) {
+        this.activityHistory.add(activity);
     }
 }

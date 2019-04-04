@@ -7,9 +7,14 @@ public class EngineConstants {
     static final String CreateMemberCommand = "createmember";
     static final String CreateBoardCommand = "createboard";
     static final String CreateBugCommand = "createbug";
-    static final String CraeteStoryCommand = "createstory";
+    static final String CreateStoryCommand = "createstory";
     static final String CreateFeedbackCommand = "createfeedback";
-    static final String AddMemberToTeam = "addmembertoteam";
+    static final String AddMemberToTeamCommand = "addmembertoteam";
+    static final String ShowAllPeopleCommand = "showallpeople";
+    static final String ShowAllTeamsCommand = "showallteams";
+    static final String ShowAllTeamMembersCommand = "showteammembers";
+    static final String ShowAllTeamBoardsCommand = "showteamboards";
+    static final String ChangeCommand = "change";
 
     // Error messages
     static final String InvalidCommandErrorMessage = "Invalid command name: %s";
@@ -19,8 +24,14 @@ public class EngineConstants {
     static final String TeamDoesNotExist = "Team %s does not exists";
     static final String MemberDoesNotExist = "Member %s does not exist";
     static final String MemberIsNotFromTheTeam = "Member %s is not from team: %s";
-    static final String BoardIsNotOnheTeam = "Board %s is not on team %s";
+    static final String BoardIsNotOnTheTeam = "Board %s is not on team %s";
     static final String MemberAlreadyInTeam = "Member %s is already in team %s";
+    static final String NoMembersErrorMessage = "No members found";
+    static final String NoTeamsErrorMessage = "No teams found";
+    static final String EmptyTeamErrorMessage = "Team %s does not have members";
+    static final String EmptyBoardsErrorMessage = "Team %s does not have boards";
+    static final String WorkItemDoesNotExist = "Work item with ID:%d does not exist";
+    static final String InvalidObjectType = "Invalid object type: %s";
 
     // Success messages
     static final String TeamCreatedSuccessMessage = "Team %s created";
@@ -30,6 +41,11 @@ public class EngineConstants {
     static final String StoryCreatedSuccessMessage = "Story %s created with ID:%d";
     static final String FeedBackSuccessMessage = "Feedback %s created with ID:%d";
     static final String MemberAddedSuccessMessage = "Member %s added to team %s";
+
+
+    // Activity history messages
+    static final String AddedWorkItemToHistory = "Created %s: %s(ID:%d)";
+    static final String MemberJoinedTeam = "%s joined %s";
 
     //Priority
     static final String HIGH = "high";

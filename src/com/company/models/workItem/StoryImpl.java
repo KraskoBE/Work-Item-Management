@@ -24,7 +24,7 @@ public class StoryImpl extends WorkItemBase implements Story {
         return priority;
     }
 
-    private void setPriority(Priority priority) {
+    public void setPriority(Priority priority) {
         this.priority = priority;
     }
 
@@ -32,7 +32,7 @@ public class StoryImpl extends WorkItemBase implements Story {
         return size;
     }
 
-    private void setSize(Size size) {
+    public void setSize(Size size) {
         this.size = size;
     }
 
@@ -44,9 +44,8 @@ public class StoryImpl extends WorkItemBase implements Story {
         this.assignee = assignee;
     }
 
-
     @Override
-    void setStatus(Status status) {
+    public void setStatus(Status status) {
         if (status != Status.NotDone && status != Status.InProgress && status != Status.Done)
             throw new IllegalArgumentException(ERROR_INVALID_STATUS);
         this.status = status;

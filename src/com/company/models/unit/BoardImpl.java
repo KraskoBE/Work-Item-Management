@@ -3,6 +3,8 @@ package com.company.models.unit;
 
 import com.company.models.contracts.unit.Board;
 
+import java.util.ArrayList;
+
 public class BoardImpl extends UnitBase implements Board {
 
     private static final int NAME_MIN_LENGTH = 5;
@@ -11,6 +13,12 @@ public class BoardImpl extends UnitBase implements Board {
 
     public BoardImpl(String name) {
         super(name);
+    }
+
+    @Override
+    void setActivityHistory() {
+        this.activityHistory = new ArrayList<>();
+        activityHistory.add("Board created");
     }
 
     @Override

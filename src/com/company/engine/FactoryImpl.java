@@ -38,8 +38,8 @@ public class FactoryImpl implements Factory {
     }
 
     @Override
-    public Bug createBug(int id, String name, String description, String priority, String severity, String status) {
-        return new BugImpl(id, name, description, getPriority(priority), getSeverity(severity), getStatus(status));
+    public Bug createBug(int id, String name, String description, String priority, String severity) {
+        return new BugImpl(id, name, description, getPriority(priority), getSeverity(severity), Status.Active);
     }
 
     @Override
@@ -52,7 +52,7 @@ public class FactoryImpl implements Factory {
         return new FeedbackImpl(id,name, description,getStatus(status),rating);
     }
 
-    private Priority getPriority(String priority) {
+     static Priority getPriority(String priority) {
         switch (priority.toLowerCase()) {
             case EngineConstants.HIGH:
                 return Priority.High;
@@ -65,7 +65,7 @@ public class FactoryImpl implements Factory {
         }
     }
 
-    private Severity getSeverity(String severity) {
+     static Severity getSeverity(String severity) {
         switch (severity.toLowerCase()) {
             case EngineConstants.CRITICAL:
                 return Severity.Critical;
@@ -78,7 +78,7 @@ public class FactoryImpl implements Factory {
         }
     }
 
-    private Status getStatus(String status) {
+     static Status getStatus(String status) {
         switch (status.toLowerCase()) {
             case EngineConstants.ACTIVE:
                 return Status.Active;
@@ -101,7 +101,7 @@ public class FactoryImpl implements Factory {
         }
     }
 
-    private Size getSize(String size) {
+     static Size getSize(String size) {
         switch (size.toLowerCase()) {
             case EngineConstants.LARGE:
                 return Size.Large;

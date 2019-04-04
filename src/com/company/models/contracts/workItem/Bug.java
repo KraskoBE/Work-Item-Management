@@ -15,4 +15,8 @@ public interface Bug extends WorkItem {
     Severity getSeverity();
 
     Member getAssignee();
+
+    void setPriority(Priority priority);
+
+    void setSeverity(Severity severity);
 }

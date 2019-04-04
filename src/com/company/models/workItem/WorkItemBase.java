@@ -20,9 +20,9 @@ public abstract class WorkItemBase implements WorkItem {
     private String description;
     protected Status status;
     private List<Comment> comments;
-    private List<String> history;
+    List<String> history;
 
-    protected WorkItemBase(int id, String title, String description, Status status) {
+    WorkItemBase(int id, String title, String description, Status status) {
         setId(id);
         setTitle(title);
         setDescription(description);
@@ -47,7 +47,7 @@ public abstract class WorkItemBase implements WorkItem {
         this.description = description;
     }
 
-    abstract void setStatus(Status status);
+    public abstract void setStatus(Status status);
 
     private void setComments() {
         this.comments = new ArrayList<>();
@@ -56,7 +56,6 @@ public abstract class WorkItemBase implements WorkItem {
     private void setHistory() {
         this.history = new ArrayList<>();
     }
-
 
     public int getId() {
         return id;

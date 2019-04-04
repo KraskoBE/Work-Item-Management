@@ -33,9 +33,14 @@ public class CommandImpl implements Command {
 
     private void translateInput(String input) {
         int indexOfFirstSeparator = input.indexOf(SPLIT_COMMAND_SYMBOL);
+        if (indexOfFirstSeparator == -1) {
+            setName(input);
+            return;
+        }
 
         setName(input.substring(0, indexOfFirstSeparator));
-        setParameters(Arrays.asList(input.substring(indexOfFirstSeparator + 1).split(" ")));
+        if (indexOfFirstSeparator != input.length())
+            setParameters(Arrays.asList(input.substring(indexOfFirstSeparator + 1).split(" ")));
     }
 
     private void setName(String name) {

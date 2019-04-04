@@ -27,11 +27,11 @@ public class BugImpl extends WorkItemBase implements Bug {
         this.stepsToReproduce = new ArrayList<>();
     }
 
-    private void setPriority(Priority priority) {
+    public void setPriority(Priority priority) {
         this.priority = priority;
     }
 
-    private void setSeverity(Severity severity) {
+    public void setSeverity(Severity severity) {
         this.severity = severity;
     }
 
@@ -40,7 +40,7 @@ public class BugImpl extends WorkItemBase implements Bug {
     }
 
     @Override
-    void setStatus(Status status) {
+    public void setStatus(Status status) {
         if (status != Status.Active && status != Status.Fixed)
             throw new IllegalArgumentException(ERROR_INVALID_STATUS);
         this.status = status;

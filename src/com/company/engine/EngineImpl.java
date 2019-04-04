@@ -4,6 +4,7 @@ import com.company.engine.contracts.Command;
 import com.company.engine.contracts.Engine;
 import com.company.engine.contracts.Factory;
 import com.company.engine.contracts.Renderer;
+import com.company.models.common.Priority;
 import com.company.models.contracts.Team;
 import com.company.models.contracts.unit.Board;
 import com.company.models.contracts.unit.Member;
@@ -12,6 +13,7 @@ import com.company.models.contracts.workItem.Feedback;
 import com.company.models.contracts.workItem.Story;
 import com.company.models.contracts.workItem.WorkItem;
 
+import javax.swing.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -96,14 +98,13 @@ public class EngineImpl implements Engine {
                     String bugDescription = command.getParameters().get(1);
                     String bugPriority = command.getParameters().get(2);
                     String bugSeverity = command.getParameters().get(3);
-                    String bugStatus = command.getParameters().get(4);
-                    String bugBoard = command.getParameters().get(5);
-                    String bugTeam = command.getParameters().get(6);
+                    String bugBoard = command.getParameters().get(4);
+                    String bugTeam = command.getParameters().get(5);
 
-                    commandResult = createBug(bugName, bugDescription, bugPriority, bugSeverity, bugStatus, bugBoard, bugTeam);
+                    commandResult = createBug(bugName, bugDescription, bugPriority, bugSeverity, bugBoard, bugTeam);
                     commandResults.add(commandResult);
                     break;
-                case EngineConstants.CraeteStoryCommand:
+                case EngineConstants.CreateStoryCommand:
                     String storyName = command.getParameters().get(0);
                     String storyDescription = command.getParameters().get(1);
                     String storyStatus = command.getParameters().get(2);
@@ -123,23 +124,49 @@ public class EngineImpl implements Engine {
                     String feedbackBoard = command.getParameters().get(4);
                     String feedbackTeam = command.getParameters().get(5);
 
-                    commandResult = createFeedback(feedbackName, feedbackDescription, feedbackStatus, feedbackRating, feedbackBoard, feedbackTeam );
+                    commandResult = createFeedback(feedbackName, feedbackDescription, feedbackStatus, feedbackRating, feedbackBoard, feedbackTeam);
                     commandResults.add(commandResult);
                     break;
+                case EngineConstants.ShowAllPeopleCommand:
+                    commandResult = showAllPeople();
+                    commandResults.add(commandResult);
+                    break;
+                case EngineConstants.ShowAllTeamsCommand:
+                    commandResult = showAllTeams();
+                    commandResults.add(commandResult);
+                    break;
+                case EngineConstants.ShowAllTeamMembersCommand:
+                    teamName = command.getParameters().get(0);
 
-                case EngineConstants.AddMemberToTeam:
+                    commandResult = showAllTeamMembers(teamName);
+                    commandResults.add(commandResult);
+                    break;
+                case EngineConstants.ShowAllTeamBoardsCommand:
+                    teamName = command.getParameters().get(0);
+
+                    commandResult = showAllTeamBoards(teamName);
+                    commandResults.add(commandResult);
+                    break;
+                case EngineConstants.AddMemberToTeamCommand:
                     memberName = command.getParameters().get(0);
                     teamName = command.getParameters().get(1);
 
                     commandResult = addMemberToTeam(memberName, teamName);
                     commandResults.add(commandResult);
                     break;
+                case EngineConstants.ChangeCommand:
+                    int workItemID = Integer.parseInt(command.getParameters().get(0));
+                    String changeType = command.getParameters().get(1);
+                    String changeValue = command.getParameters().get(2);
+
+                    commandResult = changeCommand(workItemID, changeType, changeValue);
+                    commandResults.add(commandResult);
+                    break;
                 default:
-                    commandResults.add(String.format(EngineConstants.InvalidCommandErrorMessage, command.getName()));
+                    commandResults.add(String.format(EngineConstants.InvalidCommandErrorMessage, command.getName());
                     break;
             }
         }
-
         return commandResults;
     }
 
@@ -180,17 +207,18 @@ public class EngineImpl implements Engine {
         return String.format(EngineConstants.BoardCreatedSuccessMessage, name);
     }
 
-    private String createBug(String name, String description, String priority, String severity, String status, String board, String team) {
+    private String createBug(String name, String description, String priority, String severity, String board, String team) {
         if (!teams.containsKey(team))
             return String.format(EngineConstants.TeamDoesNotExist, team);
 
         if (!teams.get(team).getBoards().containsKey(board))
-            return String.format(EngineConstants.BoardIsNotOnheTeam, board, team);
+            return String.format(EngineConstants.BoardIsNotOnTheTeam, board, team);
 
-        Bug bug = factory.createBug(globalID, name, description, priority, severity, status);
+        Bug bug = factory.createBug(globalID, name, description, priority, severity);
         workItems.put(globalID, bug);
 
         teams.get(team).getBoards().get(board).addWorkItem(bug);
+        teams.get(team).getBoards().get(board).addActivity(String.format(EngineConstants.AddedWorkItemToHistory, "bug", name, globalID));
         return String.format(EngineConstants.BugCreatedSuccessMessage, name, globalID++);
     }
 
@@ -199,12 +227,13 @@ public class EngineImpl implements Engine {
             return String.format(EngineConstants.TeamDoesNotExist, team);
 
         if (!teams.get(team).getBoards().containsKey(board))
-            return String.format(EngineConstants.BoardIsNotOnheTeam, board, team);
+            return String.format(EngineConstants.BoardIsNotOnTheTeam, board, team);
 
         Story story = factory.createStory(globalID, name, description, status, priority, size);
-        workItems.put(globalID,story);
+        workItems.put(globalID, story);
 
         teams.get(team).getBoards().get(board).addWorkItem(story);
+        teams.get(team).getBoards().get(board).addActivity(String.format(EngineConstants.AddedWorkItemToHistory, "story", name, globalID));
         return String.format(EngineConstants.StoryCreatedSuccessMessage, name, globalID++);
     }
 
@@ -213,14 +242,87 @@ public class EngineImpl implements Engine {
             return String.format(EngineConstants.TeamDoesNotExist, team);
 
         if (!teams.get(team).getBoards().containsKey(board))
-            return String.format(EngineConstants.BoardIsNotOnheTeam, board, team);
+            return String.format(EngineConstants.BoardIsNotOnTheTeam, board, team);
 
         Feedback feedback = factory.createFeedback(globalID, name, description, status, rating);
-        workItems.put(globalID,feedback);
+        workItems.put(globalID, feedback);
 
         teams.get(team).getBoards().get(board).addWorkItem(feedback);
+        teams.get(team).getBoards().get(board).addActivity(String.format(EngineConstants.AddedWorkItemToHistory, "feedback", name, globalID));
         return String.format(EngineConstants.FeedBackSuccessMessage, name, globalID++);
 
+    }
+
+    private String showAllPeople() {
+        if (members.isEmpty())
+            return EngineConstants.NoMembersErrorMessage;
+
+        StringBuilder stringBuilder = new StringBuilder();
+
+        stringBuilder.append("[PEOPLE]\n");
+        members.forEach((k, v) -> stringBuilder.append(v.getName()).append('\n'));
+
+        return stringBuilder.toString().trim();
+    }
+
+    private String showAllTeams() {
+        if (teams.isEmpty())
+            return EngineConstants.NoTeamsErrorMessage;
+
+        StringBuilder stringBuilder = new StringBuilder();
+
+        stringBuilder.append("[TEAMS]\n");
+        teams.forEach((k, v) -> stringBuilder.append(v.getName()).append('\n'));
+
+        return stringBuilder.toString().trim();
+    }
+
+    private String showAllTeamMembers(String team) {
+        if (!teams.containsKey(team))
+            return String.format(EngineConstants.TeamDoesNotExist, team);
+        if (teams.get(team).getMembers().isEmpty())
+            return String.format(EngineConstants.EmptyTeamErrorMessage, team);
+
+        StringBuilder stringBuilder = new StringBuilder();
+
+        stringBuilder.append(String.format("[MEMBERS of %s]\n", team));
+        teams.get(team).getMembers().forEach((k, v) -> stringBuilder.append(v.getName()).append('\n'));
+
+        return stringBuilder.toString().trim();
+    }
+
+    private String showAllTeamBoards(String team) {
+        if (!teams.containsKey(team))
+            return String.format(EngineConstants.TeamDoesNotExist, team);
+        if (teams.get(team).getBoards().isEmpty())
+            return String.format(EngineConstants.EmptyBoardsErrorMessage, team);
+
+        StringBuilder stringBuilder = new StringBuilder();
+
+        stringBuilder.append(String.format("[BOARDS of %s]\n", team));
+        teams.get(team).getBoards().forEach((k, v) -> stringBuilder.append(v.getName()).append('\n'));
+
+        return stringBuilder.toString().trim();
+    }
+
+    private String changeCommand(int id, String type, String value) {
+        if (!workItems.containsKey(id))
+            return String.format(EngineConstants.WorkItemDoesNotExist, id);
+
+        if (workItems.get(id) instanceof Bug) {
+            switch (type.toLowerCase()) {
+                case "priority":
+                    ((Bug) workItems.get(id)).setPriority(FactoryImpl.getPriority(value));
+                    break;
+                case "severity":
+                    ((Bug) workItems.get(id)).setSeverity(FactoryImpl.getSeverity(value));
+                case "status":
+                    workItems.get(id).setStatus(FactoryImpl.getStatus(value));
+                default:
+                    return String.format(EngineConstants.InvalidObjectType, type);
+            }
+        }
+        return null;
     }
 
     private String addMemberToTeam(String memberName, String teamName) {
@@ -234,13 +336,12 @@ public class EngineImpl implements Engine {
             return String.format(EngineConstants.MemberAlreadyInTeam, memberName, teamName);
 
         teams.get(teamName).getMembers().put(memberName, members.get(memberName));
-
+        members.get(memberName).addActivity(String.format(EngineConstants.MemberJoinedTeam, memberName, teamName));
         return String.format(EngineConstants.MemberAddedSuccessMessage, memberName, teamName);
     }
 
-
     private void renderCommandResults(List<String> output) {
-        renderer.output(output);
+        //renderer.output(output);
     }
 
 }

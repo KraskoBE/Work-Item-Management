@@ -18,4 +18,6 @@ public interface WorkItem {
     List<Comment> getComments();
 
     List<String> getHistory();
+
+    void setStatus(Status status);
 }
