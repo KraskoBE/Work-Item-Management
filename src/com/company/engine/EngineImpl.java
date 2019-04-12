@@ -1,13 +1,9 @@
 package com.company.engine;
 
-import com.company.engine.commands.CreateBoardCmd;
-import com.company.engine.commands.CreateBugCmd;
-import com.company.engine.commands.CreateMemberCmd;
-import com.company.engine.commands.CreateTeamCmd;
+import com.company.engine.commands.*;
 import com.company.engine.contracts.Command;
 import com.company.engine.contracts.Engine;
 import com.company.engine.contracts.Factory;
-import com.company.models.common.Priority;
 import com.company.models.contracts.Team;
 import com.company.models.contracts.unit.Board;
 import com.company.models.contracts.unit.Member;
@@ -92,15 +88,7 @@ public class EngineImpl implements Engine {
             case EngineConstants.CreateStoryCommand:
              return CreateStoryCmd.execute(this,factory,command.getParameters());
             case EngineConstants.CreateFeedbackCommand:
-                String feedbackName = command.getParameters().get(0);
-                String feedbackDescription = command.getParameters().get(1);
-                String feedbackStatus = command.getParameters().get(2);
-                int feedbackRating = Integer.parseInt(command.getParameters().get(3));
-                String feedbackBoard = command.getParameters().get(4);
-                String feedbackTeam = command.getParameters().get(5);
-
-                commandResult = createFeedback(feedbackName, feedbackDescription, feedbackStatus, feedbackRating, feedbackBoard, feedbackTeam);
-                break;
+              return CreateFeedbackCmd.execute(this,factory,command.getParameters());
             case EngineConstants.ShowAllPeopleCommand:
                 commandResult = showAllPeople();
                 break;
