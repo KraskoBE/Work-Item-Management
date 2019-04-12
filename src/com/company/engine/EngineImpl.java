@@ -90,15 +90,7 @@ public class EngineImpl implements Engine {
             case EngineConstants.CreateBugCommand:
                 return CreateBugCmd.execute(this,factory,command.getParameters());
             case EngineConstants.CreateStoryCommand:
-                String storyName = command.getParameters().get(0);
-                String storyDescription = command.getParameters().get(1);
-                String storyPriority = command.getParameters().get(2);
-                String storySize = command.getParameters().get(3);
-                String storyBoard = command.getParameters().get(4);
-                String storyTeam = command.getParameters().get(5);
-
-                commandResult = createStory(storyName, storyDescription, storyPriority, storySize, storyBoard, storyTeam);
-                break;
+             return CreateStoryCmd.execute(this,factory,command.getParameters());
             case EngineConstants.CreateFeedbackCommand:
                 String feedbackName = command.getParameters().get(0);
                 String feedbackDescription = command.getParameters().get(1);
