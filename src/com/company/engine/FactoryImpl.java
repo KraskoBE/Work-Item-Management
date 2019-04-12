@@ -18,7 +18,6 @@ import com.company.models.workItem.BugImpl;
 import com.company.models.workItem.FeedbackImpl;
 import com.company.models.workItem.StoryImpl;
 
-import java.awt.*;
 
 public class FactoryImpl implements Factory {
 

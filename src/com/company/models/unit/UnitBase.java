@@ -2,7 +2,6 @@ package com.company.models.unit;
 
 import com.company.models.contracts.unit.Unit;
 import com.company.models.contracts.workItem.WorkItem;
-import com.sun.corba.se.spi.orbutil.threadpool.Work;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -43,11 +42,14 @@ public abstract class UnitBase implements Unit {
     @Override
     public void addWorkItem(WorkItem workItem) {
         this.items.put(workItem.getId(), workItem);
-        System.out.println("Dobavqme workItem s id" + workItem.getId() +"  i ime " + workItem.getTitle());
     }
 
     @Override
     public void addActivity(String activity) {
         this.activityHistory.add(activity);
+    }
+
+    public void removeWorkItem(int id){
+        this.items.remove(id);
     }
 }

@@ -7,6 +7,6 @@ public enum Status {
     InProgress,
     Done,
     New,
-    Unscheduled,
-    Scheduled
+    Scheduled,
+    Unscheduled
 }

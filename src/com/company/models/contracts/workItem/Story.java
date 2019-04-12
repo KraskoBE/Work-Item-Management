@@ -4,7 +4,7 @@ import com.company.models.common.Priority;
 import com.company.models.common.Size;
 import com.company.models.contracts.unit.Member;
 
-public interface Story extends WorkItem {
+public interface Story extends BugStory {
 
     Priority getPriority();
 

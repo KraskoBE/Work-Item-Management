@@ -17,4 +17,6 @@ public interface Unit {
     void addWorkItem(WorkItem workItem);
 
     void addActivity(String activity);
+
+    void removeWorkItem(int id);
 }

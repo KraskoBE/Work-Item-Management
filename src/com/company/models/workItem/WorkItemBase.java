@@ -19,7 +19,7 @@ public abstract class WorkItemBase implements WorkItem {
     private String title;
     private String description;
     protected Status status;
-    private List<Comment> comments;
+    List<Comment> comments;
     List<String> history;
 
     WorkItemBase(int id, String title, String description, Status status) {
@@ -79,5 +79,29 @@ public abstract class WorkItemBase implements WorkItem {
 
     public List<String> getHistory() {
         return new ArrayList<>(history);
+    }
+
+    abstract String additionalInfo();
+
+    @Override
+    public String toString() {
+        return String.format("[%s]\n" +
+                        "{\n" +
+                        "   ID: %d\n" +
+                        "   Title: %s\n" +
+                        "   Description: %s\n" +
+                        "   Status: %s\n" +
+                        "   %s\n" + // additionalInfo
+                        "   Comments: %s\n" +
+                        "   History: %s\n" +
+                        "}",
+                getClass().getSimpleName().replace("Impl",""),
+                getId(),
+                getTitle(),
+                getDescription(),
+                getStatus().toString(),
+                additionalInfo(),
+                getComments().toString(),
+                getHistory().toString());
     }
 }

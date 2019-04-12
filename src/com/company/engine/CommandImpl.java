@@ -8,7 +8,6 @@ import java.util.List;
 
 public class CommandImpl implements Command {
     private static final String NULL_OR_EMPTY_NAME_ERROR_MESSAGE = "Name cannot be null or empty";
-    private static final String NULL_COLLECTION_OF_PARAMETERS = "Collection of parameters cannot be null";
     private static final char SPLIT_COMMAND_SYMBOL = ' ';
 
     private String name;
@@ -37,10 +36,9 @@ public class CommandImpl implements Command {
             setName(input);
             return;
         }
-
         setName(input.substring(0, indexOfFirstSeparator));
         if (indexOfFirstSeparator != input.length())
-            setParameters(Arrays.asList(input.substring(indexOfFirstSeparator + 1).split(" ")));
+            setParameters(Arrays.asList(input.substring(indexOfFirstSeparator + 1).split("'")));
     }
 
     private void setName(String name) {
@@ -51,9 +49,6 @@ public class CommandImpl implements Command {
     }
 
     private void setParameters(List<String> parameters) {
-        if (parameters == null) {
-            throw new IllegalArgumentException(NULL_COLLECTION_OF_PARAMETERS);
-        }
         this.parameters = new ArrayList<>(parameters);
     }
 }

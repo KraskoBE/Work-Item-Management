@@ -26,4 +26,9 @@ public class FeedbackImpl extends WorkItemBase implements Feedback {
             throw new IllegalArgumentException(ERROR_INVALID_STATUS);
         this.status = status;
     }
+
+    @Override
+    String additionalInfo() {
+        return String.format("Rating: %d", getRating());
+    }
 }

@@ -3,22 +3,19 @@ package com.company.models.workItem;
 import com.company.models.common.Priority;
 import com.company.models.common.Severity;
 import com.company.models.common.Status;
-import com.company.models.contracts.unit.Member;
 import com.company.models.contracts.workItem.Bug;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class BugImpl extends WorkItemBase implements Bug {
+public class BugImpl extends BugStoryBase implements Bug {
     private static final String ERROR_INVALID_STATUS = "Error: invalid status";
     private List<String> stepsToReproduce;
-    private Priority priority;
     private Severity severity;
-    private Member assignee;
+
 
     public BugImpl(int id, String title, String description, Priority priority, Severity severity, Status status) {
-        super(id, title, description, status);
-        setPriority(priority);
+        super(id, title, description, status, priority);
         setSeverity(severity);
         setStepsToReproduce();
     }
@@ -27,16 +24,9 @@ public class BugImpl extends WorkItemBase implements Bug {
         this.stepsToReproduce = new ArrayList<>();
     }
 
-    public void setPriority(Priority priority) {
-        this.priority = priority;
-    }
 
     public void setSeverity(Severity severity) {
         this.severity = severity;
-    }
-
-    public void setAssignee(Member assignee) {
-        this.assignee = assignee;
     }
 
     @Override
@@ -48,20 +38,25 @@ public class BugImpl extends WorkItemBase implements Bug {
     }
 
     @Override
-    public List<String> getStepsToReproduce() {
-        return new ArrayList<>(stepsToReproduce);
+    String additionalInfo() {
+        return String.format("Priority: %s\n" +
+                        "   Severity: %s\n" +
+                        "   Assignee: %s\n" +
+                        "   Steps to reproduce: %s",
+                getPriority().toString(),
+                getSeverity().toString(),
+                getAssignee().getName(),
+                getStepsToReproduce().toString());
     }
 
-    public Priority getPriority() {
-        return priority;
+    @Override
+    public List<String> getStepsToReproduce() {
+        return new ArrayList<>(stepsToReproduce);
     }
 
     public Severity getSeverity() {
         return severity;
     }
 
-    public Member getAssignee() {
-        return assignee;
-    }
 
 }
