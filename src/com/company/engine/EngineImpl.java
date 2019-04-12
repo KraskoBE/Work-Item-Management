@@ -90,8 +90,7 @@ public class EngineImpl implements Engine {
             case EngineConstants.CreateFeedbackCommand:
               return CreateFeedbackCmd.execute(this,factory,command.getParameters());
             case EngineConstants.ShowAllPeopleCommand:
-                commandResult = showAllPeople();
-                break;
+               return ShowAllPeopleCmd.showAllPeopleCmd(this);
             case EngineConstants.ShowAllTeamsCommand:
                 commandResult = showAllTeams();
                 break;
