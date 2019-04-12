@@ -1,6 +1,7 @@
 package com.company.engine;
 
 import com.company.engine.commands.CreateBoardCmd;
+import com.company.engine.commands.CreateBugCmd;
 import com.company.engine.commands.CreateMemberCmd;
 import com.company.engine.commands.CreateTeamCmd;
 import com.company.engine.contracts.Command;
@@ -87,15 +88,7 @@ public class EngineImpl implements Engine {
             case EngineConstants.CreateBoardCommand:
              return CreateBoardCmd.execute(this,factory, command.getParameters());
             case EngineConstants.CreateBugCommand:
-                String bugName = command.getParameters().get(0);
-                String bugDescription = command.getParameters().get(1);
-                String bugPriority = command.getParameters().get(2);
-                String bugSeverity = command.getParameters().get(3);
-                String bugBoard = command.getParameters().get(4);
-                String bugTeam = command.getParameters().get(5);
-
-                commandResult = createBug(bugName, bugDescription, bugPriority, bugSeverity, bugBoard, bugTeam);
-                break;
+                return CreateBugCmd.execute(this,factory,command.getParameters());
             case EngineConstants.CreateStoryCommand:
                 String storyName = command.getParameters().get(0);
                 String storyDescription = command.getParameters().get(1);
