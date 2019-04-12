@@ -7,7 +7,7 @@ import com.company.models.contracts.unit.Member;
 
 import java.util.List;
 
-public class CreateMemberCmd {
+public final class CreateMemberCmd {
 
     public static String execute(EngineImpl engine, Factory factory, List<String> parameters) {
         if (parameters.size() != 1)

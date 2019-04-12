@@ -1,6 +1,7 @@
 package com.company.engine;
 
 import com.company.engine.commands.CreateMemberCmd;
+import com.company.engine.commands.CreateTeamCmd;
 import com.company.engine.contracts.Command;
 import com.company.engine.contracts.Engine;
 import com.company.engine.contracts.Factory;
@@ -81,13 +82,10 @@ public class EngineImpl implements Engine {
             case EngineConstants.CreateMemberCommand:
                 return CreateMemberCmd.execute(this, factory, command.getParameters());
             case EngineConstants.CreateTeamCommand:
-                String teamName = command.getParameters().get(0);
-
-                commandResult = createTeam(teamName);
-                break;
+                return CreateTeamCmd.execute(this, factory, command.getParameters());
             case EngineConstants.CreateBoardCommand:
                 String boardName = command.getParameters().get(0);
-                teamName = command.getParameters().get(1);
+                String teamName = command.getParameters().get(1);
 
                 commandResult = createBoard(boardName, teamName);
                 break;
