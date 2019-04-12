@@ -5,7 +5,7 @@ import com.company.engine.EngineImpl;
 
 public final class ShowAllPeopleCmd {
 
-    public static String showAllPeopleCmd(EngineImpl engine){
+    public static String showAllPeople(EngineImpl engine){
 
         if (engine.getMembers().isEmpty())
             return EngineConstants.NoMembersErrorMessage;
@@ -16,7 +16,5 @@ public final class ShowAllPeopleCmd {
         engine.getMembers().forEach((k, v) -> stringBuilder.append(v.getName()).append('\n'));
 
         return stringBuilder.toString().trim();
-
     }
-
 }
