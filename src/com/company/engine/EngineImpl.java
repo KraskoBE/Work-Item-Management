@@ -79,30 +79,37 @@ public class EngineImpl implements Engine {
         switch (command.getName()) {
             case EngineConstants.CreateMemberCommand:
                 return CreateMemberCmd.execute(this, factory, command.getParameters());
+
             case EngineConstants.CreateTeamCommand:
                 return CreateTeamCmd.execute(this, factory, command.getParameters());
+
             case EngineConstants.CreateBoardCommand:
-             return CreateBoardCmd.execute(this,factory, command.getParameters());
+                return CreateBoardCmd.execute(this,factory, command.getParameters());
+
             case EngineConstants.CreateBugCommand:
                 return CreateBugCmd.execute(this,factory,command.getParameters());
-            case EngineConstants.CreateStoryCommand:
-             return CreateStoryCmd.execute(this,factory,command.getParameters());
-            case EngineConstants.CreateFeedbackCommand:
-              return CreateFeedbackCmd.execute(this,factory,command.getParameters());
-            case EngineConstants.ShowAllPeopleCommand:
-               return ShowAllPeopleCmd.showAllPeople(this);
-            case EngineConstants.ShowAllTeamsCommand:
-              return ShowAllTeamsCmd.showAllTeams(this);
-            case EngineConstants.ShowAllTeamMembersCommand:
-              return ShowAllTeamMembersCmd.ShowAllTeamMembers(this, command.getParameters());
-            case EngineConstants.ShowAllTeamBoardsCommand:
-                String teamName = command.getParameters().get(0);
 
-                commandResult = showAllTeamBoards(teamName);
-                break;
+            case EngineConstants.CreateStoryCommand:
+                return CreateStoryCmd.execute(this,factory,command.getParameters());
+
+            case EngineConstants.CreateFeedbackCommand:
+                return CreateFeedbackCmd.execute(this,factory,command.getParameters());
+
+            case EngineConstants.ShowAllPeopleCommand:
+                return ShowAllPeopleCmd.showAllPeople(this);
+
+            case EngineConstants.ShowAllTeamsCommand:
+                return ShowAllTeamsCmd.showAllTeams(this);
+
+            case EngineConstants.ShowAllTeamMembersCommand:
+                return ShowAllTeamMembersCmd.ShowAllTeamMembers(this, command.getParameters());
+
+            case EngineConstants.ShowAllTeamBoardsCommand:
+                return ShowAllTeamBoardsCmd.showAllTeamBoards(this, command.getParameters());
+
             case EngineConstants.AddMemberToTeamCommand:
                 String memberName = command.getParameters().get(0);
-                teamName = command.getParameters().get(1);
+                String teamName = command.getParameters().get(1);
 
                 commandResult = addMemberToTeam(memberName, teamName);
                 break;
