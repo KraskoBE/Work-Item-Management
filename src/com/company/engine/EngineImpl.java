@@ -111,20 +111,16 @@ public class EngineImpl implements Engine {
                 return AddMemberToTeamCmd.addMemberToTeam(this, command.getParameters());
 
             case EngineConstants.ChangeCommand:
-               return ChangeCmd.changeCommand(this,command.getParameters());
-
-
-
+               return ChangeCmd.changeCommand(this, command.getParameters());
 
             case EngineConstants.AssignCommand:
+               return AssignCmd.assignCommand(this, command.getParameters());
+
+
+
+            case EngineConstants.UnassignCommand:
                 int workItemID = Integer.parseInt(command.getParameters().get(0));
                 String assignee = command.getParameters().get(1);
-
-                commandResult = assignCommand(workItemID, assignee);
-                break;
-            case EngineConstants.UnassignCommand:
-                workItemID = Integer.parseInt(command.getParameters().get(0));
-                assignee = command.getParameters().get(1);
 
                 commandResult = unAssignCommand(workItemID, assignee);
                 break;
@@ -347,10 +343,13 @@ public class EngineImpl implements Engine {
     private String assignCommand(int id, String assignee) {
         if (!workItems.containsKey(id))
             return String.format(EngineConstants.WorkItemDoesNotExistErrorMessage, id);
+
         if (!members.containsKey(assignee))
             return String.format(EngineConstants.MemberDoesNotExistErrorMessage, assignee);
+
         if (!getMemberTeam(assignee).equals(getWorkItemTeam(id)))
             return String.format(EngineConstants.MemberIsNotFromTeamErrorMessage, assignee, getWorkItemTeam(id));
+
         if (members.get(assignee).getItems().containsKey(id))
             return String.format(EngineConstants.ItemAlreadyAssignedErrorMessage, assignee);
 
