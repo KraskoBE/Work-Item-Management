@@ -111,6 +111,7 @@ public class EngineImpl implements Engine {
                 return AddMemberToTeamCmd.addMemberToTeam(this, command.getParameters());
 
 
+
             case EngineConstants.ChangeCommand:
                 int workItemID = Integer.parseInt(command.getParameters().get(0));
                 String changeType = command.getParameters().get(1);
