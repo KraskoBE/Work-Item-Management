@@ -111,19 +111,17 @@ public class EngineImpl implements Engine {
                 return AddMemberToTeamCmd.addMemberToTeam(this, command.getParameters());
 
             case EngineConstants.ChangeCommand:
-               return ChangeCmd.changeCommand(this, command.getParameters());
+                return ChangeCmd.changeCommand(this, command.getParameters());
 
             case EngineConstants.AssignCommand:
-               return AssignCmd.assignCommand(this, command.getParameters());
-
-
+                return AssignCmd.assignCommand(this, command.getParameters());
 
             case EngineConstants.UnassignCommand:
-                int workItemID = Integer.parseInt(command.getParameters().get(0));
-                String assignee = command.getParameters().get(1);
+                return UnassignCmd.unAssignCommand(this, command.getParameters());
 
-                commandResult = unAssignCommand(workItemID, assignee);
-                break;
+
+
+
             case EngineConstants.ListWorkItems:
                 String firstParam = command.getParameters().get(0);
                 if (command.getParameters().size() == 1) {
