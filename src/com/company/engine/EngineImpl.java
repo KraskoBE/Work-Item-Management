@@ -108,11 +108,9 @@ public class EngineImpl implements Engine {
                 return ShowAllTeamBoardsCmd.showAllTeamBoards(this, command.getParameters());
 
             case EngineConstants.AddMemberToTeamCommand:
-                String memberName = command.getParameters().get(0);
-                String teamName = command.getParameters().get(1);
+                return AddMemberToTeamCmd.addMemberToTeam(this, command.getParameters());
 
-                commandResult = addMemberToTeam(memberName, teamName);
-                break;
+
             case EngineConstants.ChangeCommand:
                 int workItemID = Integer.parseInt(command.getParameters().get(0));
                 String changeType = command.getParameters().get(1);
