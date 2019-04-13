@@ -4,7 +4,6 @@ import com.company.models.common.Status;
 import com.company.models.contracts.workItem.Feedback;
 
 public class FeedbackImpl extends WorkItemBase implements Feedback {
-    private static final String ERROR_INVALID_STATUS = "Error: invalid status";
     private int rating;
 
     public FeedbackImpl(int id, String title, String description, Status status, int rating) {

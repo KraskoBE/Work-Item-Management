@@ -11,14 +11,11 @@ public abstract class BugStoryBase extends WorkItemBase implements BugStory {
     private Priority priority;
     private Member assignee;
 
-    public BugStoryBase(int id, String title, String description, Status status, Priority priority) {
+    BugStoryBase(int id, String title, String description, Status status, Priority priority) {
         super(id, title, description, status);
         setPriority(priority);
         setAssignee(noAssignee);
     }
-/*BugStoryBase(int id, String title, String description, Status status) {
-        super(id, title, description, status);
-    }*/
 
     public Priority getPriority() {
         return priority;

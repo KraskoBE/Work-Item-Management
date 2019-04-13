@@ -12,8 +12,9 @@ public abstract class WorkItemBase implements WorkItem {
     private static final int TITLE_MAX_LENGTH = 50;
     private static final int DESCRIPTION_MIN_LENGTH = 10;
     private static final int DESCRIPTION_MAX_LENGTH = 500;
-    private static final String ERROR_WORK_ITEM_NAME = "Error: Work item name is less than %d symbols or more than %d symbols";
-    private static final String ERROR_WORK_ITEM_DESCRIPTION = "Error: Work item description is less than %d symbols or more than %d symbols";
+    private static final String ERROR_WORK_ITEM_NAME = "Work item name should be %d-%d characters";
+    private static final String ERROR_WORK_ITEM_DESCRIPTION = "Work item description should be %d-%d characters";
+    protected static final String ERROR_INVALID_STATUS = "Invalid status";
 
     private int id;
     private String title;
@@ -29,6 +30,52 @@ public abstract class WorkItemBase implements WorkItem {
         setStatus(status);
         setComments();
         setHistory();
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public Status getStatus() {
+        return status;
+    }
+
+    public List<Comment> getComments() {
+        return new ArrayList<>(comments);
+    }
+
+    public List<String> getHistory() {
+        return new ArrayList<>(history);
+    }
+
+    @Override
+    public String toString() {
+        return String.format("[%s]\n" +
+                        "{\n" +
+                        "   ID: %d\n" +
+                        "   Title: %s\n" +
+                        "   Description: %s\n" +
+                        "   Status: %s\n" +
+                        "   %s\n" + // additionalInfo
+                        "   Comments: %s\n" +
+                        "   History: %s\n" +
+                        "}",
+                getClass().getSimpleName().replace("Impl", ""),
+                getId(),
+                getTitle(),
+                getDescription(),
+                getStatus().toString(),
+                additionalInfo(),
+                getComments().toString(),
+                getHistory().toString());
     }
 
     private void setId(int id) {
@@ -57,51 +104,5 @@ public abstract class WorkItemBase implements WorkItem {
         this.history = new ArrayList<>();
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public Status getStatus() {
-        return status;
-    }
-
-    public List<Comment> getComments() {
-        return new ArrayList<>(comments);
-    }
-
-    public List<String> getHistory() {
-        return new ArrayList<>(history);
-    }
-
     abstract String additionalInfo();
-
-    @Override
-    public String toString() {
-        return String.format("[%s]\n" +
-                        "{\n" +
-                        "   ID: %d\n" +
-                        "   Title: %s\n" +
-                        "   Description: %s\n" +
-                        "   Status: %s\n" +
-                        "   %s\n" + // additionalInfo
-                        "   Comments: %s\n" +
-                        "   History: %s\n" +
-                        "}",
-                getClass().getSimpleName().replace("Impl",""),
-                getId(),
-                getTitle(),
-                getDescription(),
-                getStatus().toString(),
-                additionalInfo(),
-                getComments().toString(),
-                getHistory().toString());
-    }
 }

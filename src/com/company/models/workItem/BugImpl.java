@@ -9,21 +9,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class BugImpl extends BugStoryBase implements Bug {
-    private static final String ERROR_INVALID_STATUS = "Error: invalid status";
     private List<String> stepsToReproduce;
     private Severity severity;
-
 
     public BugImpl(int id, String title, String description, Priority priority, Severity severity, Status status) {
         super(id, title, description, status, priority);
         setSeverity(severity);
         setStepsToReproduce();
     }
-
-    private void setStepsToReproduce() {
-        this.stepsToReproduce = new ArrayList<>();
-    }
-
 
     public void setSeverity(Severity severity) {
         this.severity = severity;
@@ -38,6 +31,19 @@ public class BugImpl extends BugStoryBase implements Bug {
     }
 
     @Override
+    public List<String> getStepsToReproduce() {
+        return new ArrayList<>(stepsToReproduce);
+    }
+
+    public Severity getSeverity() {
+        return severity;
+    }
+
+    private void setStepsToReproduce() {
+        this.stepsToReproduce = new ArrayList<>();
+    }
+
+    @Override
     String additionalInfo() {
         return String.format("Priority: %s\n" +
                         "   Severity: %s\n" +
@@ -48,15 +54,4 @@ public class BugImpl extends BugStoryBase implements Bug {
                 getAssignee().getName(),
                 getStepsToReproduce().toString());
     }
-
-    @Override
-    public List<String> getStepsToReproduce() {
-        return new ArrayList<>(stepsToReproduce);
-    }
-
-    public Severity getSeverity() {
-        return severity;
-    }
-
-
 }
