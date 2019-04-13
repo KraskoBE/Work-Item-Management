@@ -51,7 +51,7 @@ public class FactoryImpl implements Factory {
         return new FeedbackImpl(id, name, description, getStatus(status), rating);
     }
 
-    static Priority getPriority(String priority) {
+    public static Priority getPriority(String priority) {
         switch (priority.toLowerCase()) {
             case EngineConstants.HIGH:
                 return Priority.High;
@@ -64,7 +64,7 @@ public class FactoryImpl implements Factory {
         }
     }
 
-    static Severity getSeverity(String severity) {
+    public static Severity getSeverity(String severity) {
         switch (severity.toLowerCase()) {
             case EngineConstants.CRITICAL:
                 return Severity.Critical;
@@ -77,7 +77,7 @@ public class FactoryImpl implements Factory {
         }
     }
 
-    static Status getStatus(String status) {
+    public static Status getStatus(String status) {
         switch (status.toLowerCase()) {
             case EngineConstants.ACTIVE:
                 return Status.Active;
@@ -100,7 +100,7 @@ public class FactoryImpl implements Factory {
         }
     }
 
-    static Size getSize(String size) {
+    public static Size getSize(String size) {
         switch (size.toLowerCase()) {
             case EngineConstants.LARGE:
                 return Size.Large;
