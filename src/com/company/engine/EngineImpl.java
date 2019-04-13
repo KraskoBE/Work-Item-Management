@@ -94,12 +94,9 @@ public class EngineImpl implements Engine {
             case EngineConstants.ShowAllTeamsCommand:
               return ShowAllTeamsCmd.showAllTeams(this);
             case EngineConstants.ShowAllTeamMembersCommand:
-                String teamName = command.getParameters().get(0);
-
-                commandResult = showAllTeamMembers(teamName);
-                break;
+              return ShowAllTeamMembersCmd.ShowAllTeamMembers(this, command.getParameters());
             case EngineConstants.ShowAllTeamBoardsCommand:
-                teamName = command.getParameters().get(0);
+                String teamName = command.getParameters().get(0);
 
                 commandResult = showAllTeamBoards(teamName);
                 break;
