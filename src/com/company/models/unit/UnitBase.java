@@ -9,23 +9,17 @@ import java.util.List;
 import java.util.Map;
 
 public abstract class UnitBase implements Unit {
-    String name;
+    private static final String ERROR_NAME_LENGTH = "Name should be %d-%d characters";
+
+    private String name;
     private Map<Integer, WorkItem> items;
     List<String> activityHistory;
 
-    UnitBase(String name) {
-        setName(name);
+    UnitBase(String name, int NAME_MIN_LENGTH, int NAME_MAX_LENGTH) {
+        setName(name, NAME_MIN_LENGTH, NAME_MAX_LENGTH);
         setItems();
         setActivityHistory();
     }
-
-    private void setItems() {
-        this.items = new HashMap<>();
-    }
-
-    abstract void setActivityHistory();
-
-    abstract void setName(String name);
 
     public String getName() {
         return name;
@@ -49,7 +43,19 @@ public abstract class UnitBase implements Unit {
         this.activityHistory.add(activity);
     }
 
-    public void removeWorkItem(int id){
+    public void removeWorkItem(int id) {
         this.items.remove(id);
+    }
+
+    abstract void setActivityHistory();
+
+    private void setItems() {
+        this.items = new HashMap<>();
+    }
+
+    private void setName(String name, int NAME_MIN_LENGTH, int NAME_MAX_LENGTH) {
+        if (name.length() < NAME_MIN_LENGTH || name.length() > NAME_MAX_LENGTH)
+            throw new IllegalArgumentException(String.format(ERROR_NAME_LENGTH, NAME_MIN_LENGTH, NAME_MAX_LENGTH));
+        this.name = name;
     }
 }

@@ -20,10 +20,10 @@ public final class CreateFeedbackCmd {
         String feedbackBoard = parameters.get(4);
         String feedbackTeam = parameters.get(5);
 
-        if(!engine.getTeams().containsKey(feedbackTeam))
+        if (!engine.getTeams().containsKey(feedbackTeam))
             return String.format(EngineConstants.TeamDoesNotExistErrorMessage, feedbackTeam);
 
-        if(!engine.getTeams().get(feedbackTeam).getBoards().containsKey(feedbackBoard))
+        if (!engine.getTeams().get(feedbackTeam).getBoards().containsKey(feedbackBoard))
             return String.format(EngineConstants.BoardIsNotOnTheTeamErrorMessage, feedbackBoard, feedbackTeam);
 
 

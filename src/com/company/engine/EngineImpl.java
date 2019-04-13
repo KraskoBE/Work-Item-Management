@@ -68,8 +68,7 @@ public class EngineImpl implements Engine {
         return globalID;
     }
 
-    public int getGlobalIDWithIncrease()
-    {
+    public int getGlobalIDWithIncrease() {
         return globalID++;
     }
 

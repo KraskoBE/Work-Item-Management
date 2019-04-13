@@ -15,7 +15,6 @@ public class Bug_Should {
 
     @Test(expected = IllegalArgumentException.class)
     public void throwWhenNameIsSmallerThanValue() {
-
         BugImpl bug = new BugImpl(0, "title", "description of the bug", Priority.High, Severity.Critical, Status.Active);
     }
 
@@ -26,7 +25,6 @@ public class Bug_Should {
 
     @Test(expected = IllegalArgumentException.class)
     public void throwWhenDescriptionIsSmallerThanValue() {
-
         BugImpl bug = new BugImpl(0, "titleOfBug", "descr", Priority.High, Severity.Critical, Status.Active);
     }
 
@@ -41,6 +39,11 @@ public class Bug_Should {
 
     @Test(expected = IllegalArgumentException.class)
     public void throwWhenStatusIsInvalid() {
-        BugImpl bug = new BugImpl(0, "titleOfBug", "description of the bug", Priority.High, Severity.Critical, Status.Unscheduled);
+        BugImpl bug0 = new BugImpl(0, "titleOfBug", "description of the bug", Priority.High, Severity.Critical, Status.NotDone);
+        BugImpl bug1 = new BugImpl(1, "titleOfBug", "description of the bug", Priority.High, Severity.Critical, Status.InProgress);
+        BugImpl bug2 = new BugImpl(2, "titleOfBug", "description of the bug", Priority.High, Severity.Critical, Status.Done);
+        BugImpl bug3 = new BugImpl(3, "titleOfBug", "description of the bug", Priority.High, Severity.Critical, Status.New);
+        BugImpl bug4 = new BugImpl(4, "titleOfBug", "description of the bug", Priority.High, Severity.Critical, Status.Scheduled);
+        BugImpl bug5 = new BugImpl(5, "titleOfBug", "description of the bug", Priority.High, Severity.Critical, Status.Unscheduled);
     }
 }
