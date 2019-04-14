@@ -14,6 +14,10 @@ public class Tests_With_Files {
         executeIOTest("001");
     }
 
+    @Test
+    public void test_003() throws Exception {
+        executeIOTest("003");
+    }
 
     private void executeIOTest(String testNumber) throws Exception {
         String testInputFilePath = "./src/Tests/TestData/test." + testNumber + ".in.txt";
