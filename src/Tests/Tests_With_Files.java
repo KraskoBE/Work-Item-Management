@@ -14,6 +14,35 @@ public class Tests_With_Files {
         executeIOTest("001");
     }
 
+    @Test
+    public void test_003() throws Exception {
+        executeIOTest("003");
+    }
+
+    @Test
+    public void test_004() throws Exception {
+        executeIOTest("004");
+    }
+
+    @Test
+    public void test_006() throws Exception {
+        executeIOTest("006");
+    }
+
+    @Test
+    public void test_008() throws Exception {
+        executeIOTest("008");
+    }
+
+    @Test
+    public void test_010() throws Exception {
+        executeIOTest("010");
+    }
+
+    @Test
+    public void test_012() throws Exception {
+        executeIOTest("012");
+    }
 
     private void executeIOTest(String testNumber) throws Exception {
         String testInputFilePath = "./src/Tests/TestData/test." + testNumber + ".in.txt";

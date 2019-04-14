@@ -1,0 +1,8 @@
+Invalid number of parameters
+Team otbor does not exists
+Team otbor created
+No members found
+Member krasen created
+Member krasen added to team otbor
+[MEMBERS of otbor]
+krasen

@@ -1,0 +1,3 @@
+showallpeople
+createmember krasen
+showallpeople

@@ -1,0 +1,5 @@
+Team otbor created
+Board board created
+Invalid number of parameters
+Board board already exists in otbor
+Team ekip does not exists

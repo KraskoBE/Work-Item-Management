@@ -1,0 +1,5 @@
+createteam otbor
+createboard board'otbor
+createboard board
+createboard board'otbor
+createboard board2'ekip
