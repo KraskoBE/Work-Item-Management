@@ -21,7 +21,7 @@ public class FeedbackImpl extends WorkItemBase implements Feedback {
 
     @Override
     public void setStatus(Status status) {
-        if (status != Status.New && status != Status.Unscheduled && status != Status.Done)
+        if (status != Status.New && status != Status.Unscheduled && status != Status.Done && status!= Status.Scheduled)
             throw new IllegalArgumentException(ERROR_INVALID_STATUS);
         this.status = status;
     }

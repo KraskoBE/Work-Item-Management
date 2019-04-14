@@ -1,0 +1,62 @@
+Team team1 created
+Board board1 created
+Bug nameOfTheBug created with ID:0
+Invalid command parameters
+Work item with ID:1 does not exist
+Invalid number of parameters
+Invalid number of parameters
+Changed nameOfTheBug's priority to High
+Changed nameOfTheBug's priority to Medium
+Changed nameOfTheBug's priority to Low
+Invalid priority name: InvalidPriority
+Changed nameOfTheBug's severity to Critical
+Changed nameOfTheBug's severity to Major
+Changed nameOfTheBug's severity to Minor
+Invalid severity name: InvalidSeverity
+Changed nameOfTheBug's status to Active
+Changed nameOfTheBug's status to Fixed
+Invalid status
+Invalid status
+Invalid status
+Invalid status
+Invalid status
+Invalid status
+Invalid status name: InvalidStatus
+Invalid object type: rating
+Story nameOfTheStory created with ID:1
+Changed nameOfTheStory's priority to High
+Changed nameOfTheStory's priority to Medium
+Changed nameOfTheStory's priority to Low
+Invalid priority name: InvalidPriority
+Changed nameOfTheStory's size to Large
+Changed nameOfTheStory's size to Medium
+Changed nameOfTheStory's size to Small
+Invalid size name: InvalidSize
+Error: invalid status
+Error: invalid status
+Changed nameOfTheStory's status to NotDone
+Changed nameOfTheStory's status to InProgress
+Changed nameOfTheStory's status to Done
+Error: invalid status
+Error: invalid status
+Error: invalid status
+Invalid status name: InvalidStatus
+Invalid object type: rating
+Invalid object type: severity
+Feedback nameOfTheFeedback created with ID:2
+Changed nameOfTheFeedback's rating to 10
+Invalid object type: size
+Invalid object type: size
+Invalid object type: size
+Invalid object type: size
+Invalid status
+Invalid status
+Invalid status
+Invalid status
+Changed nameOfTheFeedback's status to Done
+Changed nameOfTheFeedback's status to New
+Changed nameOfTheFeedback's status to Scheduled
+Changed nameOfTheFeedback's status to UnScheduled
+Invalid status name: InvalidStatus
+Invalid object type: priority
+Invalid object type: severity

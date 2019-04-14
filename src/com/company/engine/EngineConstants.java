@@ -41,6 +41,7 @@ public final class EngineConstants {
     public static final String InvalidCategoryErrorMessage = "Invalid category name %s";
     public static final String InvalidSortTypeErrorMessage = "Invalid sort type %s";
     public static final String InvalidNumberOfParameters = "Invalid number of parameters";
+    public static final String InvalidCommandParameters = "Invalid command parameters";
 
     // Success messages
     public static final String TeamCreatedSuccessMessage = "Team %s created";
