@@ -12,7 +12,7 @@ import java.util.List;
 
 public final class AssignCmd {
 
-    public static String assignCommand (EngineImpl engine, List<String> parameters) {
+    public static String assignCommand(EngineImpl engine, List<String> parameters) {
 
         if (parameters.size() != 2)
             return EngineConstants.InvalidNumberOfParameters;
@@ -33,7 +33,7 @@ public final class AssignCmd {
             return String.format(EngineConstants.ItemAlreadyAssignedErrorMessage, assignee);
 
         if (engine.getWorkItems().get(workItemID) instanceof Bug) {
-            if (((Bug) engine.getWorkItems().get(workItemID)).getAssignee() != null)
+            if (((Bug) engine.getWorkItems().get(workItemID)).getAssignee().getName().equals("No assignee"))
                 return String.format(EngineConstants.ItemAlreadyAssignedErrorMessage, ((Bug) engine.getWorkItems().get(workItemID)).getAssignee().getName());
             ((Bug) engine.getWorkItems().get(workItemID)).setAssignee(engine.getMembers().get(assignee));
         }
@@ -46,7 +46,7 @@ public final class AssignCmd {
 
 
     private static String getMemberTeam(EngineImpl engine, String name) {
-        for (Team t : engine.getTeams().values() )
+        for (Team t : engine.getTeams().values())
             for (Member m : t.getMembers().values())
                 if (m.getName().equals(name))
                     return t.getName();

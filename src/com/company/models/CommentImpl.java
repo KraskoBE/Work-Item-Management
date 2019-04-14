@@ -11,7 +11,7 @@ public class CommentImpl implements Comment {
         return author;
     }
 
-   public String getMessage() {
+    public String getMessage() {
         return message;
     }
 
