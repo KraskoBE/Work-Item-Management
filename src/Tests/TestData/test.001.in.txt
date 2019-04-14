@@ -1,2 +1,7 @@
+createteam otbor
 createmember krasen
-
+addmembertoteam krasen'otbor
+addmembertoteam krasen'otbor'ekip
+addmembertoteam krasen'ekip
+addmembertoteam stoyan'otbor
+addmembertoteam krasen'otbor
