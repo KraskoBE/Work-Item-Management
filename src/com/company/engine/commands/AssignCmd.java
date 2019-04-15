@@ -12,8 +12,7 @@ import java.util.List;
 
 public final class AssignCmd {
 
-    public static String assignCommand(EngineImpl engine, List<String> parameters) {
-
+    public static String execute(EngineImpl engine, List<String> parameters) {
         if (parameters.size() != 2)
             return EngineConstants.InvalidNumberOfParameters;
 
@@ -38,12 +37,10 @@ public final class AssignCmd {
             ((Bug) engine.getWorkItems().get(workItemID)).setAssignee(engine.getMembers().get(assignee));
         }
 
-
         engine.getMembers().get(assignee).addWorkItem(engine.getWorkItems().get(workItemID));
         return String.format(EngineConstants.WorkItemAssignedSuccessMessage, workItemID, assignee);
 
     }
-
 
     private static String getMemberTeam(EngineImpl engine, String name) {
         for (Team t : engine.getTeams().values())

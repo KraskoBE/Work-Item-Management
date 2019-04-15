@@ -20,12 +20,11 @@ public final class CreateStoryCmd {
         String storyBoard = parameters.get(4);
         String storyTeam = parameters.get(5);
 
-        if(!engine.getTeams().containsKey(storyTeam))
+        if (!engine.getTeams().containsKey(storyTeam))
             return String.format(EngineConstants.TeamDoesNotExistErrorMessage, storyTeam);
 
-        if(!engine.getTeams().get(storyTeam).getBoards().containsKey(storyBoard))
+        if (!engine.getTeams().get(storyTeam).getBoards().containsKey(storyBoard))
             return String.format(EngineConstants.BoardIsNotOnTheTeamErrorMessage, storyBoard, storyTeam);
-
 
         Story story = factory.createStory(engine.getGlobalID(), storyName, storyDescription, storyPriority, storySize);
 
@@ -33,6 +32,5 @@ public final class CreateStoryCmd {
         engine.getTeams().get(storyTeam).getBoards().get(storyBoard).addWorkItem(story);
 
         return String.format(EngineConstants.StoryCreatedSuccessMessage, storyName, engine.getGlobalIDWithIncrease());
-
     }
 }

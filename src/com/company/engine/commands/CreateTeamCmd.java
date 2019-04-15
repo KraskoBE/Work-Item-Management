@@ -23,6 +23,5 @@ public final class CreateTeamCmd {
         engine.getTeams().put(teamName, team);
 
         return String.format(EngineConstants.TeamCreatedSuccessMessage, teamName);
-
     }
 }

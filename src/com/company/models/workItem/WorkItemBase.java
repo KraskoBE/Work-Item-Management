@@ -105,4 +105,5 @@ public abstract class WorkItemBase implements WorkItem {
     }
 
     abstract String additionalInfo();
+
 }

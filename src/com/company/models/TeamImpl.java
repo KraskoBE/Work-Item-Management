@@ -32,6 +32,8 @@ public class TeamImpl implements Team {
     }
 
     private void setName(String name) {
+        if(name.isEmpty())
+            throw new IllegalArgumentException("Team name should not be empty");
         this.name = name;
     }
 

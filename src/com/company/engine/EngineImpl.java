@@ -10,8 +10,6 @@ import com.company.models.contracts.unit.Member;
 import com.company.models.contracts.workItem.*;
 
 import java.util.*;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class EngineImpl implements Engine {
 
@@ -25,7 +23,6 @@ public class EngineImpl implements Engine {
     private Map<Integer, WorkItem> workItems;
 
     public EngineImpl() {
-
         factory = new FactoryImpl();
         teams = new HashMap<>();
         members = new HashMap<>();
@@ -74,7 +71,6 @@ public class EngineImpl implements Engine {
 
     private String processCommand(Command command) {
         String commandResult;
-
         switch (command.getName()) {
             case EngineConstants.CreateMemberCommand:
                 return CreateMemberCmd.execute(this, factory, command.getParameters());
@@ -83,61 +79,47 @@ public class EngineImpl implements Engine {
                 return CreateTeamCmd.execute(this, factory, command.getParameters());
 
             case EngineConstants.CreateBoardCommand:
-                return CreateBoardCmd.execute(this,factory, command.getParameters());
+                return CreateBoardCmd.execute(this, factory, command.getParameters());
 
             case EngineConstants.CreateBugCommand:
-                return CreateBugCmd.execute(this,factory,command.getParameters());
+                return CreateBugCmd.execute(this, factory, command.getParameters());
 
             case EngineConstants.CreateStoryCommand:
-                return CreateStoryCmd.execute(this,factory,command.getParameters());
+                return CreateStoryCmd.execute(this, factory, command.getParameters());
 
             case EngineConstants.CreateFeedbackCommand:
-                return CreateFeedbackCmd.execute(this,factory,command.getParameters());
+                return CreateFeedbackCmd.execute(this, factory, command.getParameters());
 
             case EngineConstants.ShowAllPeopleCommand:
-                return ShowAllPeopleCmd.showAllPeople(this);
+                return ShowAllPeopleCmd.execute(this);
 
             case EngineConstants.ShowAllTeamsCommand:
-                return ShowAllTeamsCmd.showAllTeams(this);
+                return ShowAllTeamsCmd.execute(this);
 
             case EngineConstants.ShowAllTeamMembersCommand:
-                return ShowAllTeamMembersCmd.ShowAllTeamMembers(this, command.getParameters());
+                return ShowAllTeamMembersCmd.execute(this, command.getParameters());
 
             case EngineConstants.ShowAllTeamBoardsCommand:
-                return ShowAllTeamBoardsCmd.showAllTeamBoards(this, command.getParameters());
+                return ShowAllTeamBoardsCmd.execute(this, command.getParameters());
 
             case EngineConstants.AddMemberToTeamCommand:
-                return AddMemberToTeamCmd.addMemberToTeam(this, command.getParameters());
+                return AddMemberToTeamCmd.execute(this, command.getParameters());
 
             case EngineConstants.ChangeCommand:
-                return ChangeCmd.changeCommand(this, command.getParameters());
+                return ChangeCmd.execute(this, command.getParameters());
 
             case EngineConstants.AssignCommand:
-                return AssignCmd.assignCommand(this, command.getParameters());
+                return AssignCmd.execute(this, command.getParameters());
 
             case EngineConstants.UnassignCommand:
-                return UnassignCmd.unAssignCommand(this, command.getParameters());
+                return UnassignCmd.execute(this, command.getParameters());
 
+            case EngineConstants.ListWorkItemsCommand:
+                return ListWorkItemsCmd.execute(this, command.getParameters());
 
+            case EngineConstants.SortWorkItemsCommand:
+                return SortWorkItemsCmd.execute(this, command.getParameters());
 
-
-            case EngineConstants.ListWorkItems:
-                String firstParam = command.getParameters().get(0);
-                if (command.getParameters().size() == 1) {
-                    commandResult = listWorkItemsByCategory(firstParam);
-                    break;
-                }
-
-                String secondParam = command.getParameters().get(1);
-                if (firstParam.equals("sort")) {
-                    commandResult = sortWorkItems(secondParam);
-                    break;
-                }
-                /*if (firstParam.equals("status")) {
-                    //commandResult = listWorkItemsByStatus(secondParam);
-                }*/
-                commandResult = "error";
-                break;
             default:
                 commandResult = String.format(EngineConstants.InvalidCommandErrorMessage, command.getName());
                 break;
@@ -145,7 +127,7 @@ public class EngineImpl implements Engine {
         return commandResult;
     }
 
-    private String createTeam(String name) {
+   /* private String createTeam(String name) {
         if (teams.containsKey(name)) {
             return String.format(EngineConstants.TeamExistsErrorMessage, name);
         }
@@ -218,7 +200,7 @@ public class EngineImpl implements Engine {
 
     }
 
-    private String showAllPeople() {
+    private String execute() {
         if (members.isEmpty())
             return EngineConstants.NoMembersErrorMessage;
 
@@ -230,7 +212,7 @@ public class EngineImpl implements Engine {
         return stringBuilder.toString().trim();
     }
 
-    private String showAllTeams() {
+    private String execute() {
         if (teams.isEmpty())
             return EngineConstants.NoTeamsErrorMessage;
 
@@ -256,7 +238,7 @@ public class EngineImpl implements Engine {
         return stringBuilder.toString().trim();
     }
 
-    private String showAllTeamBoards(String team) {
+    private String execute(String team) {
         if (!teams.containsKey(team))
             return String.format(EngineConstants.TeamDoesNotExistErrorMessage, team);
         if (teams.get(team).getBoards().isEmpty())
@@ -270,7 +252,7 @@ public class EngineImpl implements Engine {
         return stringBuilder.toString().trim();
     }
 
-    private String changeCommand(int id, String type, String value) {
+    private String execute(int id, String type, String value) {
         if (!workItems.containsKey(id))
             return String.format(EngineConstants.WorkItemDoesNotExistErrorMessage, id);
 
@@ -322,7 +304,7 @@ public class EngineImpl implements Engine {
         return String.format(EngineConstants.WorkItemObjectChangedSuccessMessage, workItems.get(id).getTitle(), type, value);
     }
 
-    private String addMemberToTeam(String memberName, String teamName) {
+    private String execute(String memberName, String teamName) {
         if (!teams.containsKey(teamName))
             return String.format(EngineConstants.TeamDoesNotExistErrorMessage, teamName);
 
@@ -337,7 +319,7 @@ public class EngineImpl implements Engine {
         return String.format(EngineConstants.MemberAddedSuccessMessage, memberName, teamName);
     }
 
-    private String assignCommand(int id, String assignee) {
+    private String execute(int id, String assignee) {
         if (!workItems.containsKey(id))
             return String.format(EngineConstants.WorkItemDoesNotExistErrorMessage, id);
 
@@ -360,7 +342,7 @@ public class EngineImpl implements Engine {
         return String.format(EngineConstants.WorkItemAssignedSuccessMessage, id, assignee);
     }
 
-    private String unAssignCommand(int id, String assignee) {
+    private String execute(int id, String assignee) {
         if (!workItems.containsKey(id))
             return String.format(EngineConstants.WorkItemDoesNotExistErrorMessage, id);
         if (!members.containsKey(assignee))
@@ -467,11 +449,5 @@ public class EngineImpl implements Engine {
         return result.length() == 0 ?
                 EngineConstants.WorkItemListEmptyErrorMessage : result.trim();
     }
-
-
-    /*private String listWorkItemsByStatus(String status) {
-        switch (status.toLowerCase()) {
-
-        }
-    }*/
+*/
 }

@@ -8,8 +8,7 @@ import java.util.List;
 
 public final class UnassignCmd {
 
-    public static String unAssignCommand (EngineImpl engine, List<String> parameters) {
-
+    public static String execute(EngineImpl engine, List<String> parameters) {
         if (parameters.size() != 2)
             return EngineConstants.InvalidNumberOfParameters;
 
@@ -25,12 +24,10 @@ public final class UnassignCmd {
         if (!engine.getMembers().get(assignee).getItems().containsKey(workItemID))
             return String.format(EngineConstants.MemberDoesNotHaveWorkItemErrorMessage, assignee, workItemID);
 
-
         engine.getMembers().get(assignee).removeWorkItem(workItemID);
         if (engine.getWorkItems().get(workItemID) instanceof Bug)
             ((Bug) engine.getWorkItems().get(workItemID)).removeAssignee();
 
         return EngineConstants.WorkItemUnassignedSuccessMessage;
-
     }
 }

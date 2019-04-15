@@ -21,19 +21,17 @@ public final class CreateBugCmd {
         String bugBoard = parameters.get(4);
         String bugTeam = parameters.get(5);
 
-        if(!engine.getTeams().containsKey(bugTeam))
+        if (!engine.getTeams().containsKey(bugTeam))
             return String.format(EngineConstants.TeamDoesNotExistErrorMessage, bugTeam);
 
-        if(!engine.getTeams().get(bugTeam).getBoards().containsKey(bugBoard))
+        if (!engine.getTeams().get(bugTeam).getBoards().containsKey(bugBoard))
             return String.format(EngineConstants.BoardIsNotOnTheTeamErrorMessage, bugBoard, bugTeam);
 
+        Bug bug = factory.createBug(engine.getGlobalID(), bugName, bugDescription, bugPriority, bugSeverity);
 
-         Bug bug = factory.createBug(engine.getGlobalID(), bugName, bugDescription, bugPriority, bugSeverity);
+        engine.getWorkItems().put(engine.getGlobalID(), bug);
+        engine.getTeams().get(bugTeam).getBoards().get(bugBoard).addWorkItem(bug);
 
-         engine.getWorkItems().put(engine.getGlobalID(), bug);
-         engine.getTeams().get(bugTeam).getBoards().get(bugBoard).addWorkItem(bug);
-
-         return String.format(EngineConstants.BugCreatedSuccessMessage, bugName, engine.getGlobalIDWithIncrease());
-
+        return String.format(EngineConstants.BugCreatedSuccessMessage, bugName, engine.getGlobalIDWithIncrease());
     }
 }

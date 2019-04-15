@@ -5,8 +5,7 @@ import com.company.engine.EngineImpl;
 
 public final class ShowAllTeamsCmd {
 
-    public static String showAllTeams(EngineImpl engine) {
-
+    public static String execute(EngineImpl engine) {
         if (engine.getTeams().isEmpty())
             return EngineConstants.NoTeamsErrorMessage;
 

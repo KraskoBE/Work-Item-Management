@@ -3,21 +3,22 @@ package com.company.engine;
 public final class EngineConstants {
 
     // Commands
-    public static final String CreateTeamCommand = "createteam";
-    public static final String CreateMemberCommand = "createmember";
-    public static final String CreateBoardCommand = "createboard";
-    public static final String CreateBugCommand = "createbug";
-    public static final String CreateStoryCommand = "createstory";
-    public static final String CreateFeedbackCommand = "createfeedback";
-    public static final String AddMemberToTeamCommand = "addmembertoteam";
-    public static final String ShowAllPeopleCommand = "showallpeople";
-    public static final String ShowAllTeamsCommand = "showallteams";
-    public static final String ShowAllTeamMembersCommand = "showteammembers";
-    public static final String ShowAllTeamBoardsCommand = "showteamboards";
-    public static final String ChangeCommand = "change";
-    public static final String AssignCommand = "assign";
-    public static final String UnassignCommand = "unassign";
-    public static final String ListWorkItems = "listworkitems";
+    static final String CreateTeamCommand = "createteam";
+    static final String CreateMemberCommand = "createmember";
+    static final String CreateBoardCommand = "createboard";
+    static final String CreateBugCommand = "createbug";
+    static final String CreateStoryCommand = "createstory";
+    static final String CreateFeedbackCommand = "createfeedback";
+    static final String AddMemberToTeamCommand = "addmembertoteam";
+    static final String ShowAllPeopleCommand = "showallpeople";
+    static final String ShowAllTeamsCommand = "showallteams";
+    static final String ShowAllTeamMembersCommand = "showteammembers";
+    static final String ShowAllTeamBoardsCommand = "showteamboards";
+    static final String ChangeCommand = "change";
+    static final String AssignCommand = "assign";
+    static final String UnassignCommand = "unassign";
+    static final String ListWorkItemsCommand = "listworkitems";
+    static final String SortWorkItemsCommand = "sortworkitems";
 
     // Error messages
     public static final String InvalidCommandErrorMessage = "Invalid command name: %s";

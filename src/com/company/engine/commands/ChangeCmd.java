@@ -11,8 +11,7 @@ import java.util.List;
 
 public final class ChangeCmd {
 
-    public static String changeCommand(EngineImpl engine, List<String> parameters) {
-
+    public static String execute(EngineImpl engine, List<String> parameters) {
         if (parameters.size() != 3)
             return EngineConstants.InvalidNumberOfParameters;
 
@@ -89,6 +88,5 @@ public final class ChangeCmd {
         }
 
         return String.format(EngineConstants.WorkItemObjectChangedSuccessMessage, engine.getWorkItems().get(workItemID).getTitle(), changeType, changeValue);
-
     }
 }

@@ -26,13 +26,11 @@ public final class CreateFeedbackCmd {
         if (!engine.getTeams().get(feedbackTeam).getBoards().containsKey(feedbackBoard))
             return String.format(EngineConstants.BoardIsNotOnTheTeamErrorMessage, feedbackBoard, feedbackTeam);
 
-
         Feedback feedback = factory.createFeedback(engine.getGlobalID(), feedbackName, feedbackDescription, feedbackStatus, feedbackRating);
 
         engine.getWorkItems().put(engine.getGlobalID(), feedback);
         engine.getTeams().get(feedbackTeam).getBoards().get(feedbackBoard).addWorkItem(feedback);
 
         return String.format(EngineConstants.FeedBackSuccessMessage, feedbackName, engine.getGlobalIDWithIncrease());
-
     }
 }

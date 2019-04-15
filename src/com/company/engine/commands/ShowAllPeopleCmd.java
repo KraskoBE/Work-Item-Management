@@ -5,8 +5,7 @@ import com.company.engine.EngineImpl;
 
 public final class ShowAllPeopleCmd {
 
-    public static String showAllPeople(EngineImpl engine){
-
+    public static String execute(EngineImpl engine) {
         if (engine.getMembers().isEmpty())
             return EngineConstants.NoMembersErrorMessage;
 
