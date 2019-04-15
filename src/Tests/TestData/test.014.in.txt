@@ -1,0 +1,16 @@
+sortworkitems title
+sortworkitems
+createteam otbor
+createboard board1'otbor
+createbug ImeeeeeeeeeeeeBug'Opisanie Bug 1'Low'Major'board1'otbor
+createbug ImeeeeeeeeeeeeBug2'Mnogo Dulgo Opisanie Na Bug'High'Critical'board1'otbor
+createstory imeNaStory2'DescriptionNaStory2'High'Large'board1'otbor
+createstory imeNaStory1'DescriptionNaStory1'Low'Small'board1'otbor
+createfeedback feedbackime123'nqkvoopisanienafeedbacka'done'567'board1'otbor
+createfeedback feedbackime1234'nqkvoopisanienafeedbacka2'New'999'board1'otbor
+sortworkitems title
+sortworkitems priority
+sortworkitems severity
+sortworkitems size
+sortworkitems rating
+sortworkitems aaaaaaaa
