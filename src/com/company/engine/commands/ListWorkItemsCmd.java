@@ -83,7 +83,7 @@ public final class ListWorkItemsCmd {
         Stream<BugStory> bugStoryStream = engine.getWorkItems()
                 .values()
                 .stream()
-                .filter(workItem -> workItem instanceof BugStory)
+                .filter(workItem -> workItem instanceof Bug || workItem instanceof Story)
                 .map(workItem -> (BugStory) workItem);
 
         String result = bugStoryStream
@@ -102,7 +102,7 @@ public final class ListWorkItemsCmd {
         Stream<BugStory> bugStoryStream = engine.getWorkItems()
                 .values()
                 .stream()
-                .filter(workItem -> workItem instanceof BugStory)
+                .filter(workItem -> workItem instanceof Bug || workItem instanceof Story)
                 .map(workItem -> (BugStory) workItem);
 
         String result = bugStoryStream

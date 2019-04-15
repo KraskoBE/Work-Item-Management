@@ -6,6 +6,8 @@ import com.company.models.contracts.Team;
 import com.company.models.contracts.unit.Board;
 import com.company.models.contracts.unit.Member;
 import com.company.models.contracts.workItem.Bug;
+import com.company.models.contracts.workItem.BugStory;
+import com.company.models.contracts.workItem.Story;
 import com.company.models.contracts.workItem.WorkItem;
 
 import java.util.List;
@@ -31,15 +33,14 @@ public final class AssignCmd {
         if (engine.getMembers().get(assignee).getItems().containsKey(workItemID))
             return String.format(EngineConstants.ItemAlreadyAssignedErrorMessage, assignee);
 
-        if (engine.getWorkItems().get(workItemID) instanceof Bug) {
-            if (((Bug) engine.getWorkItems().get(workItemID)).getAssignee().getName().equals("No assignee"))
-                return String.format(EngineConstants.ItemAlreadyAssignedErrorMessage, ((Bug) engine.getWorkItems().get(workItemID)).getAssignee().getName());
-            ((Bug) engine.getWorkItems().get(workItemID)).setAssignee(engine.getMembers().get(assignee));
+        if (engine.getWorkItems().get(workItemID) instanceof Bug || engine.getWorkItems().get(workItemID) instanceof Story) {
+            if (!((BugStory) engine.getWorkItems().get(workItemID)).getAssignee().getName().equals("No assignee"))
+                return String.format(EngineConstants.ItemAlreadyAssignedErrorMessage, ((BugStory) engine.getWorkItems().get(workItemID)).getAssignee().getName());
+            ((BugStory) engine.getWorkItems().get(workItemID)).setAssignee(engine.getMembers().get(assignee));
         }
 
         engine.getMembers().get(assignee).addWorkItem(engine.getWorkItems().get(workItemID));
         return String.format(EngineConstants.WorkItemAssignedSuccessMessage, workItemID, assignee);
-
     }
 
     private static String getMemberTeam(EngineImpl engine, String name) {
