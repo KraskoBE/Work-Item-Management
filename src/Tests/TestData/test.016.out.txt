@@ -1,8 +1,11 @@
 Invalid number of parameters
 Work item with ID:0 does not exist
+Member stoyan created
 Team otbor created
 Board board1 created
 Bug ImeeeeeeeeeeeeBug created with ID:0
-Member stoyan does not exist
+Member stoyan added to team otbor
+Work item with ID:0 assigned to stoyan
+Work item unassigned successfully
 Member krasen created
 Member krasen does not have work item with ID:0 assigned.

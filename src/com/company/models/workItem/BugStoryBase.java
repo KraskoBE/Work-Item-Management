@@ -32,14 +32,12 @@ public abstract class BugStoryBase extends WorkItemBase implements BugStory {
 
     public void setAssignee(Member assignee) {
         this.assignee = assignee;
-        if (assignee == noAssignee)
-            addActivityHistory("Unassigned");
-        else
-            addActivityHistory(String.format("Assigned to:%s", assignee.getName()));
+        addActivityHistory(String.format("Assigned to:%s", assignee.getName()));
     }
 
     public void removeAssignee() {
         assignee = noAssignee;
+        addActivityHistory("Unassigned");
     }
 
 }
