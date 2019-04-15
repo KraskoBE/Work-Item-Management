@@ -36,6 +36,7 @@ public abstract class UnitBase implements Unit {
     @Override
     public void addWorkItem(WorkItem workItem) {
         this.items.put(workItem.getId(), workItem);
+        addActivity(String.format("Work item with ID:%d added", workItem.getId()));
     }
 
     @Override
@@ -45,6 +46,7 @@ public abstract class UnitBase implements Unit {
 
     public void removeWorkItem(int id) {
         this.items.remove(id);
+        addActivity(String.format("Work item with ID:%d removed", id));
     }
 
     abstract void setActivityHistory();

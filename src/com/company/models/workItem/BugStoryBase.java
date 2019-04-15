@@ -23,6 +23,7 @@ public abstract class BugStoryBase extends WorkItemBase implements BugStory {
 
     public void setPriority(Priority priority) {
         this.priority = priority;
+        addActivityHistory(String.format("Priority set to:%s", priority.toString()));
     }
 
     public Member getAssignee() {
@@ -31,6 +32,10 @@ public abstract class BugStoryBase extends WorkItemBase implements BugStory {
 
     public void setAssignee(Member assignee) {
         this.assignee = assignee;
+        if (assignee == noAssignee)
+            addActivityHistory("Unassigned");
+        else
+            addActivityHistory(String.format("Assigned to:%s", assignee.getName()));
     }
 
     public void removeAssignee() {

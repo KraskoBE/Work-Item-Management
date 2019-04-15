@@ -24,7 +24,7 @@ public final class AddMemberToTeamCmd {
             return String.format(EngineConstants.MemberAlreadyInTeamErrorMessage, memberName, teamName);
 
         engine.getTeams().get(teamName).getMembers().put(memberName, engine.getMembers().get(memberName));
-
+        engine.getMembers().get(memberName).addActivity(String.format("Joined team %s", teamName));
         return String.format(EngineConstants.MemberAddedSuccessMessage, memberName, teamName);
     }
 }

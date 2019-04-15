@@ -11,8 +11,9 @@ public class StoryImpl extends BugStoryBase implements Story {
     private Size size;
 
     public StoryImpl(int id, String title, String description, Priority priority, Size size) {
-        super(id, title, description, Status.InProgress,priority);
+        super(id, title, description, Status.InProgress, priority);
         setSize(size);
+        setHistory();
     }
 
 
@@ -29,6 +30,7 @@ public class StoryImpl extends BugStoryBase implements Story {
         if (status != Status.NotDone && status != Status.InProgress && status != Status.Done)
             throw new IllegalArgumentException(ERROR_INVALID_STATUS);
         this.status = status;
+        addActivityHistory(String.format("Status set to:%s", status.toString()));
     }
 
     @Override

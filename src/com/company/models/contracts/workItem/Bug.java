@@ -20,7 +20,5 @@ public interface Bug extends BugStory {
 
     void setSeverity(Severity severity);
 
-    void setAssignee(Member assignee);
-
     void removeAssignee();
 }

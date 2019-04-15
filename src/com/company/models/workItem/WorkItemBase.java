@@ -14,7 +14,7 @@ public abstract class WorkItemBase implements WorkItem {
     private static final int DESCRIPTION_MAX_LENGTH = 500;
     private static final String ERROR_WORK_ITEM_NAME = "Work item name should be %d-%d characters";
     private static final String ERROR_WORK_ITEM_DESCRIPTION = "Work item description should be %d-%d characters";
-    protected static final String ERROR_INVALID_STATUS = "Invalid status";
+    static final String ERROR_INVALID_STATUS = "Invalid status";
 
     private int id;
     private String title;
@@ -24,12 +24,12 @@ public abstract class WorkItemBase implements WorkItem {
     List<String> history;
 
     WorkItemBase(int id, String title, String description, Status status) {
+        setHistory();
         setId(id);
         setTitle(title);
         setDescription(description);
         setStatus(status);
         setComments();
-        setHistory();
     }
 
     public int getId() {
@@ -54,6 +54,11 @@ public abstract class WorkItemBase implements WorkItem {
 
     public List<String> getHistory() {
         return new ArrayList<>(history);
+    }
+
+    public void addActivityHistory(String activity)
+    {
+        history.add(activity);
     }
 
     @Override
@@ -96,12 +101,12 @@ public abstract class WorkItemBase implements WorkItem {
 
     public abstract void setStatus(Status status);
 
-    private void setComments() {
-        this.comments = new ArrayList<>();
+    protected void setHistory() {
+        this.history = new ArrayList<>();
     }
 
-    private void setHistory() {
-        this.history = new ArrayList<>();
+    private void setComments() {
+        this.comments = new ArrayList<>();
     }
 
     abstract String additionalInfo();

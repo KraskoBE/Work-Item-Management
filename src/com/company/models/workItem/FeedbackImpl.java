@@ -9,6 +9,7 @@ public class FeedbackImpl extends WorkItemBase implements Feedback {
     public FeedbackImpl(int id, String title, String description, Status status, int rating) {
         super(id, title, description, status);
         setRating(rating);
+        setHistory();
     }
 
     public int getRating() {
@@ -17,13 +18,15 @@ public class FeedbackImpl extends WorkItemBase implements Feedback {
 
     public void setRating(int rating) {
         this.rating = rating;
+        addActivityHistory(String.format("Rating set to:%d", rating));
     }
 
     @Override
     public void setStatus(Status status) {
-        if (status != Status.New && status != Status.Unscheduled && status != Status.Done && status!= Status.Scheduled)
+        if (status != Status.New && status != Status.Unscheduled && status != Status.Done && status != Status.Scheduled)
             throw new IllegalArgumentException(ERROR_INVALID_STATUS);
         this.status = status;
+        addActivityHistory(String.format("Status set to:%s", status.toString()));
     }
 
     @Override

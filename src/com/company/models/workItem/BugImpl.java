@@ -16,10 +16,12 @@ public class BugImpl extends BugStoryBase implements Bug {
         super(id, title, description, status, priority);
         setSeverity(severity);
         setStepsToReproduce();
+        setHistory();
     }
 
     public void setSeverity(Severity severity) {
         this.severity = severity;
+        addActivityHistory(String.format("Severity set to:%s", severity.toString()));
     }
 
     @Override
@@ -28,6 +30,7 @@ public class BugImpl extends BugStoryBase implements Bug {
         if (status != Status.Active && status != Status.Fixed)
             throw new IllegalArgumentException(ERROR_INVALID_STATUS);
         this.status = status;
+        addActivityHistory(String.format("Status set to:%s", status.toString()));
     }
 
     @Override
