@@ -4,7 +4,7 @@ import com.company.models.contracts.unit.Unit;
 import com.company.models.contracts.workItem.WorkItem;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -26,7 +26,7 @@ public abstract class UnitBase implements Unit {
     }
 
     public Map<Integer, WorkItem> getItems() {
-        return new HashMap<>(items);
+        return new LinkedHashMap<>(items);
     }
 
     public List<String> getActivityHistory() {
@@ -50,7 +50,7 @@ public abstract class UnitBase implements Unit {
     abstract void setActivityHistory();
 
     private void setItems() {
-        this.items = new HashMap<>();
+        this.items = new LinkedHashMap<>();
     }
 
     private void setName(String name, int NAME_MIN_LENGTH, int NAME_MAX_LENGTH) {

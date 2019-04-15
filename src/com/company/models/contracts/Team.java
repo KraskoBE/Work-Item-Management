@@ -3,8 +3,6 @@ package com.company.models.contracts;
 import com.company.models.contracts.unit.Board;
 import com.company.models.contracts.unit.Member;
 
-import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public interface Team {

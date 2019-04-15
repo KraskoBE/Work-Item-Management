@@ -5,7 +5,7 @@ import com.company.models.contracts.Team;
 import com.company.models.contracts.unit.Board;
 import com.company.models.contracts.unit.Member;
 
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class TeamImpl implements Team {
@@ -38,10 +38,10 @@ public class TeamImpl implements Team {
     }
 
     private void setMembers() {
-        this.members = new HashMap<>();
+        this.members = new LinkedHashMap<>();
     }
 
     private void setBoards() {
-        this.boards = new HashMap<>();
+        this.boards = new LinkedHashMap<>();
     }
 }

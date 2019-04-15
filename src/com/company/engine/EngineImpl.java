@@ -24,10 +24,10 @@ public class EngineImpl implements Engine {
 
     public EngineImpl() {
         factory = new FactoryImpl();
-        teams = new HashMap<>();
-        members = new HashMap<>();
-        boards = new HashMap<>();
-        workItems = new HashMap<>();
+        teams = new LinkedHashMap<>();
+        members = new LinkedHashMap<>();
+        boards = new LinkedHashMap<>();
+        workItems = new LinkedHashMap<>();
     }
 
     @Override

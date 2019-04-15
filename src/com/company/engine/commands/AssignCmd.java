@@ -34,7 +34,7 @@ public final class AssignCmd {
             return String.format(EngineConstants.ItemAlreadyAssignedErrorMessage, assignee);
 
         if (engine.getWorkItems().get(workItemID) instanceof Bug || engine.getWorkItems().get(workItemID) instanceof Story) {
-            if (!((BugStory) engine.getWorkItems().get(workItemID)).getAssignee().getName().equals("No assignee"))
+            if (!((BugStory) engine.getWorkItems().get(workItemID)).getAssignee().getName().equals("No Assignee"))
                 return String.format(EngineConstants.ItemAlreadyAssignedErrorMessage, ((BugStory) engine.getWorkItems().get(workItemID)).getAssignee().getName());
             ((BugStory) engine.getWorkItems().get(workItemID)).setAssignee(engine.getMembers().get(assignee));
         }
