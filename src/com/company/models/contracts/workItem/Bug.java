@@ -19,6 +19,4 @@ public interface Bug extends BugStory {
     void setPriority(Priority priority);
 
     void setSeverity(Severity severity);
-
-    void removeAssignee();
 }
