@@ -1,0 +1,8 @@
+unassign
+unassign 0'stoyan
+createteam otbor
+createboard board1'otbor
+createbug ImeeeeeeeeeeeeBug'Opisanie Bug 1'Low'Major'board1'otbor
+unassign 0'stoyan
+createmember krasen
+unassign 0'krasen

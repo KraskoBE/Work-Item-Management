@@ -79,6 +79,16 @@ public class Tests_With_Files {
         executeIOTest("014");
     }
 
+    @Test
+    public void test_015() throws Exception {
+        executeIOTest("015");
+    }
+
+    @Test
+    public void test_016() throws Exception {
+        executeIOTest("016");
+    }
+
     private void executeIOTest(String testNumber) throws Exception {
         String testInputFilePath = "./src/Tests/TestData/test." + testNumber + ".in.txt";
         InputStream testInput = new FileInputStream(testInputFilePath);

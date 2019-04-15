@@ -1,0 +1,14 @@
+assign 0
+assign 0'krasen
+createteam otbor
+createboard board1'otbor
+createbug ImeeeeeeeeeeeeBug'Opisanie Bug 1'Low'Major'board1'otbor
+assign 0'krasen
+createmember krasen
+assign 0'krasen
+addmembertoteam krasen'otbor
+assign 0'krasen
+assign 0'krasen
+createmember stoyan
+addmembertoteam stoyan'otbor
+assign 0'stoyan

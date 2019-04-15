@@ -1,0 +1,14 @@
+Invalid number of parameters
+Work item with ID:0 does not exist
+Team otbor created
+Board board1 created
+Bug ImeeeeeeeeeeeeBug created with ID:0
+Member krasen does not exist
+Member krasen created
+Member krasen is not from team otbor
+Member krasen added to team otbor
+Work item with ID:0 assigned to krasen
+Work item already assigned to krasen
+Member stoyan created
+Member stoyan added to team otbor
+Work item already assigned to krasen
