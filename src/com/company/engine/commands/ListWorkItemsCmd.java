@@ -107,6 +107,7 @@ public final class ListWorkItemsCmd {
 
         String result = bugStoryStream
                 .filter(workItem -> workItem.getAssignee().getName().equals(assignee))
+                .filter(workItem -> workItem.getStatus() == status)
                 .map(WorkItem::toString)
                 .collect(Collectors.joining("\n"));
 
