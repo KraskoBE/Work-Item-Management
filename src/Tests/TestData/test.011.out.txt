@@ -1,0 +1,8 @@
+Team otbor created
+Board board1 created
+Invalid number of parameters
+Team ekip does not exists
+Team ekip created
+Team ekip does not have boards
+[BOARDS of otbor]
+board1

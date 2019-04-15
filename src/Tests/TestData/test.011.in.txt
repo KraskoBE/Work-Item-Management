@@ -1,0 +1,7 @@
+createteam otbor
+createboard board1'otbor
+showteamboards
+showteamboards ekip
+createteam ekip
+showteamboards ekip
+showteamboards otbor

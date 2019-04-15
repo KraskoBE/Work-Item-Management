@@ -1,0 +1,6 @@
+Team otbor created
+Board board1 created
+Bug ImeeeeeeeeeeeeBug created with ID:0
+Invalid number of parameters
+Team ekip does not exists
+Board board33333 is not on team otbor

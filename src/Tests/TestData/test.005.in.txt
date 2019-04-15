@@ -1,0 +1,6 @@
+createteam otbor
+createboard board1'otbor
+createbug ImeeeeeeeeeeeeBug'Opisanie Bug 1'Low'Major'board1'otbor
+createbug ImeeeeeeeeeeeeBug'Opisanie Bug 1'Low'Major'board1
+createbug ImeeeeeeeeeeeeBug'Opisanie Bug 1'Low'Major'board1'ekip
+createbug ImeeeeeeeeeeeeBug'Opisanie Bug 1'Low'Major'board33333'otbor

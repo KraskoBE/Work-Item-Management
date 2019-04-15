@@ -15,6 +15,11 @@ public class Tests_With_Files {
     }
 
     @Test
+    public void test_002() throws Exception {
+        executeIOTest("002");
+    }
+
+    @Test
     public void test_003() throws Exception {
         executeIOTest("003");
     }
@@ -25,8 +30,18 @@ public class Tests_With_Files {
     }
 
     @Test
+    public void test_005() throws Exception {
+        executeIOTest("005");
+    }
+
+    @Test
     public void test_006() throws Exception {
         executeIOTest("006");
+    }
+
+    @Test
+    public void test_007() throws Exception {
+        executeIOTest("007");
     }
 
     @Test
@@ -35,13 +50,28 @@ public class Tests_With_Files {
     }
 
     @Test
+    public void test_009() throws Exception {
+        executeIOTest("009");
+    }
+
+    @Test
     public void test_010() throws Exception {
         executeIOTest("010");
     }
 
     @Test
+    public void test_011() throws Exception {
+        executeIOTest("011");
+    }
+
+    @Test
     public void test_012() throws Exception {
         executeIOTest("012");
+    }
+
+    @Test
+    public void test_013() throws Exception {
+        executeIOTest("013");
     }
 
     private void executeIOTest(String testNumber) throws Exception {
