@@ -5,6 +5,4 @@ import com.company.models.contracts.unit.Member;
 public interface Comment {
 
     Member getAuthor();
-
-    String getMessage();
 }
