@@ -31,10 +31,10 @@ public class CreateTeamCmd_Should {
 
     @Test
     public void createTeamWithValidParameters() {
-        parameters.add(team.getName());
+        parameters.add("otbor");
 
         String result = CreateTeamCmd.execute(engine, factory, parameters);
-        String expected = String.format(EngineConstants.TeamCreatedSuccessMessage, team.getName());
+        String expected = String.format(EngineConstants.TeamCreatedSuccessMessage, "otbor");
 
         Assert.assertEquals(expected, result);
     }
@@ -51,7 +51,6 @@ public class CreateTeamCmd_Should {
 
     @Test
     public void errorWhenLessParametersArePassed() {
-
         String result = CreateTeamCmd.execute(engine, factory, parameters);
         String expected = EngineConstants.InvalidNumberOfParameters;
 
@@ -67,7 +66,5 @@ public class CreateTeamCmd_Should {
         String expected = String.format(EngineConstants.TeamExistsErrorMessage, team.getName());
 
         Assert.assertEquals(expected, result);
-
     }
-
 }
