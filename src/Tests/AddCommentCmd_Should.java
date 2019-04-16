@@ -22,7 +22,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class AddComment_Should {
+public class AddCommentCmd_Should {
     private EngineImpl engine;
     private List<String> parameters;
     private Member member;
