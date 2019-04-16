@@ -86,5 +86,4 @@ public class CreateStoryCmd_Should {
 
         Assert.assertEquals(expected, result);
     }
-
 }
