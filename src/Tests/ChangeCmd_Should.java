@@ -17,6 +17,7 @@ import com.company.models.contracts.workItem.Story;
 import com.company.models.unit.BoardImpl;
 import com.company.models.unit.MemberImpl;
 import com.company.models.workItem.BugImpl;
+import com.company.models.workItem.FeedbackImpl;
 import com.company.models.workItem.StoryImpl;
 import org.junit.Assert;
 import org.junit.Before;
@@ -24,6 +25,7 @@ import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 public class ChangeCmd_Should {
@@ -45,9 +47,11 @@ public class ChangeCmd_Should {
         board = new BoardImpl("board");
         bug = new BugImpl(0, "imeNaBugaa", "description na bug", Priority.High, Severity.Critical, Status.Active);
         story = new StoryImpl(1, "imeNaStory", "description na story", Priority.High, Size.Large);
+        feedback = new FeedbackImpl(2, "imeNaFeedback", "description na feedback", Status.New, 100);
 
         board.addWorkItem(bug);
         board.addWorkItem(story);
+        board.addWorkItem(feedback);
         team.getBoards().put(board.getName(), board);
         team.getMembers().put(member.getName(), member);
 
@@ -56,6 +60,7 @@ public class ChangeCmd_Should {
         engine.getMembers().put(member.getName(), member);
         engine.getWorkItems().put(bug.getId(), bug);
         engine.getWorkItems().put(story.getId(), story);
+        engine.getWorkItems().put(feedback.getId(), feedback);
     }
 
     @Test
@@ -115,9 +120,64 @@ public class ChangeCmd_Should {
     }
 
     @Test
-    public void changeFeedbackTests()
-    {
+    public void changeFeedbackTests() {
+        parameters = Arrays.asList(String.valueOf(feedback.getId()), "rating", "150");
+        String result = ChangeCmd.execute(engine, parameters);
+        String expected = String.format(EngineConstants.WorkItemObjectChangedSuccessMessage, feedback.getTitle(), "rating", "150");
+        Assert.assertEquals(expected, result);
 
+        parameters = Arrays.asList(String.valueOf(feedback.getId()), "status", "unscheduled");
+        result = ChangeCmd.execute(engine, parameters);
+        expected = String.format(EngineConstants.WorkItemObjectChangedSuccessMessage, feedback.getTitle(), "status", "unscheduled");
+        Assert.assertEquals(expected, result);
+
+        parameters = Arrays.asList(String.valueOf(feedback.getId()), "status", "active");
+        result = ChangeCmd.execute(engine, parameters);
+        expected = "Invalid status";
+        Assert.assertEquals(expected, result);
+
+        parameters = Arrays.asList(String.valueOf(feedback.getId()), "invalidType", "invalid");
+        result = ChangeCmd.execute(engine, parameters);
+        expected = String.format(EngineConstants.InvalidObjectTypeErrorMessage, "invalidType");
+        Assert.assertEquals(expected, result);
     }
 
+    @Test
+    public void errorWhenMoreParametersArePassed() {
+        parameters = Arrays.asList("a", "b", "c", "d");
+
+        String result = ChangeCmd.execute(engine, parameters);
+        String expected = EngineConstants.InvalidNumberOfParameters;
+
+        Assert.assertEquals(expected, result);
+    }
+
+    @Test
+    public void errorWhenLessParametersArePassed() {
+        parameters = Arrays.asList("a", "b");
+
+        String result = ChangeCmd.execute(engine, parameters);
+        String expected = EngineConstants.InvalidNumberOfParameters;
+
+        Assert.assertEquals(expected, result);
+    }
+
+    @Test
+    public void errorWhenInvalidParameterIsPassed() {
+        parameters = Arrays.asList("a", "b", "c");
+
+        String result = ChangeCmd.execute(engine, parameters);
+        String expected = EngineConstants.InvalidCommandParameters;
+
+        Assert.assertEquals(expected, result);
+    }
+
+    @Test
+    public void errorWhenWorkItemDoesNotExist() {
+        parameters = Arrays.asList(String.valueOf(3), "rating", "150");
+        String result = ChangeCmd.execute(engine, parameters);
+        String expected = String.format(EngineConstants.WorkItemDoesNotExistErrorMessage, 3);
+
+        Assert.assertEquals(expected, result);
+    }
 }
