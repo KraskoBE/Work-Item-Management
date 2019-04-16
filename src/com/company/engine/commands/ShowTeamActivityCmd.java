@@ -6,7 +6,7 @@ import com.company.engine.EngineImpl;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public final class ShowTeamActivity {
+public final class ShowTeamActivityCmd {
     public static String execute(EngineImpl engine, List<String> parameters) {
         if (parameters.size() != 1)
             return EngineConstants.InvalidNumberOfParameters;
@@ -16,7 +16,7 @@ public final class ShowTeamActivity {
         if (!engine.getTeams().containsKey(teamName))
             return String.format(EngineConstants.TeamDoesNotExistErrorMessage, teamName);
 
-        String result = "[%s acitivty]\n" +
+        String result = String.format("[%s activity]\n", teamName) +
                 engine.getTeams()
                         .values()
                         .stream()
