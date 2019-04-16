@@ -31,10 +31,10 @@ public class CreatePersonCmd_Should {
 
     @Test
     public void createPersonWithValidParameters() {
-        parameters.add(member.getName());
+        parameters.add("krasen");
 
         String result = CreatePersonCmd.execute(engine, factory, parameters);
-        String expected = String.format(EngineConstants.PersonCreatedSuccessMessage, member.getName());
+        String expected = String.format(EngineConstants.PersonCreatedSuccessMessage, "krasen");
 
         Assert.assertEquals(expected, result);
     }
