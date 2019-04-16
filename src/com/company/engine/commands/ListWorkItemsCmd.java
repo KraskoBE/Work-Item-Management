@@ -28,7 +28,7 @@ public final class ListWorkItemsCmd {
                 return listWorkItemsByAssignee(engine, secondParam);
         }
 
-        if (!firstParam.equals("statusassignee"))
+        if (!firstParam.toLowerCase().equals("statusassignee"))
             return String.format(EngineConstants.InvalidCommandErrorMessage, firstParam);
 
         String secondParam = parameters.get(1);

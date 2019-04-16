@@ -3,8 +3,8 @@ package com.company.engine;
 public final class EngineConstants {
 
     // Commands
-    static final String CreateTeamCommand = "createteam";
     static final String CreatePersonCommand = "createperson";
+    static final String CreateTeamCommand = "createteam";
     static final String CreateBoardCommand = "createboard";
     static final String CreateBugCommand = "createbug";
     static final String CreateStoryCommand = "createstory";
@@ -14,9 +14,9 @@ public final class EngineConstants {
     static final String ShowAllTeamsCommand = "showallteams";
     static final String ShowAllTeamMembersCommand = "showteammembers";
     static final String ShowAllTeamBoardsCommand = "showteamboards";
-    static final String ShowBoardActivityCommand = "showboardactivity";
     static final String ShowPersonActivityCommand = "showpersonactivity";
     static final String ShowTeamActivityCommand = "showteamactivity";
+    static final String ShowBoardActivityCommand = "showboardactivity";
     static final String ChangeCommand = "change";
     static final String AssignCommand = "assign";
     static final String UnassignCommand = "unassign";

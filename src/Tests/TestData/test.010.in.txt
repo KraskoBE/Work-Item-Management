@@ -1,3 +1,0 @@
-showallpeople
-createmember krasen
-showallpeople

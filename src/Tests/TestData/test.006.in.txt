@@ -1,6 +1,0 @@
-createteam otbor
-createboard board'otbor
-createfeedback feedbackime123'nqkvoopisanienafeedbacka'done'567'board'otbor
-createfeedback feedbackime123'nqkvoopisanienafeedbacka'done'567'board
-createfeedback feedbackime123'nqkvoopisanienafeedbacka'done'567'board'ekip
-createfeedback feedbackime123'nqkvoopisanienafeedbacka'done'567'board222'otbor

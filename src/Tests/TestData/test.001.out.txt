@@ -1,7 +1,0 @@
-Team otbor created
-Member krasen created
-Member krasen added to team otbor
-Invalid number of parameters
-Team ekip does not exists
-Member stoyan does not exist
-Member krasen is already in team otbor

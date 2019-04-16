@@ -7,7 +7,6 @@ import java.util.Arrays;
 import java.util.List;
 
 public class CommandImpl implements Command {
-    private static final String NULL_OR_EMPTY_NAME_ERROR_MESSAGE = "Name cannot be null or empty";
     private static final char SPLIT_COMMAND_SYMBOL = ' ';
 
     private String name;
@@ -26,7 +25,7 @@ public class CommandImpl implements Command {
         return new ArrayList<>(parameters);
     }
 
-    static Command parse(String input) {
+    public static Command parse(String input) {
         return new CommandImpl(input);
     }
 
@@ -42,9 +41,6 @@ public class CommandImpl implements Command {
     }
 
     private void setName(String name) {
-        if (name == null || name.trim().equals("")) {
-            throw new IllegalArgumentException(NULL_OR_EMPTY_NAME_ERROR_MESSAGE);
-        }
         this.name = name;
     }
 

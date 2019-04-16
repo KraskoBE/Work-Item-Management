@@ -1,6 +1,0 @@
-createteam otbor
-createboard board'otbor
-createstory imeNaStory2'DescriptionNaStory2'High'Large'board'otbor
-createstory imeNaStory2'DescriptionNaStory2'High'Large'board
-createstory imeNaStory2'DescriptionNaStory2'High'Large'board'ekip
-createstory imeNaStory2'DescriptionNaStory2'High'Large'board333'otbor

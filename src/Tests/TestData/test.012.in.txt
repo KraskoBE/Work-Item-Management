@@ -1,7 +1,0 @@
-showteammembers
-showteammembers otbor
-createteam otbor
-showteammembers otbor
-createmember krasen
-addmembertoteam krasen'otbor
-showteammembers otbor

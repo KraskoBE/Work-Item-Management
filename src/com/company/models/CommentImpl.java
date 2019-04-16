@@ -16,6 +16,10 @@ public class CommentImpl implements Comment {
         return author;
     }
 
+    public String toString() {
+        return message;
+    }
+
     private void setMessage(String message) {
         if (message.isEmpty())
             throw new IllegalArgumentException("Message is empty");

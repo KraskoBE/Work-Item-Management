@@ -1,6 +1,0 @@
-Team otbor created
-Board board created
-Feedback feedbackime123 created with ID:0
-Invalid number of parameters
-Team ekip does not exists
-Board board222 is not on team otbor

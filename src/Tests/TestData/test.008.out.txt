@@ -1,6 +1,0 @@
-Team otbor created
-Board board created
-Story imeNaStory2 created with ID:0
-Invalid number of parameters
-Team ekip does not exists
-Board board333 is not on team otbor
