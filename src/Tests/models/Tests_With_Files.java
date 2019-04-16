@@ -1,4 +1,4 @@
-package Tests;
+package Tests.models;
 
 import com.company.engine.EngineImpl;
 import com.company.engine.contracts.Engine;
@@ -9,7 +9,7 @@ import java.io.*;
 
 public class Tests_With_Files {
 
-    @Test
+    /*@Test
     public void test_001() throws Exception {
         executeIOTest("001");
     }
@@ -92,7 +92,7 @@ public class Tests_With_Files {
     @Test
     public void test_017() throws Exception {
         executeIOTest("017");
-    }
+    }*/
 
     private void executeIOTest(String testNumber) throws Exception {
         String testInputFilePath = "./src/Tests/TestData/test." + testNumber + ".in.txt";

@@ -1,4 +1,4 @@
-package Tests;
+package Tests.models;
 
 import com.company.models.TeamImpl;
 import com.company.models.contracts.Team;

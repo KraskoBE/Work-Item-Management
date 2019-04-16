@@ -1,4 +1,4 @@
-package Tests;
+package Tests.models;
 
 import com.company.models.CommentImpl;
 import com.company.models.unit.MemberImpl;

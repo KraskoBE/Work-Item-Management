@@ -1,4 +1,4 @@
-package Tests;
+package Tests.models;
 
 import com.company.models.common.Priority;
 import com.company.models.common.Severity;

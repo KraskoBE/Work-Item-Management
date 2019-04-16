@@ -1,4 +1,4 @@
-package Tests;
+package Tests.models;
 
 import com.company.models.common.Status;
 import com.company.models.workItem.FeedbackImpl;
