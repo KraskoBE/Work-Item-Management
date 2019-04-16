@@ -7,7 +7,7 @@ import com.company.models.contracts.Comment;
 
 import java.util.List;
 
-public class AddCommentCmd {
+public final class AddCommentCmd {
 
     public static String execute(EngineImpl engine, List<String> parameters) {
         if (parameters.size() != 3)
