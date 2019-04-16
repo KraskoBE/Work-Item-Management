@@ -7,8 +7,6 @@ import com.company.models.common.Status;
 import com.company.models.contracts.workItem.Story;
 
 public class StoryImpl extends BugStoryBase implements Story {
-
-    private static final String ERROR_INVALID_STATUS = "Error: invalid status";
     private Size size;
 
     public StoryImpl(int id, String title, String description, Priority priority, Size size) {

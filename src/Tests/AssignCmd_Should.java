@@ -21,6 +21,7 @@ import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 public class AssignCmd_Should {
@@ -72,7 +73,7 @@ public class AssignCmd_Should {
 
     @Test
     public void errorWhenLessParametersArePassed() {
-        parameters = Arrays.asList("a");
+        parameters = Collections.singletonList("a");
 
         String result = AssignCmd.execute(engine, parameters);
         String expected = EngineConstants.InvalidNumberOfParameters;
@@ -133,6 +134,8 @@ public class AssignCmd_Should {
 
         String result = AssignCmd.execute(engine, parameters);
         String expected = String.format(EngineConstants.ItemAlreadyAssignedErrorMessage, member.getName());
+
+        Assert.assertEquals(expected, result);
     }
 
 }

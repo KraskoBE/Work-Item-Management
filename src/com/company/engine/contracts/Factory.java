@@ -19,5 +19,5 @@ public interface Factory {
 
     Story createStory(int id, String name, String description , String priority, String size);
 
-    Feedback createFeedback(int id, String name, String description, String status, int rating);
+    Feedback createFeedback(int id, String name, String description, int rating);
 }

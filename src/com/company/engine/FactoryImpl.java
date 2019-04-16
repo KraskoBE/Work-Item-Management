@@ -48,8 +48,8 @@ public class FactoryImpl implements Factory {
     }
 
     @Override
-    public Feedback createFeedback(int id, String name, String description, String status, int rating) {
-        return new FeedbackImpl(id, name, description, getStatus(status), rating);
+    public Feedback createFeedback(int id, String name, String description, int rating) {
+        return new FeedbackImpl(id, name, description, Status.New, rating);
     }
 
     public static Priority getPriority(String priority) {
