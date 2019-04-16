@@ -19,9 +19,9 @@ public interface WorkItem {
 
     List<String> getHistory();
 
-    void setStatus(Status status);
-
     void addActivityHistory(String activity);
 
     void addComment(Comment comment);
+
+    void setStatus(Status status);
 }

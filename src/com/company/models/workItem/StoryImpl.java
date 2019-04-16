@@ -15,7 +15,6 @@ public class StoryImpl extends BugStoryBase implements Story {
         setHistory();
     }
 
-
     public Size getSize() {
         return size;
     }

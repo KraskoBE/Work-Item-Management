@@ -34,11 +34,9 @@ public final class EngineConstants {
     public static final String PersonDoesNotExistErrorMessage = "Person %s does not exist";
     public static final String BoardDoesNotExistErrorMessage = "Board %s does not exist";
     public static final String BoardIsNotOnTheTeamErrorMessage = "Board %s is not on team %s";
-    public static final String MemberAlreadyInTeamErrorMessage = "Member %s is already in team %s";
     public static final String PersonAlreadyInTeamErrorMessage = "Person %s is already in team %s";
     public static final String NoMembersErrorMessage = "No members found";
     public static final String NoTeamsErrorMessage = "No teams found";
-    public static final String EmptyTeamErrorMessage = "Team %s does not have members";
     public static final String EmptyBoardsErrorMessage = "Team %s does not have boards";
     public static final String WorkItemDoesNotExistErrorMessage = "Work item with ID:%d does not exist";
     public static final String InvalidObjectTypeErrorMessage = "Invalid object type: %s";
@@ -58,7 +56,6 @@ public final class EngineConstants {
     public static final String BugCreatedSuccessMessage = "Bug %s created with ID:%d";
     public static final String StoryCreatedSuccessMessage = "Story %s created with ID:%d";
     public static final String FeedBackSuccessMessage = "Feedback %s created with ID:%d";
-    public static final String MemberAddedSuccessMessage = "Member %s added to team %s";
     public static final String PersonAddedSuccessMessage = "Person %s added to team %s";
     public static final String WorkItemObjectChangedSuccessMessage = "Changed %s's %s to %s";
     public static final String WorkItemAssignedSuccessMessage = "Work item with ID:%d assigned to %s";
@@ -85,31 +82,31 @@ public final class EngineConstants {
     public static final String TeamCreated_TeamActivity = "Team created";
 
     //Priority
-    public static final String HIGH = "high";
-    public static final String MEDIUM = "medium";
-    public static final String LOW = "low";
-    public static final String INVALID_PRIORITY_NAME = "Invalid priority name: %s";
+    static final String HIGH = "high";
+    static final String MEDIUM = "medium";
+    static final String LOW = "low";
+    static final String INVALID_PRIORITY_NAME = "Invalid priority name: %s";
 
     //Severity
-    public static final String CRITICAL = "critical";
-    public static final String MAJOR = "major";
-    public static final String MINOR = "minor";
-    public static final String INVALID_SEVERITY_NAME = "Invalid severity name: %s";
+    static final String CRITICAL = "critical";
+    static final String MAJOR = "major";
+    static final String MINOR = "minor";
+    static final String INVALID_SEVERITY_NAME = "Invalid severity name: %s";
 
     //Status
-    public static final String ACTIVE = "active";
-    public static final String FIXED = "fixed";
-    public static final String NOTDONE = "notdone";
-    public static final String INPROGRESS = "inprogress";
-    public static final String DONE = "done";
-    public static final String NEW = "new";
-    public static final String UNSCHEDULED = "unscheduled";
-    public static final String SCHEDULED = "scheduled";
-    public static final String INVALID_STATUS_NAME = "Invalid status name: %s";
+    static final String ACTIVE = "active";
+    static final String FIXED = "fixed";
+    static final String NOTDONE = "notdone";
+    static final String INPROGRESS = "inprogress";
+    static final String DONE = "done";
+    static final String NEW = "new";
+    static final String UNSCHEDULED = "unscheduled";
+    static final String SCHEDULED = "scheduled";
+    static final String INVALID_STATUS_NAME = "Invalid status name: %s";
 
     //Size
-    public static final String LARGE = "large";
-    public static final String SMALL = "small";
-    public static final String INVALID_SIZE_NAME = "Invalid size name: %s";
+    static final String LARGE = "large";
+    static final String SMALL = "small";
+    static final String INVALID_SIZE_NAME = "Invalid size name: %s";
 
 }
