@@ -72,8 +72,8 @@ public class EngineImpl implements Engine {
     private String processCommand(Command command) {
         String commandResult;
         switch (command.getName()) {
-            case EngineConstants.CreateMemberCommand:
-                return CreateMemberCmd.execute(this, factory, command.getParameters());
+            case EngineConstants.CreatePersonCommand:
+                return CreatePersonCmd.execute(this, factory, command.getParameters());
 
             case EngineConstants.CreateTeamCommand:
                 return CreateTeamCmd.execute(this, factory, command.getParameters());
@@ -102,8 +102,8 @@ public class EngineImpl implements Engine {
             case EngineConstants.ShowAllTeamBoardsCommand:
                 return ShowAllTeamBoardsCmd.execute(this, command.getParameters());
 
-            case EngineConstants.AddMemberToTeamCommand:
-                return AddMemberToTeamCmd.execute(this, command.getParameters());
+            case EngineConstants.AddPersonToTeamCommand:
+                return AddPersonToTeamCmd.execute(this, command.getParameters());
 
             case EngineConstants.ChangeCommand:
                 return ChangeCmd.execute(this, command.getParameters());
@@ -120,11 +120,17 @@ public class EngineImpl implements Engine {
             case EngineConstants.SortWorkItemsCommand:
                 return SortWorkItemsCmd.execute(this, command.getParameters());
 
-            case EngineConstants.ShowTeamActivity:
+            case EngineConstants.ShowTeamActivityCommand:
                 return ShowTeamActivity.execute(this, command.getParameters());
 
-            case EngineConstants.AddComment:
+            case EngineConstants.AddCommentCommand:
                 return AddCommentCmd.execute(this, command.getParameters());
+
+            case EngineConstants.ShowBoardActivityCommand:
+                return ShowUnitActivityCmd.execute(this, command.getParameters(), "board");
+
+            case EngineConstants.ShowPersonActivityCommand:
+                return ShowUnitActivityCmd.execute(this, command.getParameters(), "person");
 
             default:
                 commandResult = String.format(EngineConstants.InvalidCommandErrorMessage, command.getName());

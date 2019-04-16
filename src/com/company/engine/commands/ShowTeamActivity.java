@@ -16,11 +16,13 @@ public final class ShowTeamActivity {
         if (!engine.getTeams().containsKey(teamName))
             return String.format(EngineConstants.TeamDoesNotExistErrorMessage, teamName);
 
-        return engine.getTeams()
-                .values()
-                .stream()
-                .filter(team -> team.getName().equals(teamName))
-                .flatMap(t->t.getActivity().stream())
-                .collect(Collectors.joining("\n"));
+        String result = "[%s acitivty]\n" +
+                engine.getTeams()
+                        .values()
+                        .stream()
+                        .filter(team -> team.getName().equals(teamName))
+                        .flatMap(t -> t.getActivity().stream())
+                        .collect(Collectors.joining("\n"));
+        return result.trim();
     }
 }

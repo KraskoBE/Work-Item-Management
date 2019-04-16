@@ -34,7 +34,6 @@ public final class ListWorkItemsCmd {
         String secondParam = parameters.get(1);
         String thirdParam = parameters.get(2);
         return listWorkItemsByStatusAndAssignee(engine, secondParam, thirdParam);
-
     }
 
     private static String listWorkItemsByCategory(EngineImpl engine, String category) {

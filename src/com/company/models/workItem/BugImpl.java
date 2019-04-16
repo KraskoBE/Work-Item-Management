@@ -1,5 +1,6 @@
 package com.company.models.workItem;
 
+import com.company.engine.EngineConstants;
 import com.company.models.common.Priority;
 import com.company.models.common.Severity;
 import com.company.models.common.Status;
@@ -7,7 +8,6 @@ import com.company.models.contracts.workItem.Bug;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 public class BugImpl extends BugStoryBase implements Bug {
     private List<String> stepsToReproduce;
@@ -22,7 +22,7 @@ public class BugImpl extends BugStoryBase implements Bug {
 
     public void setSeverity(Severity severity) {
         this.severity = severity;
-        addActivityHistory(String.format("Severity set to:%s", severity.toString()));
+        addActivityHistory(String.format(EngineConstants.SeveritySet_WorkItemActivity, severity.toString()));
     }
 
     @Override
@@ -31,7 +31,7 @@ public class BugImpl extends BugStoryBase implements Bug {
         if (status != Status.Active && status != Status.Fixed)
             throw new IllegalArgumentException(ERROR_INVALID_STATUS);
         this.status = status;
-        addActivityHistory(String.format("Status set to:%s", status.toString()));
+        addActivityHistory(String.format(EngineConstants.StatusSet_WorkItemActivity, status.toString()));
     }
 
     @Override
@@ -45,13 +45,6 @@ public class BugImpl extends BugStoryBase implements Bug {
 
     private void setStepsToReproduce() {
         this.stepsToReproduce = new ArrayList<>();
-        /*System.out.println("Enter step to reproduce(\"end\" to finish entering)");
-        Scanner scanner = new Scanner(System.in);
-        String step = scanner.nextLine();
-        while (!step.equals("end")) {
-            stepsToReproduce.add(step);
-            step = scanner.nextLine();
-        }*/
     }
 
     @Override

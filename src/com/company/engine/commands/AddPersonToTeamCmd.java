@@ -5,7 +5,7 @@ import com.company.engine.EngineImpl;
 
 import java.util.List;
 
-public final class AddMemberToTeamCmd {
+public final class AddPersonToTeamCmd {
 
     public static String execute(EngineImpl engine, List<String> parameters) {
         if (parameters.size() != 2)
@@ -18,14 +18,14 @@ public final class AddMemberToTeamCmd {
             return String.format(EngineConstants.TeamDoesNotExistErrorMessage, teamName);
 
         if (!engine.getMembers().containsKey(memberName))
-            return String.format(EngineConstants.MemberDoesNotExistErrorMessage, memberName);
+            return String.format(EngineConstants.PersonDoesNotExistErrorMessage, memberName);
 
         if (engine.getTeams().get(teamName).getMembers().containsKey(memberName))
-            return String.format(EngineConstants.MemberAlreadyInTeamErrorMessage, memberName, teamName);
+            return String.format(EngineConstants.PersonAlreadyInTeamErrorMessage, memberName, teamName);
 
         engine.getTeams().get(teamName).getMembers().put(memberName, engine.getMembers().get(memberName));
-        engine.getMembers().get(memberName).addActivity(String.format("Joined team %s", teamName));
-        engine.getTeams().get(teamName).addActivity(String.format("%s joined the team", memberName));
-        return String.format(EngineConstants.MemberAddedSuccessMessage, memberName, teamName);
+        engine.getMembers().get(memberName).addActivity(String.format(EngineConstants.PersonJoined_PersonActivity, teamName));
+        engine.getTeams().get(teamName).addActivity(String.format(EngineConstants.PersonJoined_TeamActivity, memberName));
+        return String.format(EngineConstants.PersonAddedSuccessMessage, memberName, teamName);
     }
 }

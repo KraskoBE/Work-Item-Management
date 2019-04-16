@@ -1,5 +1,6 @@
 package com.company.models.workItem;
 
+import com.company.engine.EngineConstants;
 import com.company.models.common.Priority;
 import com.company.models.common.Status;
 import com.company.models.contracts.unit.Member;
@@ -23,7 +24,7 @@ public abstract class BugStoryBase extends WorkItemBase implements BugStory {
 
     public void setPriority(Priority priority) {
         this.priority = priority;
-        addActivityHistory(String.format("Priority set to:%s", priority.toString()));
+        addActivityHistory(String.format(EngineConstants.PrioritySet_WorkItemActivity, priority.toString()));
     }
 
     public Member getAssignee() {
@@ -32,12 +33,12 @@ public abstract class BugStoryBase extends WorkItemBase implements BugStory {
 
     public void setAssignee(Member assignee) {
         this.assignee = assignee;
-        addActivityHistory(String.format("Assigned to:%s", assignee.getName()));
+        addActivityHistory(String.format(EngineConstants.Assigned_WorkItemActivity, assignee.getName()));
     }
 
     public void removeAssignee() {
         assignee = noAssignee;
-        addActivityHistory("Unassigned");
+        addActivityHistory(EngineConstants.Unassigned_WorkItemActivity);
     }
 
 }

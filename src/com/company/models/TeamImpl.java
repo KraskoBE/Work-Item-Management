@@ -1,6 +1,7 @@
 package com.company.models;
 
 
+import com.company.engine.EngineConstants;
 import com.company.models.contracts.Team;
 import com.company.models.contracts.unit.Board;
 import com.company.models.contracts.unit.Member;
@@ -39,8 +40,7 @@ public class TeamImpl implements Team {
         return new ArrayList<>(activity);
     }
 
-    public void addActivity(String message)
-    {
+    public void addActivity(String message) {
         this.activity.add(message);
     }
 
@@ -60,6 +60,6 @@ public class TeamImpl implements Team {
 
     private void setHistory() {
         this.activity = new ArrayList<>();
-        activity.add("Team created");
+        activity.add(EngineConstants.TeamCreated_TeamActivity);
     }
 }

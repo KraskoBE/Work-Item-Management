@@ -1,5 +1,6 @@
 package com.company.models.workItem;
 
+import com.company.engine.EngineConstants;
 import com.company.models.common.Status;
 import com.company.models.contracts.workItem.Feedback;
 
@@ -18,7 +19,7 @@ public class FeedbackImpl extends WorkItemBase implements Feedback {
 
     public void setRating(int rating) {
         this.rating = rating;
-        addActivityHistory(String.format("Rating set to:%d", rating));
+        addActivityHistory(String.format(EngineConstants.RatingSet_WorkItemActivity, rating));
     }
 
     @Override
@@ -26,7 +27,7 @@ public class FeedbackImpl extends WorkItemBase implements Feedback {
         if (status != Status.New && status != Status.Unscheduled && status != Status.Done && status != Status.Scheduled)
             throw new IllegalArgumentException(ERROR_INVALID_STATUS);
         this.status = status;
-        addActivityHistory(String.format("Status set to:%s", status.toString()));
+        addActivityHistory(String.format(EngineConstants.StatusSet_WorkItemActivity, status.toString()));
     }
 
     @Override

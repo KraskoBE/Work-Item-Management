@@ -86,7 +86,6 @@ public final class ChangeCmd {
         } catch (IllegalArgumentException ex) {
             return ex.getMessage();
         }
-
         return String.format(EngineConstants.WorkItemObjectChangedSuccessMessage, engine.getWorkItems().get(workItemID).getTitle(), changeType, changeValue);
     }
 }

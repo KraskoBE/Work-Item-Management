@@ -1,5 +1,6 @@
 package com.company.models.workItem;
 
+import com.company.engine.EngineConstants;
 import com.company.models.common.Priority;
 import com.company.models.common.Size;
 import com.company.models.common.Status;
@@ -30,7 +31,7 @@ public class StoryImpl extends BugStoryBase implements Story {
         if (status != Status.NotDone && status != Status.InProgress && status != Status.Done)
             throw new IllegalArgumentException(ERROR_INVALID_STATUS);
         this.status = status;
-        addActivityHistory(String.format("Status set to:%s", status.toString()));
+        addActivityHistory(String.format(EngineConstants.StatusSet_WorkItemActivity, status.toString()));
     }
 
     @Override

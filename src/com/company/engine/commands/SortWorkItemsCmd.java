@@ -10,6 +10,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public final class SortWorkItemsCmd {
+
     public static String execute(EngineImpl engine, List<String> parameters) {
         if (parameters.size() != 1)
             return EngineConstants.InvalidNumberOfParameters;

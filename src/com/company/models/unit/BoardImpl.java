@@ -1,6 +1,7 @@
 package com.company.models.unit;
 
 
+import com.company.engine.EngineConstants;
 import com.company.models.contracts.unit.Board;
 
 import java.util.ArrayList;
@@ -17,6 +18,6 @@ public class BoardImpl extends UnitBase implements Board {
     @Override
     void setActivityHistory() {
         this.activityHistory = new ArrayList<>();
-        activityHistory.add("Board created");
+        activityHistory.add(EngineConstants.BoardCreated_BoardActivity);
     }
 }

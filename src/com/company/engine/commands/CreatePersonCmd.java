@@ -7,7 +7,7 @@ import com.company.models.contracts.unit.Member;
 
 import java.util.List;
 
-public final class CreateMemberCmd {
+public final class CreatePersonCmd {
 
     public static String execute(EngineImpl engine, Factory factory, List<String> parameters) {
         if (parameters.size() != 1)
@@ -16,12 +16,12 @@ public final class CreateMemberCmd {
         String memberName = parameters.get(0);
 
         if (engine.getMembers().containsKey(memberName))
-            return String.format(EngineConstants.MemberExistsErrorMessage, memberName);
+            return String.format(EngineConstants.PersonExistsErrorMessage, memberName);
 
         Member member = factory.createMember(memberName);
 
         engine.getMembers().put(memberName, member);
 
-        return String.format(EngineConstants.MemberCreatedSuccessMessage, memberName);
+        return String.format(EngineConstants.PersonCreatedSuccessMessage, memberName);
     }
 }

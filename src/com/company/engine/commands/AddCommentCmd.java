@@ -8,6 +8,7 @@ import com.company.models.contracts.Comment;
 import java.util.List;
 
 public class AddCommentCmd {
+
     public static String execute(EngineImpl engine, List<String> parameters) {
         if (parameters.size() != 3)
             return EngineConstants.InvalidNumberOfParameters;
@@ -22,12 +23,12 @@ public class AddCommentCmd {
         if (!engine.getWorkItems().containsKey(workItemID))
             return String.format(EngineConstants.WorkItemDoesNotExistErrorMessage, workItemID);
 
-        if (AssignCmd.getMemberTeam(engine, author).getName().equals(AssignCmd.getWorkItemTeam(engine, workItemID)))
+        if (!AssignCmd.getMemberTeam(engine, author).getName().equals(AssignCmd.getWorkItemTeam(engine, workItemID).getName()))
             return String.format(EngineConstants.MemberIsNotFromTeamErrorMessage, author, AssignCmd.getWorkItemTeam(engine, workItemID).getName());
 
         Comment comment = new CommentImpl(engine.getMembers().get(author), message);
         engine.getWorkItems().get(workItemID).addComment(comment);
-        engine.getMembers().get(author).addActivity(String.format("Added comment to work item with ID:%d", workItemID));
+        engine.getMembers().get(author).addActivity(String.format(EngineConstants.AddedComment_PersonActivity, workItemID));
 
         return EngineConstants.CommentAddedSuccessMessage;
     }

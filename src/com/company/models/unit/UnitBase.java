@@ -1,5 +1,6 @@
 package com.company.models.unit;
 
+import com.company.engine.EngineConstants;
 import com.company.models.contracts.unit.Unit;
 import com.company.models.contracts.workItem.WorkItem;
 
@@ -36,7 +37,7 @@ public abstract class UnitBase implements Unit {
     @Override
     public void addWorkItem(WorkItem workItem) {
         this.items.put(workItem.getId(), workItem);
-        addActivity(String.format("Work item with ID:%d added", workItem.getId()));
+        addActivity(String.format(EngineConstants.WorkItemAdded_UnitActivity, workItem.getId()));
     }
 
     @Override
@@ -46,7 +47,7 @@ public abstract class UnitBase implements Unit {
 
     public void removeWorkItem(int id) {
         this.items.remove(id);
-        addActivity(String.format("Work item with ID:%d removed", id));
+        addActivity(String.format(EngineConstants.WorkItemRemoved_UnitActivity, id));
     }
 
     abstract void setActivityHistory();

@@ -1,6 +1,7 @@
 package com.company.models.unit;
 
 
+import com.company.engine.EngineConstants;
 import com.company.models.contracts.unit.Member;
 
 import java.util.ArrayList;
@@ -17,6 +18,6 @@ public class MemberImpl extends UnitBase implements Member {
     @Override
     void setActivityHistory() {
         this.activityHistory = new ArrayList<>();
-        activityHistory.add("Person created");
+        activityHistory.add(EngineConstants.PersonCreated_PersonActivity);
     }
 }

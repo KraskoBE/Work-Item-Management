@@ -1,12 +1,12 @@
 package com.company.models.workItem;
 
+import com.company.engine.EngineConstants;
 import com.company.models.common.Status;
 import com.company.models.contracts.Comment;
 import com.company.models.contracts.workItem.WorkItem;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public abstract class WorkItemBase implements WorkItem {
     private static final int TITLE_MIN_LENGTH = 10;
@@ -63,8 +63,10 @@ public abstract class WorkItemBase implements WorkItem {
 
     public void addComment(Comment comment) {
         this.comments.add(comment);
-        addActivityHistory(String.format("Member %s added a comment", comment.getAuthor().getName()));
+        addActivityHistory(String.format(EngineConstants.AddedComment_WorkItemActivity, comment.getAuthor().getName()));
     }
+
+    public abstract void setStatus(Status status);
 
     @Override
     public String toString() {
@@ -104,16 +106,13 @@ public abstract class WorkItemBase implements WorkItem {
         this.description = description;
     }
 
-    public abstract void setStatus(Status status);
-
-    protected void setHistory() {
-        this.history = new ArrayList<>();
-    }
-
     private void setComments() {
         this.comments = new ArrayList<>();
     }
 
     abstract String additionalInfo();
 
+    void setHistory() {
+        this.history = new ArrayList<>();
+    }
 }

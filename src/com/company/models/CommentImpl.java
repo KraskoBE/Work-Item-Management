@@ -20,6 +20,7 @@ public class CommentImpl implements Comment {
         return message;
     }
 
+    @Override
     public String toString() {
         return this.message;
     }

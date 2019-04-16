@@ -28,9 +28,8 @@ public final class CreateBoardCmd {
         engine.getBoards().put(boardName, board);
 
         engine.getTeams().get(teamName).getBoards().put(boardName, board);
-        engine.getTeams().get(teamName).addActivity(String.format("Board %s was added", boardName));
+        engine.getTeams().get(teamName).addActivity(String.format(EngineConstants.BoardAdded_TeamActivity, boardName));
 
         return String.format(EngineConstants.BoardCreatedSuccessMessage, boardName);
     }
-
 }

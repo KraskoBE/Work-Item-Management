@@ -4,33 +4,38 @@ public final class EngineConstants {
 
     // Commands
     static final String CreateTeamCommand = "createteam";
-    static final String CreateMemberCommand = "createmember";
+    static final String CreatePersonCommand = "createperson";
     static final String CreateBoardCommand = "createboard";
     static final String CreateBugCommand = "createbug";
     static final String CreateStoryCommand = "createstory";
     static final String CreateFeedbackCommand = "createfeedback";
-    static final String AddMemberToTeamCommand = "addmembertoteam";
+    static final String AddPersonToTeamCommand = "addpersontoteam";
     static final String ShowAllPeopleCommand = "showallpeople";
     static final String ShowAllTeamsCommand = "showallteams";
     static final String ShowAllTeamMembersCommand = "showteammembers";
     static final String ShowAllTeamBoardsCommand = "showteamboards";
+    static final String ShowBoardActivityCommand = "showboardactivity";
+    static final String ShowPersonActivityCommand = "showpersonactivity";
+    static final String ShowTeamActivityCommand = "showteamactivity";
     static final String ChangeCommand = "change";
     static final String AssignCommand = "assign";
     static final String UnassignCommand = "unassign";
     static final String ListWorkItemsCommand = "listworkitems";
     static final String SortWorkItemsCommand = "sortworkitems";
-    static final String ShowTeamActivity = "showteamactivity";
-    static final String AddComment = "addcomment";
+    static final String AddCommentCommand = "addcomment";
 
     // Error messages
     public static final String InvalidCommandErrorMessage = "Invalid command name: %s";
     public static final String TeamExistsErrorMessage = "Team %s already exists";
-    public static final String MemberExistsErrorMessage = "Member %s already exists";
+    public static final String PersonExistsErrorMessage = "Person %s already exists";
     public static final String BoardExistsInTeamErrorMessage = "Board %s already exists in %s";
     public static final String TeamDoesNotExistErrorMessage = "Team %s does not exists";
     public static final String MemberDoesNotExistErrorMessage = "Member %s does not exist";
+    public static final String PersonDoesNotExistErrorMessage = "Person %s does not exist";
+    public static final String BoardDoesNotExistErrorMessage = "Board %s does not exist";
     public static final String BoardIsNotOnTheTeamErrorMessage = "Board %s is not on team %s";
     public static final String MemberAlreadyInTeamErrorMessage = "Member %s is already in team %s";
+    public static final String PersonAlreadyInTeamErrorMessage = "Person %s is already in team %s";
     public static final String NoMembersErrorMessage = "No members found";
     public static final String NoTeamsErrorMessage = "No teams found";
     public static final String EmptyTeamErrorMessage = "Team %s does not have members";
@@ -48,12 +53,13 @@ public final class EngineConstants {
 
     // Success messages
     public static final String TeamCreatedSuccessMessage = "Team %s created";
-    public static final String MemberCreatedSuccessMessage = "Member %s created";
+    public static final String PersonCreatedSuccessMessage = "Person %s created";
     public static final String BoardCreatedSuccessMessage = "Board %s created";
     public static final String BugCreatedSuccessMessage = "Bug %s created with ID:%d";
     public static final String StoryCreatedSuccessMessage = "Story %s created with ID:%d";
     public static final String FeedBackSuccessMessage = "Feedback %s created with ID:%d";
     public static final String MemberAddedSuccessMessage = "Member %s added to team %s";
+    public static final String PersonAddedSuccessMessage = "Person %s added to team %s";
     public static final String WorkItemObjectChangedSuccessMessage = "Changed %s's %s to %s";
     public static final String WorkItemAssignedSuccessMessage = "Work item with ID:%d assigned to %s";
     public static final String WorkItemUnassignedSuccessMessage = "Work item unassigned successfully";
@@ -61,8 +67,22 @@ public final class EngineConstants {
 
 
     // Activity history messages
-    public static final String AddedWorkItemToHistory = "Created %s: %s(ID:%d)";
-    public static final String MemberJoinedTeam = "%s joined %s";
+    public static final String PersonJoined_TeamActivity = "%s joined the team";
+    public static final String PersonJoined_PersonActivity = "Joined team %s";
+    public static final String AddedComment_PersonActivity = "Added comment to work item with ID:%d";
+    public static final String BoardAdded_TeamActivity = "Board %s was added";
+    public static final String BoardCreated_BoardActivity = "Board created";
+    public static final String PersonCreated_PersonActivity = "Person created";
+    public static final String WorkItemAdded_UnitActivity = "Work item with ID:%d added";
+    public static final String WorkItemRemoved_UnitActivity = "Work item with ID:%d removed";
+    public static final String SeveritySet_WorkItemActivity = "Severity set to:%s";
+    public static final String StatusSet_WorkItemActivity = "Status set to:%s";
+    public static final String PrioritySet_WorkItemActivity = "Priority set to:%s";
+    public static final String Assigned_WorkItemActivity = "Assigned to:%s";
+    public static final String Unassigned_WorkItemActivity = "Unassigned";
+    public static final String RatingSet_WorkItemActivity = "Rating set to:%d";
+    public static final String AddedComment_WorkItemActivity = "Member %s added a comment";
+    public static final String TeamCreated_TeamActivity = "Team created";
 
     //Priority
     public static final String HIGH = "high";

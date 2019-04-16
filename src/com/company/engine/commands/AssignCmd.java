@@ -28,7 +28,7 @@ public final class AssignCmd {
         if (!engine.getMembers().containsKey(assignee))
             return String.format(EngineConstants.MemberDoesNotExistErrorMessage, assignee);
 
-        if (getMemberTeam(engine, assignee).equals(getWorkItemTeam(engine, workItemID)))
+        if (!getMemberTeam(engine, assignee).getName().equals(getWorkItemTeam(engine, workItemID).getName()))
             return String.format(EngineConstants.MemberIsNotFromTeamErrorMessage, assignee, getWorkItemTeam(engine, workItemID).getName());
 
         if (engine.getMembers().get(assignee).getItems().containsKey(workItemID))
@@ -70,5 +70,4 @@ public final class AssignCmd {
                 .findFirst()
                 .orElse(new TeamImpl("No team"));
     }
-
 }
