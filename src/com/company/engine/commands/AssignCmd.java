@@ -2,6 +2,7 @@ package com.company.engine.commands;
 
 import com.company.engine.EngineConstants;
 import com.company.engine.EngineImpl;
+import com.company.models.TeamImpl;
 import com.company.models.contracts.Team;
 import com.company.models.contracts.unit.Board;
 import com.company.models.contracts.unit.Member;
@@ -27,8 +28,8 @@ public final class AssignCmd {
         if (!engine.getMembers().containsKey(assignee))
             return String.format(EngineConstants.MemberDoesNotExistErrorMessage, assignee);
 
-        if (!getMemberTeam(engine, assignee).equals(getWorkItemTeam(engine, workItemID)))
-            return String.format(EngineConstants.MemberIsNotFromTeamErrorMessage, assignee, getWorkItemTeam(engine, workItemID));
+        if (getMemberTeam(engine, assignee).equals(getWorkItemTeam(engine, workItemID)))
+            return String.format(EngineConstants.MemberIsNotFromTeamErrorMessage, assignee, getWorkItemTeam(engine, workItemID).getName());
 
         if (engine.getMembers().get(assignee).getItems().containsKey(workItemID))
             return String.format(EngineConstants.ItemAlreadyAssignedErrorMessage, assignee);
@@ -43,20 +44,31 @@ public final class AssignCmd {
         return String.format(EngineConstants.WorkItemAssignedSuccessMessage, workItemID, assignee);
     }
 
-    private static String getMemberTeam(EngineImpl engine, String name) {
-        for (Team t : engine.getTeams().values())
-            for (Member m : t.getMembers().values())
-                if (m.getName().equals(name))
-                    return t.getName();
-        return "";
+    static Team getMemberTeam(EngineImpl engine, String name) {
+        return engine.getTeams()
+                .values()
+                .stream()
+                .filter(t -> t.getMembers()
+                        .values()
+                        .stream()
+                        .anyMatch(m -> m.getName().equals(name)))
+                .findFirst()
+                .orElse(new TeamImpl("No team"));
     }
 
-    private static String getWorkItemTeam(EngineImpl engine, int id) {
-        for (Team t : engine.getTeams().values())
-            for (Board b : t.getBoards().values())
-                for (WorkItem w : b.getItems().values())
-                    if (w.getId() == id)
-                        return t.getName();
-        return "";
+    static Team getWorkItemTeam(EngineImpl engine, int id) {
+        return engine.getTeams()
+                .values()
+                .stream()
+                .filter(t -> t.getBoards()
+                        .values()
+                        .stream()
+                        .flatMap(b -> b.getItems()
+                                .values()
+                                .stream())
+                        .anyMatch(w -> w.getId() == id))
+                .findFirst()
+                .orElse(new TeamImpl("No team"));
     }
+
 }

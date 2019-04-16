@@ -7,6 +7,7 @@ import com.company.models.contracts.workItem.Bug;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class BugImpl extends BugStoryBase implements Bug {
     private List<String> stepsToReproduce;
@@ -44,6 +45,13 @@ public class BugImpl extends BugStoryBase implements Bug {
 
     private void setStepsToReproduce() {
         this.stepsToReproduce = new ArrayList<>();
+        /*System.out.println("Enter step to reproduce(\"end\" to finish entering)");
+        Scanner scanner = new Scanner(System.in);
+        String step = scanner.nextLine();
+        while (!step.equals("end")) {
+            stepsToReproduce.add(step);
+            step = scanner.nextLine();
+        }*/
     }
 
     @Override

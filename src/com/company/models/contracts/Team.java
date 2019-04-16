@@ -14,5 +14,7 @@ public interface Team {
 
     Map<String, Board> getBoards();
 
-    List<String> getHistory();
+    List<String> getActivity();
+
+    void addActivity(String message);
 }

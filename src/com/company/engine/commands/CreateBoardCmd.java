@@ -10,17 +10,17 @@ import java.util.List;
 
 public final class CreateBoardCmd {
 
-    public static String execute(EngineImpl engine, Factory factory, List<String> parameters){
-        if(parameters.size() != 2)
+    public static String execute(EngineImpl engine, Factory factory, List<String> parameters) {
+        if (parameters.size() != 2)
             return EngineConstants.InvalidNumberOfParameters;
 
         String boardName = parameters.get(0);
         String teamName = parameters.get(1);
 
-        if(engine.getBoards().containsKey(boardName))
+        if (engine.getBoards().containsKey(boardName))
             return String.format(EngineConstants.BoardExistsInTeamErrorMessage, boardName, teamName);
 
-        if(!engine.getTeams().containsKey(teamName))
+        if (!engine.getTeams().containsKey(teamName))
             return String.format(EngineConstants.TeamDoesNotExistErrorMessage, teamName);
 
         Board board = factory.createBoard(boardName);
@@ -28,8 +28,9 @@ public final class CreateBoardCmd {
         engine.getBoards().put(boardName, board);
 
         engine.getTeams().get(teamName).getBoards().put(boardName, board);
+        engine.getTeams().get(teamName).addActivity(String.format("Board %s was added", boardName));
 
-        return String.format(EngineConstants.BoardCreatedSuccessMessage,boardName);
+        return String.format(EngineConstants.BoardCreatedSuccessMessage, boardName);
     }
 
 }

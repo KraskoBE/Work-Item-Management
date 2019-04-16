@@ -22,4 +22,6 @@ public interface WorkItem {
     void setStatus(Status status);
 
     void addActivityHistory(String activity);
+
+    void addComment(Comment comment);
 }

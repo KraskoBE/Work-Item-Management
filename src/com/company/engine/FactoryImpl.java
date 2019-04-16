@@ -6,6 +6,7 @@ import com.company.models.common.Priority;
 import com.company.models.common.Severity;
 import com.company.models.common.Size;
 import com.company.models.common.Status;
+import com.company.models.contracts.Comment;
 import com.company.models.contracts.Team;
 import com.company.models.contracts.unit.Board;
 import com.company.models.contracts.unit.Member;

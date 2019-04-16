@@ -6,14 +6,12 @@ import org.junit.Test;
 
 public class Team_Should {
     @Test
-    public void createTeamWhenValidParametersArePassed()
-    {
+    public void createTeamWhenValidParametersArePassed() {
         Team team = new TeamImpl("otbor");
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void throwWhenNameIsEmpty()
-    {
+    public void throwWhenNameIsEmpty() {
         Team team = new TeamImpl("");
     }
 }

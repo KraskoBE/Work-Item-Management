@@ -120,6 +120,12 @@ public class EngineImpl implements Engine {
             case EngineConstants.SortWorkItemsCommand:
                 return SortWorkItemsCmd.execute(this, command.getParameters());
 
+            case EngineConstants.ShowTeamActivity:
+                return ShowTeamActivity.execute(this, command.getParameters());
+
+            case EngineConstants.AddComment:
+                return AddCommentCmd.execute(this, command.getParameters());
+
             default:
                 commandResult = String.format(EngineConstants.InvalidCommandErrorMessage, command.getName());
                 break;

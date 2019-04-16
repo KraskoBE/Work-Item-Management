@@ -19,6 +19,8 @@ public final class EngineConstants {
     static final String UnassignCommand = "unassign";
     static final String ListWorkItemsCommand = "listworkitems";
     static final String SortWorkItemsCommand = "sortworkitems";
+    static final String ShowTeamActivity = "showteamactivity";
+    static final String AddComment = "addcomment";
 
     // Error messages
     public static final String InvalidCommandErrorMessage = "Invalid command name: %s";
@@ -55,6 +57,7 @@ public final class EngineConstants {
     public static final String WorkItemObjectChangedSuccessMessage = "Changed %s's %s to %s";
     public static final String WorkItemAssignedSuccessMessage = "Work item with ID:%d assigned to %s";
     public static final String WorkItemUnassignedSuccessMessage = "Work item unassigned successfully";
+    public static final String CommentAddedSuccessMessage = "Comment added successfully";
 
 
     // Activity history messages

@@ -14,7 +14,7 @@ public class TeamImpl implements Team {
     private String name;
     private Map<String, Member> members;
     private Map<String, Board> boards;
-    private List<String> history;
+    private List<String> activity;
 
     public TeamImpl(String name) {
         setName(name);
@@ -35,8 +35,13 @@ public class TeamImpl implements Team {
         return boards;
     }
 
-    public List<String> getHistory() {
-        return new ArrayList<>(history);
+    public List<String> getActivity() {
+        return new ArrayList<>(activity);
+    }
+
+    public void addActivity(String message)
+    {
+        this.activity.add(message);
     }
 
     private void setName(String name) {
@@ -54,7 +59,7 @@ public class TeamImpl implements Team {
     }
 
     private void setHistory() {
-        this.history = new ArrayList<>();
-        history.add("Team created");
+        this.activity = new ArrayList<>();
+        activity.add("Team created");
     }
 }

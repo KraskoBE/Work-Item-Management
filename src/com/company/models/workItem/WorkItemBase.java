@@ -6,6 +6,7 @@ import com.company.models.contracts.workItem.WorkItem;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public abstract class WorkItemBase implements WorkItem {
     private static final int TITLE_MIN_LENGTH = 10;
@@ -20,8 +21,8 @@ public abstract class WorkItemBase implements WorkItem {
     private String title;
     private String description;
     protected Status status;
-    List<Comment> comments;
-    List<String> history;
+    private List<Comment> comments;
+    private List<String> history;
 
     WorkItemBase(int id, String title, String description, Status status) {
         setHistory();
@@ -56,9 +57,13 @@ public abstract class WorkItemBase implements WorkItem {
         return new ArrayList<>(history);
     }
 
-    public void addActivityHistory(String activity)
-    {
+    public void addActivityHistory(String activity) {
         history.add(activity);
+    }
+
+    public void addComment(Comment comment) {
+        this.comments.add(comment);
+        addActivityHistory(String.format("Member %s added a comment", comment.getAuthor().getName()));
     }
 
     @Override
